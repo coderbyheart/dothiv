@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+
+
+            _|_|          _|_|
+            _|_|          _|_|
+            _|_|
+            _|_|
+            _|_|_|_|      _|_|  _|_|    _|_|
+            _|_|_|_|_|    _|_|  _|_|    _|_|
+            _|_|    _|_|  _|_|  _|_|    _|_|
+            _|_|    _|_|  _|_|  _|_|    _|_|
+            _|_|    _|_|  _|_|  _|_|    _|_|
+      _|_|  _|_|    _|_|  _|_|    _|_|_|_|
+      _|_|  _|_|    _|_|  _|_|      _|_|
+
+ .hiv domains – The Red Ribbon of the digital age
+
+                  click4life.hiv
+
+-->
+<html lang="en">
+<head>
+    <title>dotHIV initiative | dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% stylesheets
+    'bundles/dothivadmin/lesscss/styles.less'
+    filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}">
+    {% endstylesheets %}
+    {% image '@DothivRegistryWebsiteBundle/Resources/public/images/favicon.png' %}
+    <link rel="shortcut icon" href="{{ asset_url }}">
+    {% endimage %}
+    {% javascripts
+    '@DothivAngularJsBundle/Resources/public/angular/angular.js'
+    filter='?ngmin,?closureecma5'
+    output='js/*.min.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <base href="/">
+</head>
+<body data-ng-app="dotHIVApp">
+<nav role="navigation">
+    <section>
+        <header>
+            <a href="{{ path('dothiv_admin_app') }}">dotHIV initiative</a>
+        </header>
+    </section>
+</nav>
+<main data-ui-view></main>
+<footer></footer>
+{% block angular_app %}
+    {% javascripts
+    '@DothivPremiumConfiguratorBundle/Resources/public/js/vendor/jquery.js'
+    '@DothivTwitterBootstrapBundle/Resources/public/bootstrap/js/collapse.js'
+    '@DothivAngularJsBundle/Resources/public/angular/angular-resource.js'
+    '@DothivAngularJsBundle/Resources/public/angular/angular-route.js'
+    '@DothivAngularJsBundle/Resources/public/angular/angular-cookies.js'
+    '@DothivAngularJsBundle/Resources/public/extra/angular-ui.github.io/ui-bootstrap/3/angular-ui-bootstrap-tpls.js'
+    '@DothivAngularJsBundle/Resources/public/extra/angular-ui.github.io/ui-router/angular-ui-router.js'
+    '@DothivAdminBundle/Resources/public/js/app.js'
+    '@DothivBaseWebsiteBundle/Resources/public/1.2/services/*.js'
+    '@DothivBaseWebsiteBundle/Resources/public/1.2/services/models/*.js'
+    '@DothivAdminBundle/Resources/public/js/services/models/*.js'
+    '@DothivAdminBundle/Resources/public/js/controllers/*.js'
+    filter='?ngmin,?closureecma5'
+    output='js/*.min.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock angular_app %}
+</body>
+</html>

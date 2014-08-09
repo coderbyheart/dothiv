@@ -1,0 +1,18 @@
+services:
+    dothiv.admin.controller.page:
+        class: Dothiv\AdminBundle\Controller\PageController
+        arguments:
+          - @templating
+
+    dothiv.admin.controller.login:
+        class: Dothiv\AdminBundle\Controller\LoginController
+        arguments:
+          - @templating
+
+    dothiv.admin.controller.account:
+        class: %dothiv.api.controller.account.class%
+        arguments:
+         - @dothiv.admin.service.user
+         - @dothiv.repository.user
+         - @serializer
+         - @clock

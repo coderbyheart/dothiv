@@ -1,0 +1,86 @@
+form[role=form] {
+  .container-fluid;
+  input[type=text], input[type=email], input[type=url], select, textarea {
+    &:extend(.form-control all)
+  ;
+    &.ng-valid {
+      border-color: @brand-success;
+      &.ng-pristine {
+        border-color: @input-border;
+      }
+    }
+    &.ng-invalid {
+      border-color: @brand-danger;
+      &.ng-pristine {
+        border-color: @input-border;
+      }
+    }
+    &.ng-pristine {
+    }
+    &.ng-dirty {
+    }
+  }
+  fieldset {
+    .make-xs-column(12);
+    .make-row();
+    legend {
+      .make-xs-column(12);
+    }
+    div.fields {
+      .make-xs-column(8);
+    }
+    div.fields-legend {
+      .make-xs-column(4);
+    }
+  }
+  nav {
+    .pull-right;
+  }
+  button {
+    &:extend(.btn all)
+  ;
+    &[type=submit] {
+      .btn-primary;
+    }
+  }
+
+  @-moz-keyframes spin {
+    from {
+      -moz-transform: rotate(0deg);
+    }
+    to {
+      -moz-transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes spin {
+    from {
+      -webkit-transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  button.loading {
+    .btn-default;
+    i {
+      vertical-align: text-bottom;
+      margin-right: 5px;
+      font-size: 20px;
+      .glyphicon;
+      .glyphicon-refresh;
+      -webkit-animation: spin 1s infinite linear;
+      -moz-animation: spin 1s infinite linear;
+      -o-animation: spin 1s infinite linear;
+      animation: spin 1s infinite linear;
+    }
+  }
+}

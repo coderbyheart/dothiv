@@ -1,0 +1,27 @@
+parameters:
+    dothiv.admin.service.mailer.login.class: Dothiv\AdminBundle\Service\Mailer\LoginLinkMailer
+    dothiv.admin.service.user.class: Dothiv\AdminBundle\Service\UserService
+
+services:
+    dothiv.admin.service.user:
+        class: %dothiv.admin.service.user.class%
+        arguments:
+        - @dothiv.repository.user
+        - @dothiv.repository.user_token
+        - @clock
+        - @event_dispatcher
+        - "dothiv.admin.loginlink.requested"
+        calls:
+        - [setDomain, ["%charitydomain%"]]
+
+
+    dothiv.admin.service.mailer.login:
+        class: %dothiv.admin.service.mailer.login.class%
+        arguments:
+        - @mailer
+        - @router
+        - 'dothiv_admin_app'
+        - %email_from_address%
+        - %email_from_name%
+        tags:
+            - { name: kernel.event_listener, event: dothiv.admin.loginlink.requested, method: onLoginLinkRequested }

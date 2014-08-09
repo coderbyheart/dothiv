@@ -1,0 +1,26 @@
+dothiv_admin_app:
+    path:     /
+    defaults:
+        _controller: dothiv.admin.controller.page:pageAction
+        page: index
+
+dothiv_admin_app_page:
+    path:     /app/{page}.html
+    defaults:
+        _controller: dothiv.admin.controller.page:appPageAction
+
+dothiv_admin_api_account_loginlink:
+    pattern:  /api/account/loginLink
+    defaults:
+        _controller: dothiv.admin.controller.account:loginLinkAction
+        _format: json
+        locale: en
+        ApiRequest: Dothiv\AdminBundle\Request\LoginLinkRequest
+    methods: [POST]
+
+dothiv_admin_api_token:
+    pattern:  /api/admin/{handle}/token
+    defaults:
+        _controller: dothiv.api.controller.user:revokeTokenAction
+        _format: json
+    methods: [DELETE]
