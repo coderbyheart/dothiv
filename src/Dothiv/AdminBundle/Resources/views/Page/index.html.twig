@@ -41,11 +41,14 @@
     <base href="/">
 </head>
 <body data-ng-app="dotHIVApp">
-<nav role="navigation">
+<nav role="navigation" data-ng-controller="AdminHeadNavController">
     <section>
         <header>
             <a href="{{ path('dothiv_admin_app') }}">dotHIV initiative</a>
         </header>
+        <nav class="right">
+            <button data-ng-click="logout()" data-ng-show="isLoggedIn()">Logout</button>
+        </nav>
     </section>
 </nav>
 <main data-ui-view></main>

@@ -17,10 +17,3 @@ dothiv_admin_api_account_loginlink:
         locale: en
         ApiRequest: Dothiv\AdminBundle\Request\LoginLinkRequest
     methods: [POST]
-
-dothiv_admin_api_token:
-    pattern:  /api/admin/{handle}/token
-    defaults:
-        _controller: dothiv.api.controller.user:revokeTokenAction
-        _format: json
-    methods: [DELETE]

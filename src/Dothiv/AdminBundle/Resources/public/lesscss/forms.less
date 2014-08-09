@@ -69,18 +69,25 @@ form[role=form] {
     }
   }
 
+  .loading-icon {
+    vertical-align: text-bottom;
+    margin-right: 5px;
+    font-size: 20px;
+    .glyphicon;
+    .glyphicon-refresh;
+    -webkit-animation: spin 1s infinite linear;
+    -moz-animation: spin 1s infinite linear;
+    -o-animation: spin 1s infinite linear;
+    animation: spin 1s infinite linear;
+  }
+  i.loading {
+    .loading-icon;
+  }
+
   button.loading {
     .btn-default;
     i {
-      vertical-align: text-bottom;
-      margin-right: 5px;
-      font-size: 20px;
-      .glyphicon;
-      .glyphicon-refresh;
-      -webkit-animation: spin 1s infinite linear;
-      -moz-animation: spin 1s infinite linear;
-      -o-animation: spin 1s infinite linear;
-      animation: spin 1s infinite linear;
+      .loading-icon;
     }
   }
 }

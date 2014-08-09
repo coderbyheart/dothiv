@@ -4,11 +4,6 @@ services:
         arguments:
           - @templating
 
-    dothiv.admin.controller.login:
-        class: Dothiv\AdminBundle\Controller\LoginController
-        arguments:
-          - @templating
-
     dothiv.admin.controller.account:
         class: %dothiv.api.controller.account.class%
         arguments:

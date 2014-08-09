@@ -19,6 +19,11 @@ angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.controllers', 'ngR
                 templateUrl: '/admin/app/login.html',
                 controller: 'AdminLoginController'
             })
+            .state('auth', {
+                url: '/auth/:handle/:auth_token',
+                templateUrl: '/admin/app/auth.html',
+                controller: 'AdminAuthController'
+            })
             .state('=', {
                 abstract: true,
                 url: '',
