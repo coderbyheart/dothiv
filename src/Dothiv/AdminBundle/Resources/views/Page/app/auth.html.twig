@@ -1,7 +1,6 @@
 <article>
     <div id="alert-msg" role="alert" data-ng-show="error">
-        <button type="button" class="close" data-ng-click="errorMessage=''"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <p>Failed to verify credentials. Please <a href="{{ path('dothiv_admin_app') }}">request a new token</a>.</p>
+        <p>Failed to verify credentials. Please <a href="{{ path('dothiv_admin_app') }}#!/login" data-ng-click="$dismiss()">request a new token</a>.</p>
     </div>
     <section>
         <div data-ng-show="!error">

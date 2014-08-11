@@ -12,3 +12,14 @@ services:
         - %email_from_name%
         tags:
             - { name: kernel.event_listener, event: dothiv.admin.loginlink.requested, method: onLoginLinkRequested }
+
+    dothiv.admin.service.user:
+        class: %dothiv.businessbundle.service.user.class%
+        arguments:
+        - @dothiv.repository.user
+        - @dothiv.repository.user_token
+        - @clock
+        - @event_dispatcher
+        - 'dothiv.admin.loginlink.requested'
+        - "%registrydomain%"
+

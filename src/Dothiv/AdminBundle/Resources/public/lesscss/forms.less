@@ -1,5 +1,4 @@
 form[role=form] {
-  .container-fluid;
   input[type=text], input[type=email], input[type=url], select, textarea {
     &:extend(.form-control all)
   ;
@@ -20,19 +19,6 @@ form[role=form] {
     &.ng-dirty {
     }
   }
-  fieldset {
-    .make-xs-column(12);
-    .make-row();
-    legend {
-      .make-xs-column(12);
-    }
-    div.fields {
-      .make-xs-column(8);
-    }
-    div.fields-legend {
-      .make-xs-column(4);
-    }
-  }
   nav {
     .pull-right;
   }
@@ -44,50 +30,14 @@ form[role=form] {
     }
   }
 
-  @-moz-keyframes spin {
-    from {
-      -moz-transform: rotate(0deg);
-    }
-    to {
-      -moz-transform: rotate(360deg);
-    }
-  }
-  @-webkit-keyframes spin {
-    from {
-      -webkit-transform: rotate(0deg);
-    }
-    to {
-      -webkit-transform: rotate(360deg);
-    }
-  }
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .loading-icon {
-    vertical-align: text-bottom;
-    margin-right: 5px;
-    font-size: 20px;
-    .glyphicon;
-    .glyphicon-refresh;
-    -webkit-animation: spin 1s infinite linear;
-    -moz-animation: spin 1s infinite linear;
-    -o-animation: spin 1s infinite linear;
-    animation: spin 1s infinite linear;
-  }
-  i.loading {
-    .loading-icon;
-  }
-
   button.loading {
     .btn-default;
     i {
       .loading-icon;
     }
+  }
+
+  div.fields-legend {
+    margin-top: 2em;
   }
 }

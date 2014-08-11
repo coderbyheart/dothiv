@@ -41,14 +41,23 @@
     <base href="/">
 </head>
 <body data-ng-app="dotHIVApp">
-<nav role="navigation" data-ng-controller="AdminHeadNavController">
-    <section>
-        <header>
-            <a href="{{ path('dothiv_admin_app') }}">dotHIV initiative</a>
+<nav role="navigation" data-ng-controller="AdminHeadNavController" class="navbar navbar-default">
+    <section class="container-fluid">
+        <header class="navbar-header">
+            <a class="navbar-brand" href="{{ path('dothiv_admin_app') }}">dotHIV initiative</a>
         </header>
-        <nav class="right">
-            <button data-ng-click="logout()" data-ng-show="isLoggedIn()">Logout</button>
-        </nav>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav" data-ng-show="isLoggedIn()">
+                <li data-ng-class="{active: state.includes('=.dashboard') }">
+                    <a href="{{ path('dothiv_admin_app') }}#!/dashboard">Dashboard</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <button data-ng-click="logout()" data-ng-show="isLoggedIn()">Logout</button>
+                </li>
+            </ul>
+        </div>
     </section>
 </nav>
 <main data-ui-view></main>

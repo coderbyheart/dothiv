@@ -1,26 +1,7 @@
 nav[role=navigation] {
-  &:extend(.navbar all)
-;
-  &:extend(.navbar-default all)
-;
-  section {
-    .container-fluid;
-    header {
-      .navbar-header;
-      a {
-        .navbar-brand;
-      }
-    }
-    nav {
-      &.right {
-        .pull-right;
-      }
-      margin-top: @grid-gutter-width / 4;
-      button {
-        &:extend(.btn all)
-      ;
-        .btn-default;
-      }
-    }
+  button {
+    &:extend(.btn all);
+    margin-top: @grid-gutter-width / 4;
+    .btn-default;
   }
 }

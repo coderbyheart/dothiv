@@ -3,3 +3,11 @@ services:
         class: Dothiv\AdminBundle\Controller\PageController
         arguments:
           - @templating
+
+    dothiv.admin.api.controller.account:
+        class: %dothiv.api.controller.account.class%
+        arguments:
+         - @dothiv.admin.service.user
+         - @dothiv.repository.user
+         - @serializer
+         - @clock

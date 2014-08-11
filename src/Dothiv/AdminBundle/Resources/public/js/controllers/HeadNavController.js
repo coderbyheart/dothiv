@@ -2,7 +2,7 @@
 
 angular.module('dotHIVApp.controllers').controller('AdminHeadNavController', ['$scope', '$location', '$state', 'security',
     function ($scope, $location, $state, security) {
-        // make logout available and redirect to home page
+        $scope.state = $state;
         $scope.logout = function () {
             security.logout();
             $state.transitionTo('login');
