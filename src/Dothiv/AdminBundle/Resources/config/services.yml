@@ -1,20 +1,7 @@
 parameters:
     dothiv.admin.service.mailer.login.class: Dothiv\AdminBundle\Service\Mailer\LoginLinkMailer
-    dothiv.admin.service.user.class: Dothiv\AdminBundle\Service\UserService
 
 services:
-    dothiv.admin.service.user:
-        class: %dothiv.admin.service.user.class%
-        arguments:
-        - @dothiv.repository.user
-        - @dothiv.repository.user_token
-        - @clock
-        - @event_dispatcher
-        - "dothiv.admin.loginlink.requested"
-        calls:
-        - [setDomain, ["%charitydomain%"]]
-
-
     dothiv.admin.service.mailer.login:
         class: %dothiv.admin.service.mailer.login.class%
         arguments:

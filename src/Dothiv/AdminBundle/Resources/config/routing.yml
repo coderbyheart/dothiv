@@ -12,7 +12,7 @@ dothiv_admin_app_page:
 dothiv_admin_api_account_loginlink:
     pattern:  /api/account/loginLink
     defaults:
-        _controller: dothiv.admin.controller.account:loginLinkAction
+        _controller: dothiv.api.controller.account:loginLinkAction
         _format: json
         locale: en
         ApiRequest: Dothiv\AdminBundle\Request\LoginLinkRequest
