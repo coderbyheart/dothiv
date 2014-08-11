@@ -9,8 +9,13 @@ Feature: Dashboard
       | email     | admin@click4life.hiv.dev |
       | firstname | John                     |
       | surname   | Doe                      |
+    And the "DothivBusinessBundle:UserToken" entity exists in "userToken" with values:
+      | user     | {user}                          |
+      | token    | admint0k3n                      |
+      | lifetime | {\DateTime@2015-01-01T00:00:00} |
     Given I add "Accept" header equal to "application/json"
     And I add "Content-Type" header equal to "application/json"
+    And I add Bearer token equal to "3e11fe85b5c5522aedc52015c21b6c1fda3cc4b4"
 
   Scenario: Request list of reporters
     And I send a GET request to "http://tld.hiv.dev/admin/api/stats"
