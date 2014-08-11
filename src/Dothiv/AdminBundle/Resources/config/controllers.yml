@@ -1,3 +1,6 @@
+parameters:
+    dothiv.admin.api.controller.stats.class: Dothiv\AdminBundle\Controller\StatsController
+
 services:
     dothiv.admin.controller.page:
         class: Dothiv\AdminBundle\Controller\PageController
@@ -11,3 +14,10 @@ services:
          - @dothiv.repository.user
          - @serializer
          - @clock
+
+    dothiv.admin.api.controller.stats:
+        class: %dothiv.admin.api.controller.stats.class%
+        arguments:
+        - @dothiv.admin.service.stats
+        - @serializer
+        - @router

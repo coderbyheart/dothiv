@@ -10,9 +10,31 @@ dothiv_admin_app_page:
         _controller: dothiv.admin.controller.page:appPageAction
 
 dothiv_admin_api_account_loginlink:
-    pattern:  /api/account/loginLink
+    path:  /api/account/loginLink
     defaults:
         _controller: dothiv.admin.api.controller.account:loginLinkAction
         _format: json
         locale: en
     methods: [POST]
+
+# Stats
+dothiv_admin_stats_list_reporters:
+    path: /api/stats
+    defaults:
+        _controller: dothiv.admin.api.controller.stats:listReportersAction
+        _format: json
+    methods: [GET]
+
+dothiv_admin_stats_get_reporter:
+    path: /api/stats/{reporterId}
+    defaults:
+        _controller: dothiv.admin.api.controller.stats:getReporterAction
+        _format: json
+    methods: [GET]
+
+dothiv_admin_stats_report:
+    path: /api/stats/{reporterId}/report/{reportId}
+    defaults:
+        _controller: dothiv.admin.api.controller.stats:getReportAction
+        _format: json
+    methods: [GET]

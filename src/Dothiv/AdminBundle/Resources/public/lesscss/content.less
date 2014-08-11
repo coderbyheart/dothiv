@@ -4,11 +4,33 @@
   width: 50%;
   left: 25%;
 }
+
 #alert-msg {
   .alert;
   .alert-danger;
 }
+
 #success-msg {
   .alert;
   .alert-success;
+}
+
+article.dashboard {
+  section.reporter {
+    h1 {
+      font-size: 18px;
+      font-weight: @font-weight-bold;
+    }
+    div[data-resolution=total] {
+      text-align: center;
+      font-size: 100px;
+      font-weight: @font-weight-bold;
+    }
+    .nav-tabs {
+      a {
+        font-size: 11px;
+        padding: (@grid-gutter-width / 8) (@grid-gutter-width / 4);
+      }
+    }
+  }
 }

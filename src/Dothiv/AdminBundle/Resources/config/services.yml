@@ -1,4 +1,5 @@
 parameters:
+    dothiv.admin.service.stats.class: Dothiv\AdminBundle\Service\StatsService
     dothiv.admin.service.mailer.login.class: Dothiv\AdminBundle\Service\Mailer\LoginLinkMailer
 
 services:
@@ -22,4 +23,7 @@ services:
         - @event_dispatcher
         - 'dothiv.admin.loginlink.requested'
         - "%registrydomain%"
+
+    dothiv.admin.service.stats:
+        class: %dothiv.admin.service.stats.class%
 

@@ -1,3 +1,17 @@
-<article>
-    Dashboard
+<article class="dashboard">
+    <section class="reporter" data-ng-repeat="reporter in reporters">
+        <h1 data-ng-bind="reporter.title"></h1>
+        <tabset>
+            <tab ng-repeat="report in reporter.reports" heading="%%report.title%%" select="activateTab(report)">
+                <div class="loading" data-ng-hide="report.loaded">
+                    <i></i> loading …
+                </div>
+                <div data-ng-show="report.loaded">
+                    <div data-ng-show="report.resolution == 'total'" data-resolution="%%report.resolution%%">
+                        <p data-ng-bind="report.total"></p>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+    </section>
 </article>

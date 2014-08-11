@@ -31,7 +31,8 @@ angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.controllers', 'ngR
             })
             .state('=.dashboard', {
                 url: '/dashboard',
-                templateUrl: '/admin/app/dashboard.html'
+                templateUrl: '/admin/app/dashboard.html',
+                controller: 'AdminDashboardController'
             })
         ;
     }])
