@@ -14,6 +14,7 @@ dothiv_admin_api_account_loginlink:
     defaults:
         _controller: dothiv.admin.api.controller.account:loginLinkAction
         _format: json
+        _dothiv.ApiRequest: Dothiv\AdminBundle\Request\LoginLinkRequest
         locale: en
     methods: [POST]
 

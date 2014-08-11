@@ -22,7 +22,7 @@ services:
         - @clock
         - @event_dispatcher
         - 'dothiv.admin.loginlink.requested'
-        - "%registrydomain%"
+        - "%charitydomain%"
 
     dothiv.admin.service.stats:
         class: %dothiv.admin.service.stats.class%

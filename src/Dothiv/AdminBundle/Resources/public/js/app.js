@@ -15,7 +15,7 @@ angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.controllers', 'ngR
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider
             .state('login', {
-                url: '/login',
+                url: '',
                 templateUrl: '/admin/app/login.html',
                 controller: 'AdminLoginController'
             })
@@ -49,7 +49,6 @@ angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.controllers', 'ngR
                 });
             }
         });
-        $state.transitionTo('=.dashboard');
     }])
 ;
 angular.module('dotHIVApp.services', ['dotHIVApp.controllers', 'ui.router', 'ngResource', 'ngCookies']);
