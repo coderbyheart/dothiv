@@ -6,6 +6,7 @@
     -moz-transform: rotate(360deg);
   }
 }
+
 @-webkit-keyframes spin {
   from {
     -webkit-transform: rotate(0deg);
@@ -14,6 +15,7 @@
     -webkit-transform: rotate(360deg);
   }
 }
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -23,18 +25,38 @@
   }
 }
 
-.loading-icon {
+.icon {
+  .glyphicon;
+}
+
+.icon-loading, i.loading {
+  .icon;
   vertical-align: text-bottom;
   margin-right: 5px;
   font-size: 20px;
-  .glyphicon;
   .glyphicon-refresh;
   -webkit-animation: spin 1s infinite linear;
   -moz-animation: spin 1s infinite linear;
   -o-animation: spin 1s infinite linear;
   animation: spin 1s infinite linear;
 }
-i.loading {
-  .loading-icon;
+
+.icon-edit, i.edit {
+  .icon;
+  .glyphicon-pencil;
 }
 
+.icon-next, i.next {
+  .icon;
+  .glyphicon-chevron-right;
+}
+
+.icon-prev, i.prev {
+  .icon;
+  .glyphicon-chevron-left;
+}
+
+.icon-download, i.download {
+  .icon;
+  .glyphicon-download-alt;
+}

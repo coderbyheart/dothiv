@@ -1,0 +1,92 @@
+<article class="crud">
+    <header>
+        <h1>Non-profit registration for %%domain%%</h1>
+    </header>
+    <div id="alert-msg" role="alert" data-ng-show="errorMessage">
+        <button type="button" class="close" data-ng-click="errorMessage=''">
+            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <p data-ng-bind="errorMessage"></p>
+    </div>
+    <section data-ng-show="!loaded">
+        <i class="loading"></i> Loading …
+    </section>
+</article>
+<article class="crud" data-ng-show="loaded">
+    <section class="item">
+        <h2>Organization</h2>
+        <dl>
+            <dt>Organization</dt>
+            <dd data-ng-bind="registration.organization"></dd>
+            <dt>Proof of organization</dt>
+            <dd><a data-ng-href="%%registration.proof.url%%"><i class="download"></i> Download</a></dd>
+            <dt>What do you do?</dt>
+            <dd data-ng-bind="registration.about"></dd>
+            <dt>Which field does your organization focus on?</dt>
+            <dd data-ng-bind="registration.field"></dd>
+            <dt>Postcode</dt>
+            <dd data-ng-bind="registration.postcode"></dd>
+            <dt>Locality</dt>
+            <dd data-ng-bind="registration.locality"></dd>
+            <dt>Country</dt>
+            <dd data-ng-bind="registration.country"></dd>
+            <dt>Website</dt>
+            <dd><a data-ng-href="registration.website" data-ng-bind="registration.website"></a></dd>
+            <dt data-ng-show="registration.orgPhone">Phone</dt>
+            <dd data-ng-show="registration.orgPhone">
+                <a data-ng-href="tel:%%registration.orgPhone%%" data-ng-bind="registration.orgPhone"></a></dd>
+            <dt data-ng-show="registration.orgFax">Fax</dt>
+            <dd data-ng-show="registration.orgFax">
+                <a data-ng-href="tel:%%registration.orgFax%%" data-ng-bind="registration.orgFax"></a></dd>
+        </dl>
+    </section>
+    <section class="item">
+        <h2>Contact Person</h2>
+        <dl>
+            <dt>Email</dt>
+            <dd><a data-ng-href="mailto:%%registration.personEmail%%" data-ng-bind="registration.personEmail"></a>
+            </dd>
+            <dt>Name</dt>
+            <dd>%%registration.personFirstname%% %%registration.personSurname%%</dd>
+            <dt data-ng-show="registration.personPosition">Position</dt>
+            <dd data-ng-show="registration.personPosition" data-ng-bind="registration.personPosition"></dd>
+            <dt data-ng-show="registration.personPhone">Phone</dt>
+            <dd data-ng-show="registration.personPhone">
+                <a data-ng-href="tel:%%registration.personPhone%%" data-ng-bind="registration.personPhone"></a></dd>
+            <dt data-ng-show="registration.personFax">Fax</dt>
+            <dd data-ng-show="registration.personFax">
+                <a data-ng-href="tel:%%registration.personFax%%" data-ng-bind="registration.personFax"></a></dd>
+        </dl>
+    </section>
+    <section class="item">
+        <h2>Usage</h2>
+        <dl>
+            <dt>Forward Internet users through our standard homepage</dt>
+            <dd>
+                <span data-ng-show="registration.forward">Yes</span>
+                <span data-ng-show="!registration.forward">No</span>
+            </dd>
+            <dt data-ng-show="registration.concept">Concept</dt>
+            <dd data-ng-show="registration.concept" data-ng-bind="registration.concept"></dd>
+        </dl>
+    </section>
+</article>
+<article class="crud" data-ng-show="loaded">
+    <form role="form" name="nonprofitEditForm" novalidate>
+        <fieldset>
+            <legend>Settings
+                <small class="saving" data-ng-show="saving"><i class="loading"></i> saving …</small>
+            </legend>
+            <div class="form-group">
+                <label for="registrationStatus">Status</label>
+                <select id="registrationStatus" data-ng-model="registration.status" data-ng-change="patch('status')">
+                    <option value="new">new</option>
+                    <option value="verified">verified</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="registrationCode">Code</label>
+                <input type="text" id="registrationCode" data-ng-model="registration.code" data-ng-blur="patch('code')">
+            </div>
+        </fieldset>
+    </form>
+</article>

@@ -26,7 +26,6 @@ angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.controllers', 'ngR
             })
             .state('=', {
                 abstract: true,
-                url: '',
                 template: '<div data-ui-view></div>'
             })
             .state('=.dashboard', {
@@ -34,6 +33,21 @@ angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.controllers', 'ngR
                 templateUrl: '/admin/app/dashboard.html',
                 controller: 'AdminDashboardController'
             })
+            .state('=.nonprofit', {
+                abstract: true,
+                template: '<div data-ui-view></div>'
+            })
+            .state('=.nonprofit.list', {
+                url: '/nonprofit',
+                templateUrl: '/admin/app/nonprofit.html',
+                controller: 'AdminNonProfitController'
+            })
+            .state('=.nonprofit.edit', {
+                url: '/nonprofit/:domain',
+                templateUrl: '/admin/app/nonprofit-edit.html',
+                controller: 'AdminNonProfitEditController'
+            })
+
         ;
     }])
     .run(['$rootScope', 'security', '$state', function ($rootScope, security, $state) {

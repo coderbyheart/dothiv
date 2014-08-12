@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dotHIVApp.controllers').controller('AdminDashboardController', ['$scope', 'dothivAdminStatsResource', '$http', '$q', function ($scope, dothivAdminStatsResource, $http, $q) {
+angular.module('dotHIVApp.controllers').controller('AdminDashboardController', ['$scope', 'dothivAdminStatsResource', '$http', function ($scope, dothivAdminStatsResource, $http) {
 
     $scope.reporters = [];
     var loadedReports = {};
@@ -27,13 +27,4 @@ angular.module('dotHIVApp.controllers').controller('AdminDashboardController', [
         }
     }
 
-    /**
-     *                 data
-     var reporter = data;
-     var reports = [];
-     for (var n in reporter.reports) {
-                    reports.push($http({method: 'GET', url: reporter.reports[n]['@id']}));
-     }
-     reporter.reports = reports;
-     */
 }]);

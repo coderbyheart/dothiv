@@ -39,3 +39,32 @@ dothiv_admin_stats_report:
         _controller: dothiv.admin.api.controller.stats:getReportAction
         _format: json
     methods: [GET]
+
+# Non-profit registrations
+dothiv_admin_nonprofit_list_registrations:
+    path: /api/nonprofitregistration
+    defaults:
+        _controller: dothiv.admin.api.controller.nonprofitregistration:listRegistrationsAction
+        _format: json
+    methods: [GET]
+
+dothiv_admin_nonprofit_registration:
+    path: /api/nonprofitregistration/{domain}
+    defaults:
+        _controller: dothiv.admin.api.controller.nonprofitregistration:getRegistrationAction
+        _format: json
+    methods: [GET]
+
+# Attachments
+dothiv_admin_attachment:
+    path: /api/attachment/{handle}
+    defaults:
+        _controller: dothiv.admin.api.controller.attachment:getAttachmentAction
+    methods: [GET]
+
+# Users
+dothiv_admin_user:
+    path: /api/user/{handle}
+    defaults:
+        _controller: dothiv.admin.api.controller.user:getUserAction
+    methods: [GET]

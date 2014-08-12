@@ -19,12 +19,15 @@ form[role=form] {
 }
 article {
   .make-row();
-
-}
-section {
-  .make-xs-column(12);
-  &.reporter {
-    .make-xs-column(4);
+  section, header {
+    .make-xs-column(12);
+    &.reporter {
+      .make-xs-column(4);
+    }
+  }
+  &.crud {
+    section, form {
+      .make-xs-column(6);
+    }
   }
 }
-

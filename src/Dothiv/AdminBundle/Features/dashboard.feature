@@ -1,16 +1,16 @@
-@DothivAdminBundle @Dashboard
+@AdminBundle @Dashboard
 Feature: Dashboard
   Adn admin should be able to view the dashboard
   which contains various statistical visualizations
 
   Background:
-    Given the "DothivBusinessBundle:User" entity exists in "user" with values:
+    Given the "DothivBusinessBundle:User" entity exists in "admin" with values:
       | handle    | adminhandle              |
       | email     | admin@click4life.hiv.dev |
       | firstname | John                     |
       | surname   | Doe                      |
-    And the "DothivBusinessBundle:UserToken" entity exists in "userToken" with values:
-      | user     | {user}                          |
+    And the "DothivBusinessBundle:UserToken" entity exists in "adminToken" with values:
+      | user     | {admin}                         |
       | token    | admint0k3n                      |
       | lifetime | {\DateTime@2015-01-01T00:00:00} |
     Given I add "Accept" header equal to "application/json"
