@@ -27,6 +27,7 @@ services:
         - @event_dispatcher
         - 'dothiv.admin.loginlink.requested'
         - "%charitydomain%"
+        - %dothiv_business.link_request_wait%
 
     dothiv.admin.service.stats:
         class: %dothiv.admin.service.stats.class%

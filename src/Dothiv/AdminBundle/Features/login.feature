@@ -19,23 +19,25 @@ Feature: Login
     Given I send a POST request to "http://tld.hiv.dev/admin/api/account/loginLink" with JSON values:
       | email | admin@click4life.hiv.dev |
     Then the response status code should be 429
-    And the header "Retry-After" should be equal to "1800"
+    And the header "Retry-After" should be equal to "3600"
 
   Scenario: Request login link after token lifetime exceeded
     Given the "DothivBusinessBundle:UserToken" entity exists in "adminToken" with values:
-      | user     | {admin}                         |
-      | token    | admint0k3n                      |
-      | lifetime | {\DateTime@2013-12-31T23:59:59} |
+      | user     | {admin}                                               |
+      | token    | admint0k3n                                            |
+      | lifetime | {\DateTime@2013-12-31T23:59:59}                       |
+      | scope    | {\Dothiv\BusinessBundle\ValueObject\IdentValue@login} |
     And I send a POST request to "http://tld.hiv.dev/admin/api/account/loginLink" with JSON values:
       | email | admin@click4life.hiv.dev |
     Then the response status code should be 201
 
   Scenario: Request login link after token revoked
     Given the "DothivBusinessBundle:UserToken" entity exists in "adminToken" with values:
-      | user        | {admin}                         |
-      | token       | admint0k3n                      |
-      | lifetime    | {\DateTime@2015-01-01T00:00:00} |
-      | revokedTime | {\DateTime@2013-12-31T23:59:59} |
+      | user        | {admin}                                               |
+      | token       | admint0k3n                                            |
+      | lifetime    | {\DateTime@2015-01-01T00:00:00}                       |
+      | revokedTime | {\DateTime@2013-12-31T23:59:59}                       |
+      | scope       | {\Dothiv\BusinessBundle\ValueObject\IdentValue@login} |
     And I send a POST request to "http://tld.hiv.dev/admin/api/account/loginLink" with JSON values:
       | email | admin@click4life.hiv.dev |
     Then the response status code should be 201

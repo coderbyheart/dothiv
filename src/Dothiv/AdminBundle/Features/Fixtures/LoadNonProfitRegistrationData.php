@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Dothiv\BusinessBundle\Entity\Attachment;
 use Dothiv\BusinessBundle\Entity\NonProfitRegistration;
+use Dothiv\BusinessBundle\Entity\Registrar;
 use Dothiv\BusinessBundle\Entity\User;
 
 class LoadNonProfitRegistrationData implements FixtureInterface

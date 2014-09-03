@@ -9,10 +9,15 @@ Feature: Domain Report
       | firstname | John                     |
       | surname   | Doe                      |
     And the "DothivBusinessBundle:UserToken" entity exists in "adminToken" with values:
-      | user     | {admin}                         |
-      | token    | admint0k3n                      |
-      | lifetime | {\DateTime@2015-01-01T00:00:00} |
+      | user     | {admin}                                               |
+      | token    | admint0k3n                                            |
+      | lifetime | {\DateTime@2015-01-01T00:00:00}                       |
+      | scope    | {\Dothiv\BusinessBundle\ValueObject\IdentValue@login} |
+    And the "DothivBusinessBundle:Registrar" entity exists in "registrar" with values:
+      | extId | 1234-AC        |
+      | name  | ACME Registrar |
     And the "DothivBusinessBundle:Domain" entity exists in "domain" with values:
+      | registrar  | {registrar}  |
       | name       | test.hiv     |
       | token      | domaint0k3n  |
       | ownerEmail | john@doe.com |
