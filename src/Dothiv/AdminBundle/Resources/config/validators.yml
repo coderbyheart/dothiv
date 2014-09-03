@@ -1,0 +1,7 @@
+services:
+    dothiv.admin.validator.admin_email:
+        class: Dothiv\AdminBundle\Validator\Constraints\ValidAdminEmailValidator
+        tags:
+            - { name: validator.constraint_validator, alias: admin_email_validator }
+        calls:
+             - [setAdminUserDomain, ["%charitydomain%"]]

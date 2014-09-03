@@ -1,0 +1,48 @@
+form[role=form] {
+  input[type=text], input[type=email], input[type=url], select, textarea {
+    &:extend(.form-control all)
+  ;
+    &.ng-valid {
+      border-color: @brand-success;
+      &.ng-pristine {
+        border-color: @input-border;
+      }
+    }
+    &.ng-invalid {
+      border-color: @brand-danger;
+      &.ng-pristine {
+        border-color: @input-border;
+      }
+    }
+    &.ng-pristine {
+    }
+    &.ng-dirty {
+    }
+  }
+  nav {
+    .pull-right;
+  }
+  button {
+    &:extend(.btn all)
+  ;
+    &[type=submit] {
+      .btn-primary;
+    }
+  }
+
+  button.loading {
+    .btn-default;
+    i {
+      .icon-loading;
+    }
+  }
+
+  div.fields-legend {
+    margin-top: 2em;
+  }
+  fieldset {
+    legend {
+      padding: 0;
+    }
+  }
+}

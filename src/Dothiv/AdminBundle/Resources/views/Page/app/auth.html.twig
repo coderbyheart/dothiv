@@ -1,0 +1,10 @@
+<article>
+    <div id="alert-msg" role="alert" data-ng-show="error">
+        <p>Failed to verify credentials. Please <a href="{{ path('dothiv_admin_app') }}#!/login" data-ng-click="$dismiss()">request a new token</a>.</p>
+    </div>
+    <section>
+        <div data-ng-show="!error">
+            <h3><i class="loading"></i> Verifying credentials</h3>
+        </div>
+    </section>
+</article>
