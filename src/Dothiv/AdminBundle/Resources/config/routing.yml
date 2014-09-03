@@ -1,0 +1,70 @@
+dothiv_admin_app:
+    path:     /
+    defaults:
+        _controller: dothiv.admin.controller.page:pageAction
+        page: index
+
+dothiv_admin_app_page:
+    path:     /app/{page}.html
+    defaults:
+        _controller: dothiv.admin.controller.page:appPageAction
+
+dothiv_admin_api_account_loginlink:
+    path:  /api/account/loginLink
+    defaults:
+        _controller: dothiv.admin.api.controller.account:loginLinkAction
+        _format: json
+        _dothiv.ApiRequest: Dothiv\AdminBundle\Request\LoginLinkRequest
+        locale: en
+    methods: [POST]
+
+# Stats
+dothiv_admin_stats_list_reporters:
+    path: /api/stats
+    defaults:
+        _controller: dothiv.admin.api.controller.stats:listReportersAction
+        _format: json
+    methods: [GET]
+
+dothiv_admin_stats_get_reporter:
+    path: /api/stats/{reporterId}
+    defaults:
+        _controller: dothiv.admin.api.controller.stats:getReporterAction
+        _format: json
+    methods: [GET]
+
+dothiv_admin_stats_report:
+    path: /api/stats/{reporterId}/report/{reportId}
+    defaults:
+        _controller: dothiv.admin.api.controller.stats:getReportAction
+        _format: json
+    methods: [GET]
+
+# Non-profit registrations
+dothiv_admin_nonprofit_list_registrations:
+    path: /api/nonprofitregistration
+    defaults:
+        _controller: dothiv.admin.api.controller.nonprofitregistration:listRegistrationsAction
+        _format: json
+    methods: [GET]
+
+dothiv_admin_nonprofit_registration:
+    path: /api/nonprofitregistration/{domain}
+    defaults:
+        _controller: dothiv.admin.api.controller.nonprofitregistration:getRegistrationAction
+        _format: json
+    methods: [GET]
+
+# Attachments
+dothiv_admin_attachment:
+    path: /api/attachment/{handle}
+    defaults:
+        _controller: dothiv.admin.api.controller.attachment:getAttachmentAction
+    methods: [GET]
+
+# Users
+dothiv_admin_user:
+    path: /api/user/{handle}
+    defaults:
+        _controller: dothiv.admin.api.controller.user:getUserAction
+    methods: [GET]
