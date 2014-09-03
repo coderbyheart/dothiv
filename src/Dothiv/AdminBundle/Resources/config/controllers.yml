@@ -1,6 +1,7 @@
 parameters:
     dothiv.admin.api.controller.stats.class: Dothiv\AdminBundle\Controller\StatsController
     dothiv.admin.api.controller.nonprofitregistration.class: Dothiv\AdminBundle\Controller\NonProfitRegistrationController
+    dothiv.admin.api.controller.attachment.class: Dothiv\AdminBundle\Controller\AttachmentController
 
 services:
     dothiv.admin.controller.page:
@@ -31,3 +32,8 @@ services:
         - @dothiv.admin.transformer.nonprofitregistration
         - @dothiv.admin.transformer.paginatedlist
         - @serializer
+
+    dothiv.admin.api.controller.attachment:
+        class: %dothiv.admin.api.controller.attachment.class%
+        arguments:
+        - @dothiv.businessbundle.service.attachment
