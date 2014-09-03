@@ -52,6 +52,8 @@ services:
         arguments:
         - @router
         - "dothiv_admin_attachment"
+        calls:
+        - [setSecurityContext, [@security.context]]
 
     dothiv.admin.transformer.user:
         class: %dothiv.admin.transformer.user.class%

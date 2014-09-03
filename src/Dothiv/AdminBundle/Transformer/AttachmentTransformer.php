@@ -3,6 +3,8 @@
 namespace Dothiv\AdminBundle\Transformer;
 
 use Dothiv\AdminBundle\Model\AttachmentModel;
+use Dothiv\AdminBundle\Transformer\Traits\SecurityContextTrait;
+use Dothiv\APIBundle\Security\Authentication\Token\Oauth2BearerToken;
 use Dothiv\BusinessBundle\Entity\Attachment;
 use Dothiv\BusinessBundle\ValueObject\URLValue;
 use Dothiv\BusinessBundle\ValueObject\W3CDateTimeValue;
@@ -11,6 +13,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class AttachmentTransformer extends AbstractTransformer
 {
+    use SecurityContextTrait;
+
     /**
      * @param Attachment $entity
      * @param string     $route
@@ -28,9 +32,16 @@ class AttachmentTransformer extends AbstractTransformer
                 RouterInterface::ABSOLUTE_URL
             )
         ));
+        $attachmentRoute = Option::fromValue($route)->getOrElse($this->route);
+        $params = array('handle' => $entity->getHandle(), 'download' => '1');
+        if (Option::fromValue($this->getSecurityContext())->isDefined()) {
+            /** @var Oauth2BearerToken $token */
+            $token = $this->getSecurityContext()->getToken();
+            $params['auth_token'] = $token->getBearerToken();
+        }
         $model->setUrl(new URLValue($this->router->generate(
-            Option::fromValue($route)->getOrElse($this->route),
-            array('handle' => $entity->getHandle(), 'download' => '1'),
+            $attachmentRoute,
+            $params,
             RouterInterface::ABSOLUTE_URL
         )));
         $model->setMimeType($entity->getMimeType());
