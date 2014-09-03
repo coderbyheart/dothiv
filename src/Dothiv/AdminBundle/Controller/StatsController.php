@@ -78,6 +78,7 @@ class StatsController
         foreach ($reporter->getReports()->getKeys() as $reportId) {
             $report = new Report();
             $report->setJsonLdId(new URLValue($this->getReportUrl($reporterId, $reportId)));
+            $report->setTitle($reporter->getReports()->get($reportId)->getTitle());
             $reports->add($report);
         }
 
