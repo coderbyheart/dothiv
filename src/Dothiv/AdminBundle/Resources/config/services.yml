@@ -2,6 +2,7 @@ parameters:
     dothiv.admin.service.stats.class: Dothiv\AdminBundle\Service\StatsService
     dothiv.admin.service.mailer.login.class: Dothiv\AdminBundle\Service\Mailer\LoginLinkMailer
     dothiv.admin.transformer.nonprofitregistration.class: Dothiv\AdminBundle\Transformer\NonProfitRegistrationTransformer
+    dothiv.admin.transformer.domain.class: Dothiv\AdminBundle\Transformer\DomainTransformer
     dothiv.admin.transformer.paginatedlist.class: Dothiv\AdminBundle\Transformer\PaginatedListTransformer
     dothiv.admin.transformer.attachment.class: Dothiv\AdminBundle\Transformer\AttachmentTransformer
     dothiv.admin.transformer.user.class: Dothiv\AdminBundle\Transformer\UserTransformer
@@ -40,6 +41,12 @@ services:
         calls:
         - [setAttachmentTransformer, [@dothiv.admin.transformer.attachment]]
         - [setUserTransformer, [@dothiv.admin.transformer.user]]
+
+    dothiv.admin.transformer.domain:
+        class: %dothiv.admin.transformer.domain.class%
+        arguments:
+        - @router
+        - "dothiv_admin_domain_registration"
 
     dothiv.admin.transformer.paginatedlist:
         class: %dothiv.admin.transformer.paginatedlist.class%

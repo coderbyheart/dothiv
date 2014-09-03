@@ -33,22 +33,25 @@ angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.controllers', 'ngR
                 templateUrl: '/admin/app/dashboard.html',
                 controller: 'AdminDashboardController'
             })
-            .state('=.nonprofit', {
-                abstract: true,
-                template: '<div data-ui-view></div>'
-            })
-            .state('=.nonprofit.list', {
-                url: '/nonprofit',
-                templateUrl: '/admin/app/nonprofit.html',
-                controller: 'AdminNonProfitController'
-            })
-            .state('=.nonprofit.edit', {
-                url: '/nonprofit/:domain',
-                templateUrl: '/admin/app/nonprofit-edit.html',
-                controller: 'AdminNonProfitEditController'
-            })
-
         ;
+        var sections = ['domain', 'nonprofit'];
+        for (var k in sections) {
+            $stateProvider
+                .state('=.' + sections[k], {
+                    abstract: true,
+                    template: '<div data-ui-view></div>'
+                })
+                .state('=.' + sections[k] + '.list', {
+                    url: '/' + sections[k],
+                    templateUrl: '/admin/app/' + sections[k] + '.html',
+                    controller: 'AdminListController'
+                })
+                .state('=.' + sections[k] + '.edit', {
+                    url: '/' + sections[k] + '/:identifier',
+                    templateUrl: '/admin/app/' + sections[k] + '-edit.html',
+                    controller: 'AdminEditController'
+                });
+        }
     }])
     .run(['$rootScope', 'security', '$state', function ($rootScope, security, $state) {
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {

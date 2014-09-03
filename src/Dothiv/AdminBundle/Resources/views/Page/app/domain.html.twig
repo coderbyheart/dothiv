@@ -1,0 +1,44 @@
+<article class="crud" data-ng-init="listUrl = '/admin/api/domain';">
+    <h1>Domain registrations</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Domain</th>
+            <th class="right">Created</th>
+            <th class="center"><abbr title="Click-Counter configured">Counter</abbr></th>
+            <th class="center"><abbr title="Token sent">Token</abbr></th>
+            <th class="right">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="domain in items">
+            <td>%%domain.domainUTF8%%</td>
+            <td class="right">%%domain.created%%</td>
+            <td class="center">
+                <i class="yes" data-ng-show="domain.clickCounterConfigured"></i>
+                <i class="no" data-ng-show="!domain.clickCounterConfigured"></i>
+            </td>
+            <td class="center">
+                <i class="yes" data-ng-show="domain.tokenSent"></i>
+                <i class="no" data-ng-show="!domain.tokenSent"></i>
+            </td>
+            <td class="right">
+                <button type="submit" data-ng-click="edit('=.domain.edit', domain.domain)"><i></i></button>
+            </td>
+        </tr>
+
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5">
+                <nav>
+                    <button data-ng-disabled="!prevUrl" data-ng-click="prev()"><i class="prev"></i></button>
+                    <button data-ng-disabled="!nextUrl" data-ng-click="next()"><i class="next"></i></button>
+                </nav>
+                <span class="loading" data-ng-show="!loaded"><i class="loading"></i> loading …</span>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</article>

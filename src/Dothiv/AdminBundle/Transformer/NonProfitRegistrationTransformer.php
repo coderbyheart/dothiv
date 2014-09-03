@@ -3,6 +3,8 @@
 namespace Dothiv\AdminBundle\Transformer;
 
 use Dothiv\AdminBundle\Model\NonProfitRegistrationModel;
+use Dothiv\APIBundle\JsonLd\JsonLdEntityInterface;
+use Dothiv\BusinessBundle\Entity\Entity;
 use Dothiv\BusinessBundle\Entity\NonProfitRegistration;
 use Dothiv\BusinessBundle\ValueObject\EmailValue;
 use Dothiv\BusinessBundle\ValueObject\HivDomainValue;
@@ -11,27 +13,28 @@ use Dothiv\BusinessBundle\ValueObject\W3CDateTimeValue;
 use PhpOption\Option;
 use Symfony\Component\Routing\RouterInterface;
 
-class NonProfitRegistrationTransformer extends AbstractTransformer
+class NonProfitRegistrationTransformer extends AbstractTransformer implements EntityTransformerInterface
 {
     use Traits\AttachmentTransformerTrait;
     use Traits\UserTransformerTrait;
 
     /**
-     * @param NonProfitRegistration $entity
-     * @param string                $route
-     * @param boolean               $listing
+     * @param Entity  $entity
+     * @param string  $route
+     * @param boolean $listing
      *
-     * @return NonProfitRegistrationModel
+     * @return JsonLdEntityInterface
      */
-    public function transform(NonProfitRegistration $entity, $route = null, $listing = false)
+    public function transform(Entity $entity, $route = null, $listing = false)
     {
+        /** @var NonProfitRegistration $entity */
         $model = new NonProfitRegistrationModel();
         $model->setDomain(new HivDomainValue($entity->getDomain()));
         $model->setCreated(new W3CDateTimeValue($entity->getCreated()));
         $model->setJsonLdId(new URLValue(
             $this->router->generate(
                 Option::fromValue($route)->getOrElse($this->route),
-                array('domain' => $entity->getDomain()),
+                array('identifier' => $entity->getDomain()),
                 RouterInterface::ABSOLUTE_URL
             )
         ));
