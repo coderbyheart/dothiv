@@ -25,13 +25,29 @@ Feature: Manage Domain Registrations
     And the header "content-type" should contain "application/json"
     And the JSON node "items" should contain 2 elements
 
-  Scenario: Get domain
+  Scenario: Get domain (with token)
     Given I send a GET request to "http://tld.hiv.dev/admin/api/domain/bcme.hiv"
     Then the response status code should be 200
     And the header "content-type" should contain "application/json"
     And the JSON node "domain" should contain "bcme.hiv"
     And the JSON node "ownerName" should contain "Domain Administrator"
     And the JSON node "ownerEmail" should contain "domain@bcme.com"
+    And the JSON node "tokenSent" should be equal to true
+    And the JSON node "token" should contain "domaintokenb"
+    And the JSON node "clickCounterConfigured" should be equal to false
+    And the JSON node "clickCount" should be equal to 0
+    And the JSON node "registrar.name" should contain "Example Registrar"
+    And the JSON node "registrar.notification" should be equal to "true"
+
+  Scenario: Get domain (without token)
+    Given I send a GET request to "http://tld.hiv.dev/admin/api/domain/acme.hiv"
+    Then the response status code should be 200
+    And the header "content-type" should contain "application/json"
+    And the JSON node "domain" should contain "acme.hiv"
+    And the JSON node "ownerName" should contain "Domain Administrator"
+    And the JSON node "ownerEmail" should contain "ccops@acme.com"
     And the JSON node "tokenSent" should be equal to false
     And the JSON node "clickCounterConfigured" should be equal to false
     And the JSON node "clickCount" should be equal to 0
+    And the JSON node "registrar.name" should contain "Example Registrar"
+    And the JSON node "registrar.notification" should be equal to "true"

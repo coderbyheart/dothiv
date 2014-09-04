@@ -24,6 +24,7 @@ class LoadDomainRegistrationData implements FixtureInterface
         $domainA->setOwnerName("Domain Administrator");
         $domainA->setOwnerEmail("domain@bcme.com");
         $domainA->setRegistrar($registrar);
+        $domainA->setToken('domaintokenb');
         $manager->persist($domainA);
 
         $domainB = new Domain();

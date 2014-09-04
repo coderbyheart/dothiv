@@ -83,3 +83,10 @@ dothiv_admin_user:
     defaults:
         _controller: dothiv.admin.api.controller.user:getUserAction
     methods: [GET]
+
+# Registrars
+dothiv_admin_registrar:
+    path: /api/registrar/{identifier}
+    defaults:
+       _controller: dothiv.admin.api.controller.registrar:getItemAction
+    methods: [GET]

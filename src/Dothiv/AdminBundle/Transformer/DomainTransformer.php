@@ -5,6 +5,7 @@ namespace Dothiv\AdminBundle\Transformer;
 use Dothiv\AdminBundle\Model\DomainModel;
 use Dothiv\BusinessBundle\Entity\Domain;
 use Dothiv\BusinessBundle\Entity\Entity;
+use Dothiv\BusinessBundle\Service\Traits\UserServiceTrait;
 use Dothiv\BusinessBundle\ValueObject\EmailValue;
 use Dothiv\BusinessBundle\ValueObject\HivDomainValue;
 use Dothiv\BusinessBundle\ValueObject\URLValue;
@@ -15,7 +16,8 @@ use Symfony\Component\Routing\RouterInterface;
 class DomainTransformer extends AbstractTransformer implements EntityTransformerInterface
 {
     use Traits\AttachmentTransformerTrait;
-    use Traits\UserTransformerTrait;
+    use Traits\RegistrarTransformerTrait;
+    use UserServiceTrait;
 
     /**
      * @param Entity  $entity
@@ -44,6 +46,8 @@ class DomainTransformer extends AbstractTransformer implements EntityTransformer
         );
         $model->setClickCount($entity->getClickcount());
         $model->setTokenSent(Option::fromValue($entity->getToken())->isDefined());
+        $model->setToken($entity->getToken());
+        $model->setRegistrar($this->getRegistrarTransformer()->transform($entity->getRegistrar()));
         return $model;
     }
 }

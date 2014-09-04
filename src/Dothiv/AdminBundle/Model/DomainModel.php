@@ -6,6 +6,7 @@ use Dothiv\APIBundle\JsonLd\JsonLdEntityInterface;
 use Dothiv\APIBundle\JsonLd\JsonLdEntityTrait;
 use Dothiv\BusinessBundle\ValueObject\EmailValue;
 use Dothiv\BusinessBundle\ValueObject\HivDomainValue;
+use Dothiv\BusinessBundle\ValueObject\URLValue;
 use JMS\Serializer\Annotation as Serializer;
 
 class DomainModel implements JsonLdEntityInterface
@@ -44,9 +45,24 @@ class DomainModel implements JsonLdEntityInterface
     protected $tokenSent;
 
     /**
+     * @var string
+     */
+    protected $token;
+
+    /**
      * @var int
      */
     protected $clickCount;
+
+    /**
+     * @var RegistrarModel
+     */
+    protected $registrar;
+
+    public function __construct()
+    {
+        $this->setJsonLdContext(new URLValue('http://jsonld.click4life.hiv/Domain'));
+    }
 
     /**
      * @param HivDomainValue $domain
@@ -163,4 +179,41 @@ class DomainModel implements JsonLdEntityInterface
         return $this->clickCount;
     }
 
+    /**
+     * @param string $token
+     *
+     * @return self
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param RegistrarModel $registrar
+     *
+     * @return self
+     */
+    public function setRegistrar(RegistrarModel $registrar)
+    {
+        $this->registrar = $registrar;
+        return $this;
+    }
+
+    /**
+     * @return RegistrarModel
+     */
+    public function getRegistrar()
+    {
+        return $this->registrar;
+    }
 }
