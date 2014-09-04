@@ -1,4 +1,4 @@
-<article class="crud">
+<article class="crud" data-ng-init="listUrl = '/admin/api/nonprofitregistration';">
     <h1>Non-profit registrations</h1>
 
     <table>
@@ -10,11 +10,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr data-ng-repeat="registration in registrations">
+        <tr data-ng-repeat="registration in items">
             <td>%%registration.domainUTF8%%</td>
             <td class="right">%%registration.created%%</td>
             <td class="right">
-                <button type="submit" data-ng-click="edit(registration)"><i></i></button>
+                <button type="submit" data-ng-click="edit('=.nonprofit.edit', registration.domain)"><i></i></button>
             </td>
         </tr>
 

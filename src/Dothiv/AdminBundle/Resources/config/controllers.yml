@@ -1,6 +1,6 @@
 parameters:
     dothiv.admin.api.controller.stats.class: Dothiv\AdminBundle\Controller\StatsController
-    dothiv.admin.api.controller.nonprofitregistration.class: Dothiv\AdminBundle\Controller\NonProfitRegistrationController
+    dothiv.admin.api.controller.crud.class: Dothiv\AdminBundle\Controller\CRUDController
     dothiv.admin.api.controller.attachment.class: Dothiv\AdminBundle\Controller\AttachmentController
 
 services:
@@ -25,11 +25,18 @@ services:
         - @router
 
     dothiv.admin.api.controller.nonprofitregistration:
-        class: %dothiv.admin.api.controller.nonprofitregistration.class%
+        class: %dothiv.admin.api.controller.crud.class%
         arguments:
-        - @dothiv.business.service.nonprofitregistration
         - @dothiv.repository.nonprofitregistration
         - @dothiv.admin.transformer.nonprofitregistration
+        - @dothiv.admin.transformer.paginatedlist
+        - @serializer
+
+    dothiv.admin.api.controller.domain:
+        class: %dothiv.admin.api.controller.crud.class%
+        arguments:
+        - @dothiv.repository.domain
+        - @dothiv.admin.transformer.domain
         - @dothiv.admin.transformer.paginatedlist
         - @serializer
 

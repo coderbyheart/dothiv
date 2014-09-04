@@ -1,0 +1,41 @@
+<article class="crud" data-ng-init="itemUrl = '/admin/api/domain/' + stateParams.identifier;">
+    <header>
+        <h1><a data-ng-href="http://%%stateParams.identifier%%" target="_blank">%%stateParams.identifier%%</a></h1>
+    </header>
+    <div id="alert-msg" role="alert" data-ng-show="errorMessage">
+        <button type="button" class="close" data-ng-click="errorMessage=''">
+            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <p data-ng-bind="errorMessage"></p>
+    </div>
+    <section data-ng-show="!loaded">
+        <i class="loading"></i> Loading …
+    </section>
+</article>
+<article class="crud" data-ng-show="loaded">
+    <section class="item">
+        <h2>Owner</h2>
+        <dl>
+            <dt>Name</dt>
+            <dd data-ng-bind="item.ownerName"></dd>
+            <dt>Email</dt>
+            <dd><a data-ng-href="mailto:%%item.ownerEmail%%" data-ng-bind="item.ownerEmail"></a>
+        </dl>
+    </section>
+    <section class="item">
+        <h2>Info</h2>
+        <dl>
+            <dt>Click-Counter</dt>
+            <dd>
+                <i class="yes" data-ng-show="item.clickCounterConfigured"></i>
+                <i class="no" data-ng-show="!item.clickCounterConfigured"></i>
+            </dd>
+            <dt>Clicks</dt>
+            <dd data-ng-bind="item.clickCount"></dd>
+            <dt>Token sent</dt>
+            <dd>
+                <i class="yes" data-ng-show="item.tokenSent"></i>
+                <i class="no" data-ng-show="!item.tokenSent"></i>
+            </dd>
+        </dl>
+    </section>
+</article>

@@ -44,14 +44,29 @@ dothiv_admin_stats_report:
 dothiv_admin_nonprofit_list_registrations:
     path: /api/nonprofitregistration
     defaults:
-        _controller: dothiv.admin.api.controller.nonprofitregistration:listRegistrationsAction
+        _controller: dothiv.admin.api.controller.nonprofitregistration:listItemsAction
         _format: json
     methods: [GET]
 
 dothiv_admin_nonprofit_registration:
-    path: /api/nonprofitregistration/{domain}
+    path: /api/nonprofitregistration/{identifier}
     defaults:
-        _controller: dothiv.admin.api.controller.nonprofitregistration:getRegistrationAction
+        _controller: dothiv.admin.api.controller.nonprofitregistration:getItemAction
+        _format: json
+    methods: [GET]
+
+# Domain registrations
+dothiv_admin_domain_list_registrations:
+    path: /api/domain
+    defaults:
+        _controller: dothiv.admin.api.controller.domain:listItemsAction
+        _format: json
+    methods: [GET]
+
+dothiv_admin_domain_registration:
+    path: /api/domain/{identifier}
+    defaults:
+        _controller: dothiv.admin.api.controller.domain:getItemAction
         _format: json
     methods: [GET]
 
