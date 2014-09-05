@@ -6,6 +6,7 @@ parameters:
     dothiv.admin.transformer.paginatedlist.class: Dothiv\AdminBundle\Transformer\PaginatedListTransformer
     dothiv.admin.transformer.attachment.class: Dothiv\AdminBundle\Transformer\AttachmentTransformer
     dothiv.admin.transformer.user.class: Dothiv\AdminBundle\Transformer\UserTransformer
+    dothiv.admin.transformer.registrar.class: Dothiv\AdminBundle\Transformer\RegistrarTransformer
 
 services:
     dothiv.admin.service.mailer.login:
@@ -47,6 +48,8 @@ services:
         arguments:
         - @router
         - "dothiv_admin_domain_registration"
+        calls:
+        - [setRegistrarTransformer, [@dothiv.admin.transformer.registrar]]
 
     dothiv.admin.transformer.paginatedlist:
         class: %dothiv.admin.transformer.paginatedlist.class%
@@ -67,3 +70,9 @@ services:
         arguments:
         - @router
         - "dothiv_admin_user"
+
+    dothiv.admin.transformer.registrar:
+        class: %dothiv.admin.transformer.registrar.class%
+        arguments:
+        - @router
+        - "dothiv_admin_registrar"
