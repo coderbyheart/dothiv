@@ -45,7 +45,7 @@ class DomainTransformer extends AbstractTransformer implements EntityTransformer
             Option::fromValue($entity->getActiveBanner())->isDefined()
         );
         $model->setClickCount($entity->getClickcount());
-        $model->setTokenSent(Option::fromValue($entity->getToken())->isDefined());
+        $model->setTokenSent(Option::fromValue($entity->getTokenSent())->isDefined());
         $model->setToken($entity->getToken());
         $model->setRegistrar($this->getRegistrarTransformer()->transform($entity->getRegistrar()));
         return $model;
