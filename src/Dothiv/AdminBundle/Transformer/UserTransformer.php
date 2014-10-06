@@ -4,8 +4,8 @@ namespace Dothiv\AdminBundle\Transformer;
 
 use Dothiv\AdminBundle\Model\UserModel;
 use Dothiv\BusinessBundle\Entity\User;
-use Dothiv\BusinessBundle\ValueObject\EmailValue;
-use Dothiv\BusinessBundle\ValueObject\URLValue;
+use Dothiv\ValueObject\EmailValue;
+use Dothiv\ValueObject\URLValue;
 use PhpOption\Option;
 use Symfony\Component\Routing\RouterInterface;
 

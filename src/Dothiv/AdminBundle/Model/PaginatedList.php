@@ -4,7 +4,7 @@ namespace Dothiv\AdminBundle\Model;
 
 use Dothiv\APIBundle\JsonLd\JsonLdEntityInterface;
 use Dothiv\APIBundle\JsonLd\JsonLdEntityTrait;
-use Dothiv\BusinessBundle\ValueObject\URLValue;
+use Dothiv\ValueObject\URLValue;
 use JMS\Serializer\Annotation as Serializer;
 
 class PaginatedList implements JsonLdEntityInterface

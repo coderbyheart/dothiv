@@ -4,7 +4,7 @@ namespace Dothiv\AdminBundle\Transformer;
 
 use Dothiv\AdminBundle\Model\PaginatedList;
 use Dothiv\BusinessBundle\Repository\PaginatedResult;
-use Dothiv\BusinessBundle\ValueObject\URLValue;
+use Dothiv\ValueObject\URLValue;
 use Symfony\Component\Routing\RouterInterface;
 
 class PaginatedListTransformer extends AbstractTransformer

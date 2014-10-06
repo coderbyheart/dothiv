@@ -4,10 +4,10 @@ namespace Dothiv\AdminBundle\Model;
 
 use Dothiv\APIBundle\JsonLd\JsonLdEntityInterface;
 use Dothiv\APIBundle\JsonLd\JsonLdEntityTrait;
-use Dothiv\BusinessBundle\ValueObject\EmailValue;
-use Dothiv\BusinessBundle\ValueObject\HivDomainValue;
-use Dothiv\BusinessBundle\ValueObject\URLValue;
-use Dothiv\BusinessBundle\ValueObject\W3CDateTimeValue;
+use Dothiv\ValueObject\EmailValue;
+use Dothiv\ValueObject\HivDomainValue;
+use Dothiv\ValueObject\URLValue;
+use Dothiv\ValueObject\W3CDateTimeValue;
 use JMS\Serializer\Annotation as Serializer;
 
 class AttachmentModel implements JsonLdEntityInterface

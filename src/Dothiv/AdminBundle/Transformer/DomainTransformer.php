@@ -6,10 +6,10 @@ use Dothiv\AdminBundle\Model\DomainModel;
 use Dothiv\BusinessBundle\Entity\Domain;
 use Dothiv\BusinessBundle\Entity\Entity;
 use Dothiv\BusinessBundle\Service\Traits\UserServiceTrait;
-use Dothiv\BusinessBundle\ValueObject\EmailValue;
-use Dothiv\BusinessBundle\ValueObject\HivDomainValue;
-use Dothiv\BusinessBundle\ValueObject\URLValue;
-use Dothiv\BusinessBundle\ValueObject\W3CDateTimeValue;
+use Dothiv\ValueObject\EmailValue;
+use Dothiv\ValueObject\HivDomainValue;
+use Dothiv\ValueObject\URLValue;
+use Dothiv\ValueObject\W3CDateTimeValue;
 use PhpOption\Option;
 use Symfony\Component\Routing\RouterInterface;
 

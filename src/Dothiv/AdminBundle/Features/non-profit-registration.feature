@@ -10,10 +10,10 @@ Feature: Manage Non-profit Registrations
       | firstname | John                     |
       | surname   | Doe                      |
     And the "DothivBusinessBundle:UserToken" entity exists in "adminToken" with values:
-      | user     | {admin}                                               |
-      | token    | admint0k3n                                            |
-      | lifetime | {\DateTime@2015-01-01T00:00:00}                       |
-      | scope    | {\Dothiv\BusinessBundle\ValueObject\IdentValue@login} |
+      | user     | {admin}                                |
+      | token    | admint0k3n                             |
+      | lifetime | {\DateTime@2015-01-01T00:00:00}        |
+      | scope    | {\Dothiv\ValueObject\IdentValue@login} |
     And the fixture "Dothiv\AdminBundle\Features\Fixtures\LoadNonProfitRegistrationData" is loaded
     Given I add "Accept" header equal to "application/json"
     And I add "Content-Type" header equal to "application/json"

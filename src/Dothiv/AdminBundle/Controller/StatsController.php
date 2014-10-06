@@ -8,7 +8,7 @@ use Dothiv\AdminBundle\Model\Reporter;
 use Dothiv\AdminBundle\Service\StatsServiceInterface;
 use Dothiv\AdminBundle\Stats\ReporterInterface;
 use Dothiv\APIBundle\Controller\Traits\CreateJsonResponseTrait;
-use Dothiv\BusinessBundle\ValueObject\URLValue;
+use Dothiv\ValueObject\URLValue;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
