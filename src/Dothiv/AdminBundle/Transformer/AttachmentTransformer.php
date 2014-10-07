@@ -6,8 +6,8 @@ use Dothiv\AdminBundle\Model\AttachmentModel;
 use Dothiv\AdminBundle\Transformer\Traits\SecurityContextTrait;
 use Dothiv\APIBundle\Security\Authentication\Token\Oauth2BearerToken;
 use Dothiv\BusinessBundle\Entity\Attachment;
-use Dothiv\BusinessBundle\ValueObject\URLValue;
-use Dothiv\BusinessBundle\ValueObject\W3CDateTimeValue;
+use Dothiv\ValueObject\URLValue;
+use Dothiv\ValueObject\W3CDateTimeValue;
 use PhpOption\Option;
 use Symfony\Component\Routing\RouterInterface;
 

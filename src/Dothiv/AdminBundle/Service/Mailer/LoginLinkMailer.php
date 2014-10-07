@@ -9,6 +9,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class LoginLinkMailer
 {
+
     /**
      * @var \Swift_Mailer
      */
@@ -33,7 +34,6 @@ class LoginLinkMailer
      * @var string
      */
     private $route;
-
 
     /**
      * @param \Swift_Mailer   $mailer
@@ -73,6 +73,7 @@ class LoginLinkMailer
             UrlGeneratorInterface::ABSOLUTE_URL
         );
         $link .= sprintf('#!/auth/%s/%s', $user->getHandle(), $userToken);
+        $link = preg_replace('%^http://%', 'https://', $link);
 
         $to     = $user->getEmail();
         $toName = $user->getFirstname() . ' ' . $user->getSurname();

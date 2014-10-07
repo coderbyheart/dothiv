@@ -2,7 +2,7 @@
 
 namespace Dothiv\AdminBundle\Model;
 
-use Dothiv\BusinessBundle\ValueObject\W3CDateTimeValue;
+use Dothiv\ValueObject\W3CDateTimeValue;
 
 trait W3CCreatedTrait
 {

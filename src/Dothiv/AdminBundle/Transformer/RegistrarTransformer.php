@@ -5,8 +5,8 @@ namespace Dothiv\AdminBundle\Transformer;
 use Dothiv\AdminBundle\Model\RegistrarModel;
 use Dothiv\BusinessBundle\Entity\Entity;
 use Dothiv\BusinessBundle\Entity\Registrar;
-use Dothiv\BusinessBundle\ValueObject\URLValue;
-use Dothiv\BusinessBundle\ValueObject\W3CDateTimeValue;
+use Dothiv\ValueObject\URLValue;
+use Dothiv\ValueObject\W3CDateTimeValue;
 use PhpOption\Option;
 use Symfony\Component\Routing\RouterInterface;
 

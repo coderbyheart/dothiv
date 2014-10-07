@@ -4,9 +4,9 @@ namespace Dothiv\AdminBundle\Model;
 
 use Dothiv\APIBundle\JsonLd\JsonLdEntityInterface;
 use Dothiv\APIBundle\JsonLd\JsonLdEntityTrait;
-use Dothiv\BusinessBundle\ValueObject\EmailValue;
-use Dothiv\BusinessBundle\ValueObject\HivDomainValue;
-use Dothiv\BusinessBundle\ValueObject\URLValue;
+use Dothiv\ValueObject\EmailValue;
+use Dothiv\ValueObject\HivDomainValue;
+use Dothiv\ValueObject\URLValue;
 use JMS\Serializer\Annotation as Serializer;
 
 class RegistrarModel implements JsonLdEntityInterface
