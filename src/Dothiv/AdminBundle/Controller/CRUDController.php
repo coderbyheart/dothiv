@@ -6,7 +6,7 @@ use Dothiv\AdminBundle\Transformer\NonProfitRegistrationTransformer;
 use Dothiv\AdminBundle\Transformer\PaginatedListTransformer;
 use Dothiv\AdminBundle\Transformer\EntityTransformerInterface;
 use Dothiv\APIBundle\Controller\Traits\CreateJsonResponseTrait;
-use Dothiv\BusinessBundle\Repository\CRUDRepository;
+use Dothiv\BusinessBundle\Repository\CRUDRepositoryInterface;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +17,7 @@ class CRUDController
     use CreateJsonResponseTrait;
 
     /**
-     * @var CRUDRepository
+     * @var CRUDRepositoryInterface
      */
     protected $itemRepo;
 
@@ -32,13 +32,13 @@ class CRUDController
     protected $paginatedListTransformer;
 
     /**
-     * @param CRUDRepository             $itemRepo
+     * @param CRUDRepositoryInterface             $itemRepo
      * @param EntityTransformerInterface $itemTransformer
      * @param PaginatedListTransformer   $paginatedListTransformer
      * @param SerializerInterface        $serializer
      */
     public function __construct(
-        CRUDRepository $itemRepo,
+        CRUDRepositoryInterface $itemRepo,
         EntityTransformerInterface $itemTransformer,
         PaginatedListTransformer $paginatedListTransformer,
         SerializerInterface $serializer
@@ -74,7 +74,7 @@ class CRUDController
     }
 
     /**
-     * @param CRUDRepository             $repo
+     * @param CRUDRepositoryInterface             $repo
      * @param string                     $offsetKey
      * @param string                     $offsetDir
      * @param PaginatedListTransformer   $listTransformer
@@ -84,7 +84,7 @@ class CRUDController
      * @return \Dothiv\AdminBundle\Model\PaginatedList
      */
     protected function createListing(
-        CRUDRepository $repo,
+        CRUDRepositoryInterface $repo,
         $offsetKey,
         $offsetDir,
         PaginatedListTransformer $listTransformer,

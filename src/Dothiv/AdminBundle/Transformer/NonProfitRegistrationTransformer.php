@@ -3,8 +3,7 @@
 namespace Dothiv\AdminBundle\Transformer;
 
 use Dothiv\AdminBundle\Model\NonProfitRegistrationModel;
-use Dothiv\APIBundle\JsonLd\JsonLdEntityInterface;
-use Dothiv\BusinessBundle\Entity\Entity;
+use Dothiv\BusinessBundle\Entity\EntityInterface;
 use Dothiv\BusinessBundle\Entity\NonProfitRegistration;
 use Dothiv\ValueObject\EmailValue;
 use Dothiv\ValueObject\HivDomainValue;
@@ -19,13 +18,9 @@ class NonProfitRegistrationTransformer extends AbstractTransformer implements En
     use Traits\UserTransformerTrait;
 
     /**
-     * @param Entity  $entity
-     * @param string  $route
-     * @param boolean $listing
-     *
-     * @return JsonLdEntityInterface
+     * {@inheritdoc}
      */
-    public function transform(Entity $entity, $route = null, $listing = false)
+    public function transform(EntityInterface $entity, $route = null, $listing = false)
     {
         /** @var NonProfitRegistration $entity */
         $model = new NonProfitRegistrationModel();

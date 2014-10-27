@@ -1,6 +1,6 @@
 <?php
 
-namespace Dothiv\AdminBundle\Model;
+namespace Dothiv\AdminBundle\Model\Traits;
 
 use Dothiv\ValueObject\W3CDateTimeValue;
 

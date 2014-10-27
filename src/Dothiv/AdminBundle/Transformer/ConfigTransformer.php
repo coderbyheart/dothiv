@@ -2,35 +2,31 @@
 
 namespace Dothiv\AdminBundle\Transformer;
 
-use Dothiv\AdminBundle\Model\RegistrarModel;
+use Dothiv\AdminBundle\Model\ConfigModel;
+use Dothiv\BusinessBundle\Entity\Config;
 use Dothiv\BusinessBundle\Entity\EntityInterface;
-use Dothiv\BusinessBundle\Entity\Registrar;
 use Dothiv\ValueObject\URLValue;
 use Dothiv\ValueObject\W3CDateTimeValue;
 use PhpOption\Option;
 use Symfony\Component\Routing\RouterInterface;
 
-class RegistrarTransformer extends AbstractTransformer implements EntityTransformerInterface
+class ConfigTransformer extends AbstractTransformer implements EntityTransformerInterface
 {
-    use Traits\AttachmentTransformerTrait;
-    use Traits\UserTransformerTrait;
-
     /**
      * {@inheritdoc}
      */
     public function transform(EntityInterface $entity, $route = null, $listing = false)
     {
-        /** @var Registrar $entity */
-        $model = new RegistrarModel();
+        /** @var Config $entity */
+        $model = new ConfigModel();
         $model->setName($entity->getName());
-        $model->setNotification($entity->canSendRegistrationNotification());
-        $model->setNotificationType($entity->getRegistrationNotification());
-        $model->setExtId($entity->getExtId());
+        $model->setValue($entity->getValue());
         $model->setCreated(new W3CDateTimeValue($entity->getCreated()));
+        $model->setUpdated(new W3CDateTimeValue($entity->getUpdated()));
         $model->setJsonLdId(new URLValue(
             $this->router->generate(
                 Option::fromValue($route)->getOrElse($this->route),
-                array('identifier' => $entity->getExtId()),
+                array('identifier' => $entity->getName()),
                 RouterInterface::ABSOLUTE_URL
             )
         ));

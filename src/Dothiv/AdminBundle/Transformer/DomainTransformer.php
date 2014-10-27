@@ -4,7 +4,7 @@ namespace Dothiv\AdminBundle\Transformer;
 
 use Dothiv\AdminBundle\Model\DomainModel;
 use Dothiv\BusinessBundle\Entity\Domain;
-use Dothiv\BusinessBundle\Entity\Entity;
+use Dothiv\BusinessBundle\Entity\EntityInterface;
 use Dothiv\BusinessBundle\Service\Traits\UserServiceTrait;
 use Dothiv\ValueObject\EmailValue;
 use Dothiv\ValueObject\HivDomainValue;
@@ -20,13 +20,9 @@ class DomainTransformer extends AbstractTransformer implements EntityTransformer
     use UserServiceTrait;
 
     /**
-     * @param Entity  $entity
-     * @param string  $route
-     * @param boolean $listing
-     *
-     * @return DomainModel
+     * {@inheritdoc}
      */
-    public function transform(Entity $entity, $route = null, $listing = false)
+    public function transform(EntityInterface $entity, $route = null, $listing = false)
     {
         /** @var Domain $entity */
         $model = new DomainModel();

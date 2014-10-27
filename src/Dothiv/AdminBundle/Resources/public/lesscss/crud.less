@@ -41,7 +41,7 @@ article.crud {
   }
   section.item {
     h2 {
-      padding: 0;
+      padding: 0 @grid-gutter-width / 2;
       margin-bottom: @line-height-computed;
       font-size: (@font-size-base * 1.5);
       line-height: inherit;
@@ -53,11 +53,13 @@ article.crud {
       &:extend(.dl-horizontal all);
     }
   }
-  form {
-    legend {
-      small.saving {
-        .pull-right;
-      }
+}
+form.crud {
+  legend {
+    margin-bottom: @line-height-computed;
+    margin-top: @line-height-computed;
+    small.saving {
+      .pull-right;
     }
   }
 }

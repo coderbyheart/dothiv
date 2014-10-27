@@ -40,6 +40,14 @@ services:
         - @dothiv.admin.transformer.paginatedlist
         - @serializer
 
+    dothiv.admin.api.controller.config:
+        class: %dothiv.admin.api.controller.crud.class%
+        arguments:
+        - @dothiv.repository.config
+        - @dothiv.admin.transformer.config
+        - @dothiv.admin.transformer.paginatedlist
+        - @serializer
+
     dothiv.admin.api.controller.attachment:
         class: %dothiv.admin.api.controller.attachment.class%
         arguments:

@@ -12,7 +12,7 @@ use JMS\Serializer\Annotation as Serializer;
 class DomainModel implements JsonLdEntityInterface
 {
     use JsonLdEntityTrait;
-    use W3CCreatedTrait;
+    use Traits\W3CCreatedTrait;
 
     /**
      * @var HivDomainValue

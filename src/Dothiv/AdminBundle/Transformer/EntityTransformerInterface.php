@@ -3,16 +3,16 @@
 namespace Dothiv\AdminBundle\Transformer;
 
 use Dothiv\APIBundle\JsonLd\JsonLdEntityInterface;
-use Dothiv\BusinessBundle\Entity\Entity;
+use Dothiv\BusinessBundle\Entity\EntityInterface;
 
 interface EntityTransformerInterface
 {
     /**
-     * @param Entity  $entity
-     * @param string  $route
-     * @param boolean $listing
+     * @param EntityInterface $entity
+     * @param string          $route
+     * @param boolean         $listing
      *
      * @return JsonLdEntityInterface
      */
-    public function transform(Entity $entity, $route = null, $listing = false);
+    public function transform(EntityInterface $entity, $route = null, $listing = false);
 } 
