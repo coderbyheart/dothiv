@@ -27,16 +27,16 @@
     {% stylesheets
     'bundles/dothivadmin/lesscss/styles.less'
     filter='cssrewrite' %}
-    <link rel="stylesheet" href="/assetic{{ asset_url }}">
+    <link rel="stylesheet" href="{{ asset(asset_url) }}">
     {% endstylesheets %}
     {% image '@DothivRegistryWebsiteBundle/Resources/public/images/favicon.png' %}
-    <link rel="shortcut icon" href="/assetic{{ asset_url }}">
+    <link rel="shortcut icon" href="{{ asset(asset_url) }}">
     {% endimage %}
     {% javascripts
     '@DothivAngularJsBundle/Resources/public/angular/angular.js'
     filter='?ngmin,?closureecma5'
     output='js/*.min.js' %}
-    <script type="text/javascript" src="/assetic{{ asset_url }}"></script>
+    <script type="text/javascript" src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
     <base href="/">
 </head>
@@ -78,13 +78,13 @@
     '@DothivAngularJsBundle/Resources/public/extra/angular-ui.github.io/ui-bootstrap/3/angular-ui-bootstrap-tpls.js'
     '@DothivAngularJsBundle/Resources/public/extra/angular-ui.github.io/ui-router/angular-ui-router.js'
     '@DothivAdminBundle/Resources/public/js/app.js'
-    '@DothivBaseWebsiteBundle/Resources/public/1.2/services/*.js'
-    '@DothivBaseWebsiteBundle/Resources/public/1.2/services/models/*.js'
+    '@DothivBaseWebsiteBundle/Resources/public/js/services/*.js'
+    '@DothivBaseWebsiteBundle/Resources/public/js/services/models/*.js'
     '@DothivAdminBundle/Resources/public/js/services/models/*.js'
     '@DothivAdminBundle/Resources/public/js/controllers/*.js'
     filter='?ngmin,?closureecma5'
     output='js/*.min.js' %}
-    <script type="text/javascript" src="/assetic{{ asset_url }}"></script>
+    <script type="text/javascript" src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
 {% endblock angular_app %}
 </body>
