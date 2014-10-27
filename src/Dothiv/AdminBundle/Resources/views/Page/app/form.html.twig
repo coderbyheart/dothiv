@@ -1,0 +1,19 @@
+{% macro validatedInput(form, model, field, type, label, info, required) %}
+    <div class="validated-form-group">
+        <div class="input">
+            <label for="{{ field }}">{{ label }}</label>
+            <input 
+                    type="{{ type }}" 
+                    {{ required ? "required" : "" }} 
+                    id="{{ field }}" 
+                    name="{{ field }}" 
+                    data-ng-model="{{ model ~ "." ~ field }}">
+        </div>
+        <div class="status">
+            <abbr class="valid" data-ng-show="{{ form ~ "." ~ field }}.$valid" title="This input is valid."></abbr>
+            <abbr class="required" data-ng-show="{{ form ~ "." ~ field }}.$invalid && {{ form ~ "." ~ field }}.$error.required" title="This input is required."></abbr>
+            <abbr class="invalid" data-ng-show="{{ form ~ "." ~ field }}.$invalid && !{{ form ~ "." ~ field }}.$error.required" title="This input is invalid."></abbr>
+        </div>
+        <div class="info"><p>{{ info }}</p></div>
+    </div>
+{% endmacro %}

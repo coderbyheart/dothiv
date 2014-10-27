@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.controllers', 'ngRoute', 'ui.router'])
+angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.directives', 'dotHIVApp.controllers', 'ngRoute', 'ui.router'])
     .config(['$locationProvider', function ($locationProvider) {
         $locationProvider.hashPrefix('!');
     }])
@@ -69,5 +69,6 @@ angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.controllers', 'ngR
     }])
 ;
 angular.module('dotHIVApp.services', ['dotHIVApp.controllers', 'ui.router', 'ngResource', 'ngCookies']);
+angular.module('dotHIVApp.directives', []);
 angular.module('dotHIVApp.controllers', ['ui.bootstrap']);
 

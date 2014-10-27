@@ -80,6 +80,7 @@
     '@DothivAdminBundle/Resources/public/js/app.js'
     '@DothivBaseWebsiteBundle/Resources/public/js/services/*.js'
     '@DothivBaseWebsiteBundle/Resources/public/js/services/models/*.js'
+    '@DothivAdminBundle/Resources/public/js/services/*.js'
     '@DothivAdminBundle/Resources/public/js/services/models/*.js'
     '@DothivAdminBundle/Resources/public/js/controllers/*.js'
     filter='?ngmin,?closureecma5'
@@ -87,5 +88,18 @@
     <script type="text/javascript" src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
 {% endblock angular_app %}
+<script type="text/ng-template" id="error-modal.html">
+    <header>
+        <h2>%%title%%</h2>
+    </header>
+    <article>
+        <div>
+            <p>%%message%%</p>
+        </div>
+    </article>
+    <footer>
+        <button data-ng-click="$dismiss()">Close</button>
+    </footer>
+</script>
 </body>
 </html>
