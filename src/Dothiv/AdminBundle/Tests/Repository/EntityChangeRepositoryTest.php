@@ -2,16 +2,23 @@
 
 namespace Dothiv\AdminBundle\Repository\Tests;
 
+use Dothiv\AdminBundle\AdminEvents;
 use Dothiv\AdminBundle\Entity\EntityChange;
 use Dothiv\AdminBundle\Model\EntityPropertyChange;
 use Dothiv\AdminBundle\Repository\EntityChangeRepository;
 use Dothiv\BusinessBundle\Tests\Traits;
 use Dothiv\ValueObject\EmailValue;
 use Dothiv\ValueObject\IdentValue;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class EntityChangeRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     use Traits\RepositoryTestTrait;
+
+    /**
+     * @var EventDispatcherInterface|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $mockEventDispatcher;
 
     /**
      * @test
@@ -34,6 +41,13 @@ class EntityChangeRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldPersist()
     {
+        $this->mockEventDispatcher->expects($this->once())->method('dispatch')
+            ->with(
+                AdminEvents::ADMIN_ENTITY_CHANGE,
+                $this->isInstanceOf('\Dothiv\AdminBundle\Event\EntityChangeEvent')
+            )
+            ->willReturnArgument(1);
+
         $entityChange = new EntityChange();
         $entityChange->setAuthor(new EmailValue('john.doe@exmample.com'));
         $entityChange->setEntity('\Some\Entity');
@@ -108,6 +122,18 @@ class EntityChangeRepositoryTest extends \PHPUnit_Framework_TestCase
         /** @var EntityChangeRepository $repo */
         $repo = $this->getTestEntityManager()->getRepository('DothivAdminBundle:EntityChange');
         $repo->setValidator($this->testValidator);
+        $repo->setEventDispatcher($this->mockEventDispatcher);
         return $repo;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUp()
+    {
+        $this->testValidator       = $this->getTestContainer()->get('validator');
+        $this->mockEventDispatcher = $this->getMockBuilder('\Symfony\Component\EventDispatcher\EventDispatcherInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 } 

@@ -3,16 +3,22 @@
 namespace Dothiv\AdminBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Dothiv\AdminBundle\AdminEvents;
 use Dothiv\AdminBundle\Entity\EntityChange;
-use Dothiv\BusinessBundle\Repository\PaginatedResult;
+use Dothiv\AdminBundle\Event\EntityChangeEvent;
 use Dothiv\BusinessBundle\Repository\Traits;
 use Dothiv\ValueObject\IdentValue;
-use PhpOption\Option;
 
 class EntityChangeRepository extends EntityRepository implements EntityChangeRepositoryInterface
 {
     use Traits\ValidatorTrait;
+    use Traits\EventDispatcherTrait;
     use Traits\PaginatedQueryTrait;
+
+    /**
+     * @var EntityChange[]
+     */
+    private $entities = array();
 
     /**
      * @param EntityChange $change
@@ -22,6 +28,7 @@ class EntityChangeRepository extends EntityRepository implements EntityChangeRep
     public function persist(EntityChange $change)
     {
         $this->getEntityManager()->persist($this->validate($change));
+        $this->entities[] = $change;
         return $this;
     }
 
@@ -31,6 +38,10 @@ class EntityChangeRepository extends EntityRepository implements EntityChangeRep
     public function flush()
     {
         $this->getEntityManager()->flush();
+        foreach ($this->entities as $entity) {
+            $this->eventDispatcher->dispatch(AdminEvents::ADMIN_ENTITY_CHANGE, new EntityChangeEvent($entity));
+        }
+        $this->entities = array();
         return $this;
     }
 
