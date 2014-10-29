@@ -33,7 +33,7 @@
     <link rel="shortcut icon" href="{{ asset(asset_url) }}">
     {% endimage %}
     {% javascripts
-    '@DothivAngularJsBundle/Resources/public/angular/angular.js'
+    '@angular_js'
     filter='?ngmin,?closureecma5'
     output='js/*.min.js' %}
     <script type="text/javascript" src="{{ asset(asset_url) }}"></script>
@@ -74,12 +74,13 @@
 {% block angular_app %}
     {% javascripts
     '@DothivPremiumConfiguratorBundle/Resources/public/js/vendor/jquery.js'
-    '@DothivTwitterBootstrapBundle/Resources/public/bootstrap/js/collapse.js'
-    '@DothivAngularJsBundle/Resources/public/angular/angular-resource.js'
-    '@DothivAngularJsBundle/Resources/public/angular/angular-route.js'
-    '@DothivAngularJsBundle/Resources/public/angular/angular-cookies.js'
-    '@DothivAngularJsBundle/Resources/public/extra/angular-ui.github.io/ui-bootstrap/3/angular-ui-bootstrap-tpls.js'
-    '@DothivAngularJsBundle/Resources/public/extra/angular-ui.github.io/ui-router/angular-ui-router.js'
+    '@bootstrap_js_collapse'
+    '@angular_js_resource'
+    '@angular_js_route'
+    '@angular_js_cookies'
+    '@jquery'
+    '@angular_ui_bootstrap_tpls'
+    '@angular_ui_router'
     '@DothivAdminBundle/Resources/public/js/app.js'
     '@DothivBaseWebsiteBundle/Resources/public/js/services/*.js'
     '@DothivBaseWebsiteBundle/Resources/public/js/services/models/*.js'
