@@ -87,6 +87,31 @@ dothiv_admin_config:
     requirements:
         identifier: .+
 
+dothiv_admin_config_update:
+    path: /api/config/{identifier}
+    defaults:
+        _controller: dothiv.admin.api.controller.config:updateItemAction
+        _format: json
+    methods: [PATCH]
+    requirements:
+        identifier: .+
+        property: .+
+        
+# History
+dothiv_admin_history_list:
+    path: /api/history/{entity}/{identifier}
+    defaults:
+        _controller: dothiv.admin.api.controller.history:listItemsAction
+        _format: json
+    methods: [GET]
+
+dothiv_admin_history:
+    path: /api/history/{entity}/{identifier}/{id}
+    defaults:
+        _controller: dothiv.admin.api.controller.history:getItemAction
+        _format: json
+    methods: [GET]
+
 # Attachments
 dothiv_admin_attachment:
     path: /api/attachment/{handle}

@@ -18,9 +18,11 @@ angular.module('dotHIVApp.controllers').controller('AdminEditController', ['$sco
     };
 
     $scope.patch = function (what) {
+        var data = {};
+        data[what] = $scope.item[what];
         $scope.saving = true;
         $scope.errorMessage = null;
-        $http.put($scope.itemUrl + '/' + what, $scope.item[what])
+        $http({method: 'PATCH', url: $scope.itemUrl, data: angular.toJson(data)})
             .success(function (data) {
                 $scope.saving = false;
                 loadItem($scope.itemUrl);
@@ -30,7 +32,7 @@ angular.module('dotHIVApp.controllers').controller('AdminEditController', ['$sco
                 $scope.errorMessage = code;
             })
         ;
-    }
+    };
 
     $scope.$watch('$scope.itemUrl', function () {
         loadItem($scope.itemUrl);
