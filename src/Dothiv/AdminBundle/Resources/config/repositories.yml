@@ -10,3 +10,4 @@ services:
         arguments: [ %dothiv.admin.repository.entity_change.entity% ]
         calls:
         - [setValidator, ["@validator"]]
+        - [setEventDispatcher, ["@dothiv.business.event_dispatcher"]]
