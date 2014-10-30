@@ -90,6 +90,14 @@ class EntityChange implements EntityInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getPublicId()
+    {
+        return $this->getId();
+    }
+
+    /**
      * @return EmailValue
      */
     public function getAuthor()

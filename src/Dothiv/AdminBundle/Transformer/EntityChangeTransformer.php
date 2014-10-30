@@ -27,7 +27,7 @@ class EntityChangeTransformer extends AbstractTransformer implements EntityTrans
             $this->router->generate(
                 Option::fromValue($route)->getOrElse($this->route),
                 array(
-                    'id'         => $entity->getId(),
+                    'id'         => $entity->getPublicId(),
                     'identifier' => $entity->getIdentifier()->toScalar(),
                     'entity'     => $entityAlias
                 ),

@@ -178,7 +178,7 @@ class CRUDController
         $change = new EntityChange();
         $change->setAuthor(new EmailValue($this->securityContext->getToken()->getUser()->getEmail()));
         $change->setEntity($this->itemRepo->getItemEntityName($item));
-        $change->setIdentifier(new IdentValue($item->getId()));
+        $change->setIdentifier(new IdentValue($item->getPublicId()));
 
         foreach ($newPropertyValues as $property => $content) {
             $setter = 'set' . ucfirst($property);
