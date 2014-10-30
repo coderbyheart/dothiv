@@ -1,3 +1,4 @@
+{% import "DothivAdminBundle:Page:app/form.html.twig" as form %}
 <article class="crud" data-ng-init="itemUrl = '/admin/api/domain/' + stateParams.identifier;">
     <header>
         <h1><a data-ng-href="http://%%stateParams.identifier%%" target="_blank">%%stateParams.identifier%%</a></h1>
@@ -45,6 +46,8 @@
             </dd>
             <dt data-ng-show="item.token">Token</dt>
             <dd data-ng-show="item.token"><code data-ng-bind="item.token"></code></dd>
+            <dt data-ng-show="item.transfer">Transfer</dt>
+            <dd data-ng-show="item.transfer">active</dd>
         </dl>
     </section>
     <section class="item">
@@ -58,4 +61,12 @@
             <dd data-ng-bind="item.registrar.notificationType"></dd>
         </dl>
     </section>
+</article>
+<article>
+    <form class="crud" role="form" name="domainForm" novalidate>
+        <fieldset>
+            <legend>Action</legend>
+            {{ form.toggle("item", "transfer", "Toggle transfer") }}
+        </fieldset>
+    </form>
 </article>

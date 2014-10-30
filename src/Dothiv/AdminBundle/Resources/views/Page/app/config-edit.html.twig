@@ -25,7 +25,7 @@
             {{ form.validatedInput("configForm", "item", "value", "text", "Value", "Please enter the new value.", true) }}
         </fieldset>
         <nav>
-            <button type="submit" data-ng-click="patch('value', item.value); configForm.$setPristine();" data-ng-disabled="loading || configForm.$invalid || configForm.$pristine" data-ng-class="{loading: loading}">
+            <button type="submit" data-ng-click="patch('value'); configForm.$setPristine();" data-ng-disabled="loading || configForm.$invalid || configForm.$pristine" data-ng-class="{loading: loading}">
                 <span data-ng-show="!loading">save</span>
                 <span data-ng-show="loading"><i></i> saving…</span>
             </button>

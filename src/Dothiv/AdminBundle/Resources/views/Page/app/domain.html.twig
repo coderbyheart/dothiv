@@ -5,7 +5,7 @@
         <thead>
         <tr>
             <th>Domain</th>
-            <th class="right">Created</th>
+            <th><!-- flags --></th>
             <th>Registrar</th>
             <th class="center"><abbr title="Click-Counter configured">Counter</abbr></th>
             <th class="center"><abbr title="Token sent">Token</abbr></th>
@@ -15,7 +15,9 @@
         <tbody>
         <tr data-ng-repeat="domain in items">
             <td data-ng-bind="domain.domainUTF8"></td>
-            <td class="right" data-ng-bind="domain.created"></td>
+            <td class="right">
+                <abbr title="Domain transfer active"><i class="transfer" data-ng-show="domain.transfer"></i></abbr>
+            </td>
             <td data-ng-bind="domain.registrar.name"></td>
             <td class="center">
                 <i class="yes" data-ng-show="domain.clickCounterConfigured"></i>

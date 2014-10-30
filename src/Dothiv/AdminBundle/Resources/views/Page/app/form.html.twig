@@ -17,3 +17,34 @@
         <div class="info"><p>{{ info }}</p></div>
     </div>
 {% endmacro %}
+
+{% macro toggle(model, field, label) %}
+    <div class="validated-form-group">
+        <div class="input">
+            <label>{{ label }}</label><br>
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary" data-ng-class="{active: {{ model }}.{{ field }} == 0}">
+                    <input type="radio"
+                            name="{{ field }}-toggle"
+                            value="0"
+                            autocomplete="off"
+                            id="{{ field }}-toggle-off"
+                            data-ng-model="{{ model }}.{{ field }}"
+                            data-ng-click="{{ model }}.{{ field }} = 0; patch('{{ field }}');"
+                            > disabled
+                </label>
+                <label class="btn btn-primary" data-ng-class="{active: {{ model }}.{{ field }} == 1}">
+                    <input type="radio"
+                            name="{{ field }}-toggle"
+                            value="1"
+                            autocomplete="off"
+                            id="{{ field }}-toggle-on"
+                            data-ng-model="{{ model }}.{{ field }}"
+                            data-ng-click="{{ model }}.{{ field }} = 1; patch('{{ field }}');"
+                            > enabled
+                </label>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
