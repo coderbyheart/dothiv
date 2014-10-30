@@ -59,6 +59,12 @@ class DomainModel implements JsonLdEntityInterface
      */
     protected $registrar;
 
+    /**
+     * @var boolean
+     * @Serializer\Type("integer")
+     */
+    protected $transfer;
+
     public function __construct()
     {
         $this->setJsonLdContext(new URLValue('http://jsonld.click4life.hiv/Domain'));
@@ -215,5 +221,24 @@ class DomainModel implements JsonLdEntityInterface
     public function getRegistrar()
     {
         return $this->registrar;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getTransfer()
+    {
+        return $this->transfer;
+    }
+
+    /**
+     * @param boolean $transfer
+     *
+     * @return self
+     */
+    public function setTransfer($transfer)
+    {
+        $this->transfer = (boolean)$transfer;
+        return $this;
     }
 }

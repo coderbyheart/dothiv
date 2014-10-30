@@ -69,6 +69,13 @@ dothiv_admin_domain_registration:
         _controller: dothiv.admin.api.controller.domain:getItemAction
         _format: json
     methods: [GET]
+    
+dothiv_admin_domain_registration_update:
+    path: /api/domain/{identifier}
+    defaults:
+        _controller: dothiv.admin.api.controller.domain:updateItemAction
+        _format: json
+    methods: [PATCH]
 
 # Config
 dothiv_admin_config_list:
