@@ -45,6 +45,7 @@ class DomainTransformer extends AbstractTransformer implements EntityTransformer
         $model->setToken($entity->getToken());
         $model->setRegistrar($this->getRegistrarTransformer()->transform($entity->getRegistrar()));
         $model->setTransfer($entity->getTransfer());
+        $model->setNonprofit($entity->getNonprofit());
         return $model;
     }
 }
