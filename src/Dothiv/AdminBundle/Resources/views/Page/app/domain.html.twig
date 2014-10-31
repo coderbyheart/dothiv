@@ -15,7 +15,9 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="domain in items">
-            <td data-ng-bind="domain.domainUTF8"></td>
+            <td>
+                <a href="http://www.%%domain.domain%%/" data-ng-bind="domain.domainUTF8"></a>
+            </td>
             <td class="right">
                 <abbr title="Domain transfer active"><i class="transfer" data-ng-show="domain.transfer"></i></abbr>
             </td>

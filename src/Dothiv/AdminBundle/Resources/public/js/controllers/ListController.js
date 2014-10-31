@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dotHIVApp.controllers').controller('AdminListController', ['$scope', '$http', '$state', '$window', function ($scope, $http, $state, $window) {
+angular.module('dotHIVApp.controllers').controller('AdminListController', ['$scope', '$http', '$state', '$window', 'ContentBehaviour', function ($scope, $http, $state, $window, ContentBehaviour) {
 
     $scope.listUrl = null;
     $scope.items = [];
@@ -24,7 +24,10 @@ angular.module('dotHIVApp.controllers').controller('AdminListController', ['$sco
             loading = false;
             $scope.nextUrl = data.nextPageUrl;
             $scope.prevUrl = data.prevPageUrl;
-            $window.setTimeout(loadMore, 1);
+            $window.setTimeout(function () {
+                ContentBehaviour.run();
+                loadMore();
+            }, 1);
         });
     }
 
