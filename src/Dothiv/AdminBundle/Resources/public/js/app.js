@@ -53,7 +53,7 @@ angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.directives', 'dotH
                 });
         }
     }])
-    .run(['$rootScope', 'security', '$state', function ($rootScope, security, $state) {
+    .run(['$rootScope', 'security', '$state', '$window', 'ContentBehaviour', function ($rootScope, security, $state, $window, ContentBehaviour) {
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             if (toState.name.match('^=\.')) {
                 // Get the current user when the application starts (in case they are still logged in from a previous session)
@@ -65,6 +65,11 @@ angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.directives', 'dotH
                     }
                 });
             }
+        });
+        $rootScope.$on('$viewContentLoaded', function (event, current, previous, rejection) {
+            $window.setTimeout(function() {
+                ContentBehaviour.run();
+            }, 0);
         });
     }])
 ;
