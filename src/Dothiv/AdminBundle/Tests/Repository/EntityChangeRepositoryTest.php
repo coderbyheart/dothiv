@@ -6,6 +6,7 @@ use Dothiv\AdminBundle\AdminEvents;
 use Dothiv\AdminBundle\Entity\EntityChange;
 use Dothiv\AdminBundle\Model\EntityPropertyChange;
 use Dothiv\AdminBundle\Repository\EntityChangeRepository;
+use Dothiv\BusinessBundle\Repository\PaginatedQueryOptions;
 use Dothiv\BusinessBundle\Tests\Traits;
 use Dothiv\ValueObject\EmailValue;
 use Dothiv\ValueObject\IdentValue;
@@ -94,10 +95,10 @@ class EntityChangeRepositoryTest extends \PHPUnit_Framework_TestCase
         }
         $repo->flush();
 
-        $otherChanges = $repo->getPaginated('\Some\Other\Entity', new IdentValue('someIdent'));
+        $otherChanges = $repo->getPaginated('\Some\Other\Entity', new IdentValue('someIdent'), new PaginatedQueryOptions());
         $this->assertEquals(0, $otherChanges->getTotal());
 
-        $changes = $repo->getPaginated('\Some\Entity', new IdentValue('someIdent'));
+        $changes = $repo->getPaginated('\Some\Entity', new IdentValue('someIdent'), new PaginatedQueryOptions());
         $this->assertEquals(15, $changes->getTotal());
         $this->assertEquals(10, $changes->getResult()->count());
         /** @var EntityPropertyChange $change */
@@ -105,7 +106,9 @@ class EntityChangeRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(14, $change->getOldValue());
         $this->assertEquals(15, $change->getNewValue());
 
-        $changes2 = $repo->getPaginated('\Some\Entity', new IdentValue('someIdent'), $changes->getNextPageKey()->get());
+        $options = new PaginatedQueryOptions();
+        $options->setOffsetKey($changes->getNextPageKey()->get());
+        $changes2 = $repo->getPaginated('\Some\Entity', new IdentValue('someIdent'), $options);
         $this->assertEquals(15, $changes2->getTotal());
         $this->assertEquals(5, $changes2->getResult()->count());
         /** @var EntityPropertyChange $change2 */

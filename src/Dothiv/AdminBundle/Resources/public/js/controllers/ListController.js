@@ -7,20 +7,35 @@ angular.module('dotHIVApp.controllers').controller('AdminListController', ['$sco
     $scope.loaded = false;
     $scope.nextUrl = null;
     $scope.prevUrl = null;
+    $scope.sortField = null;
+    $scope.sortDir = null;
+    $scope.total = 0;
 
     var loading = false;
 
-    function loadList(url) {
+    function loadList(url, clear) {
+        clear = typeof clear == 'undefined' ? false : clear;
         if (loading) {
             return;
         }
         loading = true;
         $scope.loaded = false;
-        $http.get(url).success(function (data) {
+        var config = {params: {}};
+        if ($scope.sortField) {
+            config.params.sortField = $scope.sortField;
+        }
+        if ($scope.sortDir) {
+            config.params.sortDir = $scope.sortDir;
+        }
+        $http.get(url, config).success(function (data) {
+            if (clear) {
+                $scope.items = [];
+            }
             for (var i = 0; i < data.items.length; i++) {
                 $scope.items.push(data.items[i]);
             }
             $scope.loaded = true;
+            $scope.total = data.total;
             loading = false;
             $scope.nextUrl = data.nextPageUrl;
             $scope.prevUrl = data.prevPageUrl;
@@ -43,8 +58,12 @@ angular.module('dotHIVApp.controllers').controller('AdminListController', ['$sco
         loadList($scope.prevUrl);
     };
 
+    $scope.load = function () {
+        loadList($scope.listUrl, true);
+    };
+
     $scope.$watch('$scope.listUrl', function () {
-        loadList($scope.listUrl);
+        $scope.load();
     });
 
     function loadMore() {

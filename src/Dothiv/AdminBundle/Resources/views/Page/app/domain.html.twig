@@ -1,10 +1,14 @@
+{% import "DothivAdminBundle:Page:app/list.html.twig" as list %}
 <article class="crud" data-ng-init="listUrl = '/admin/api/domain';">
-    <h1>Domain registrations</h1>
+    <h1>Domain registrations <small>(<span data-ng-bind="total"></span>)</small></h1>
 
     <table>
         <thead>
         <tr>
-            <th>Domain</th>
+            <th>
+                Domain
+                {{ list.sort("name") }}
+            </th>
             <th><!-- flags --></th>
             <th>Registrar</th>
             <th class="right">Clicks</th>

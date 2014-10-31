@@ -11,10 +11,12 @@ use Dothiv\AdminBundle\Transformer\PaginatedListTransformer;
 use Dothiv\APIBundle\Controller\Traits\CreateJsonResponseTrait;
 use Dothiv\BusinessBundle\Entity\EntityInterface;
 use Dothiv\BusinessBundle\Repository\CRUDRepositoryInterface;
+use Dothiv\BusinessBundle\Repository\PaginatedQueryOptions;
 use Dothiv\ValueObject\EmailValue;
 use Dothiv\ValueObject\IdentValue;
 use Dothiv\ValueObject\ValueObjectInterface;
 use JMS\Serializer\SerializerInterface;
+use PhpOption\Option;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -82,13 +84,22 @@ class CRUDController
      */
     public function listItemsAction(Request $request)
     {
+        $options = new PaginatedQueryOptions();
+        Option::fromValue($request->query->get('sortField'))->map(function($sortField) use($options) {
+            $options->setSortField($sortField);
+        });
+        Option::fromValue($request->query->get('sortDir'))->map(function($sortDir) use($options) {
+            $options->setSortDir($sortDir);
+        });
+        Option::fromValue($request->query->get('offsetKey'))->map(function($offsetKey) use($options) {
+            $options->setOffsetKey($offsetKey);
+        });
         $paginatedList = $this->createListing(
             $this->itemRepo,
-            $request->query->get('offsetKey'),
-            $request->query->get('offsetDir'),
             $this->paginatedListTransformer,
-            $request->attributes->get('_route'),
-            $this->itemTransformer
+            $this->itemTransformer,
+            $options,
+            $request->attributes->get('_route')
         );
 
         $response = $this->createResponse();
@@ -98,24 +109,22 @@ class CRUDController
 
     /**
      * @param CRUDRepositoryInterface    $repo
-     * @param string                     $offsetKey
-     * @param string                     $offsetDir
      * @param PaginatedListTransformer   $listTransformer
-     * @param string                     $route
      * @param EntityTransformerInterface $itemTransformer
+     * @param PaginatedQueryOptions      $options
+     * @param string                     $route
      *
      * @return \Dothiv\AdminBundle\Model\PaginatedList
      */
     protected function createListing(
         CRUDRepositoryInterface $repo,
-        $offsetKey,
-        $offsetDir,
         PaginatedListTransformer $listTransformer,
-        $route,
-        EntityTransformerInterface $itemTransformer
+        EntityTransformerInterface $itemTransformer,
+        PaginatedQueryOptions $options,
+        $route
     )
     {
-        $paginatedResult = $repo->getPaginated($offsetKey, $offsetDir);
+        $paginatedResult = $repo->getPaginated($options);
         $paginatedList   = $listTransformer->transform($paginatedResult, $route);
         foreach ($paginatedResult->getResult() as $reg) {
             $paginatedList->addItem($itemTransformer->transform($reg, null, true));

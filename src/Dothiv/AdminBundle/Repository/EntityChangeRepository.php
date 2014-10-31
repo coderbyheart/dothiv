@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use Dothiv\AdminBundle\AdminEvents;
 use Dothiv\AdminBundle\Entity\EntityChange;
 use Dothiv\AdminBundle\Event\EntityChangeEvent;
+use Dothiv\BusinessBundle\Repository\PaginatedQueryOptions;
 use Dothiv\BusinessBundle\Repository\Traits;
 use Dothiv\ValueObject\IdentValue;
 
@@ -48,12 +49,12 @@ class EntityChangeRepository extends EntityRepository implements EntityChangeRep
     /**
      * {@inheritdoc}
      */
-    public function getPaginated($entity, IdentValue $identifier, $offsetKey = null, $offsetDir = null)
+    public function getPaginated($entity, IdentValue $identifier, PaginatedQueryOptions $options)
     {
         $qb = $this->createQueryBuilder('i');
         $qb->andWhere('i.entity = :entity')->setParameter('entity', $entity);
         $qb->andWhere('i.identifier = :identifier')->setParameter('identifier', $identifier->toScalar());
-        return $this->buildPaginatedResult($qb, $offsetKey);
+        return $this->buildPaginatedResult($qb, $options);
     }
 
 } 

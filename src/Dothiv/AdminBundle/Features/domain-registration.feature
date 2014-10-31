@@ -49,5 +49,20 @@ Feature: Manage Domain Registrations
     And the JSON node "tokenSent" should be equal to false
     And the JSON node "clickCounterConfigured" should be equal to false
     And the JSON node "clickCount" should be equal to 0
-    And the JSON node "registrar.name" should contain "Example Registrar"
+    And the JSON node "registrar.name" should contain "Example Registrar 2"
     And the JSON node "registrar.notification" should be equal to "true"
+
+  @Sort
+  Scenario: List domains, ordered by name, ascending
+    Given I send a GET request to "http://tld.hiv.dev/admin/api/domain?sortField=name&sortDir=asc"
+    Then the response status code should be 200
+    And the JSON node "items" should contain 2 elements
+    And the JSON node "items[0].domain" should contain "acme.hiv"
+
+  @Sort
+  Scenario: List domains, ordered by name, descending
+    Given I send a GET request to "http://tld.hiv.dev/admin/api/domain?sortField=name&sortDir=desc"
+    Then the response status code should be 200
+    And the JSON node "items" should contain 2 elements
+    And the JSON node "items[0].domain" should contain "bcme.hiv"
+

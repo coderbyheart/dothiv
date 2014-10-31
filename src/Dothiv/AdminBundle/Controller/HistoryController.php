@@ -6,8 +6,10 @@ use Dothiv\AdminBundle\Repository\EntityChangeRepositoryInterface;
 use Dothiv\AdminBundle\Transformer\EntityTransformerInterface;
 use Dothiv\AdminBundle\Transformer\PaginatedListTransformer;
 use Dothiv\APIBundle\Controller\Traits\CreateJsonResponseTrait;
+use Dothiv\BusinessBundle\Repository\PaginatedQueryOptions;
 use Dothiv\ValueObject\IdentValue;
 use JMS\Serializer\SerializerInterface;
+use PhpOption\Option;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -60,11 +62,17 @@ class HistoryController
      */
     public function listItemsAction(Request $request, $entity, $identifier)
     {
+        $options = new PaginatedQueryOptions();
+        Option::fromValue($request->query->get('sortDir'))->map(function ($sortDir) use ($options) {
+            $options->setSortDir($sortDir);
+        });
+        Option::fromValue($request->query->get('offsetKey'))->map(function ($offsetKey) use ($options) {
+            $options->setOffsetKey($offsetKey);
+        });
         $paginatedResult = $this->entityChangeRepo->getPaginated(
             'Dothiv\BusinessBundle\Entity\\' . ucfirst($entity),
             new IdentValue($identifier),
-            $request->query->get('offsetKey'),
-            $request->query->get('offsetDir')
+            $options
         );
         $paginatedList   = $this->paginatedListTransformer->transform($paginatedResult, $request->attributes->get('_route'));
         foreach ($paginatedResult->getResult() as $reg) {
