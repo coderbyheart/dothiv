@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dotHIVApp.controllers').controller('AdminListController', ['$scope', '$http', '$state', function ($scope, $http, $state) {
+angular.module('dotHIVApp.controllers').controller('AdminListController', ['$scope', '$http', '$state', '$window', function ($scope, $http, $state, $window) {
 
     $scope.listUrl = null;
     $scope.items = [];
@@ -8,13 +8,23 @@ angular.module('dotHIVApp.controllers').controller('AdminListController', ['$sco
     $scope.nextUrl = null;
     $scope.prevUrl = null;
 
+    var loading = false;
+
     function loadList(url) {
+        if (loading) {
+            return;
+        }
+        loading = true;
         $scope.loaded = false;
         $http.get(url).success(function (data) {
-            $scope.items = data.items;
+            for (var i = 0; i < data.items.length; i++) {
+                $scope.items.push(data.items[i]);
+            }
             $scope.loaded = true;
+            loading = false;
             $scope.nextUrl = data.nextPageUrl;
             $scope.prevUrl = data.prevPageUrl;
+            $window.setTimeout(loadMore, 1);
         });
     }
 
@@ -32,5 +42,17 @@ angular.module('dotHIVApp.controllers').controller('AdminListController', ['$sco
 
     $scope.$watch('$scope.listUrl', function () {
         loadList($scope.listUrl);
+    });
+
+    function loadMore() {
+        if ($('#loadMoreButton').offset().top - $(window).scrollTop() < $(window).height()) {
+            if ($scope.nextUrl) {
+                loadList($scope.nextUrl);
+            }
+        }
+    }
+
+    $(window).scroll(function () {
+        loadMore();
     });
 }]);

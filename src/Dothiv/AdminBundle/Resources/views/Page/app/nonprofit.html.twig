@@ -23,8 +23,7 @@
         <tr>
             <td colspan="3">
                 <nav>
-                    <button data-ng-disabled="!prevUrl" data-ng-click="prev()"><i class="prev"></i></button>
-                    <button data-ng-disabled="!nextUrl" data-ng-click="next()"><i class="next"></i></button>
+                    <button data-ng-disabled="!nextUrl" data-ng-click="next()" id="loadMoreButton">Load more</button>
                 </nav>
                 <span class="loading" data-ng-show="!loaded"><i class="loading"></i> loading …</span>
             </td>
