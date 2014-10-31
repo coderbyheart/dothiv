@@ -1,9 +1,50 @@
 {% import "DothivAdminBundle:Page:app/list.html.twig" as list %}
-<article class="crud" data-ng-init="listUrl = '/admin/api/domain';">
-    <h1>Domain registrations <small>(<span data-ng-bind="total"></span>)</small></h1>
+<article class="crud" data-ng-init="listUrl = '/admin/api/domain'; fetchFilterPropertyValues('/admin/api/registrar', 'registrars');">
+    <h1>
+        Domain registrations
+        <small>(<span data-ng-bind="total"></span>)</small>
+    </h1>
 
     <table>
         <thead>
+        <tr>
+            <td colspan="7">
+                <form>
+                    <fieldset>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" data-ng-true-value="1" data-ng-false-value="" data-ng-model="filterProperties.nonprofit" data-ng-change="loadAfter();">
+                                Non-Profit <i class="nonprofit"></i> </label>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" data-ng-true-value="1" data-ng-false-value="" data-ng-model="filterProperties.transfer" data-ng-change="loadAfter();">
+                                Transfer <i class="transfer"></i> </label>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="text"
+                                    data-ng-model="registrarLabel"
+                                    data-typeahead="registrar as registrar.name for registrar in filterPropertyValues.registrars | filter:$viewValue | limitTo:3"
+                                    data-typeahead-on-select="filterPropertyTypeahead($item, 'registrar');"
+                                    placeholder="Registrar (%%filterPropertyValues.registrars.length%%)"
+                                    >
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <input type="text" placeholder="Search …" data-ng-model="filterTerm" data-ng-change="loadAfter();">
+                    </fieldset>
+                    <fieldset>
+                        <button type="reset" data-ng-click="clearFilters()">
+                            <i class="trash"></i>
+                        </button>
+                    </fieldset>
+                </form>
+            </td>
+        </tr>
         <tr>
             <th>
                 Domain
@@ -45,7 +86,9 @@
                 <button type="submit" data-ng-click="edit('=.domain.edit', domain.domain)"><i></i></button>
             </td>
         </tr>
-
+        <tr data-ng-show="items.length == 0">
+            <td colspan="7">No domains found.</td>
+        </tr>
         </tbody>
         <tfoot>
         <tr>

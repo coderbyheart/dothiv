@@ -134,6 +134,13 @@ dothiv_admin_user:
     methods: [GET]
 
 # Registrars
+dothiv_admin_registrar_list:
+    path: /api/registrar
+    defaults:
+        _controller: dothiv.admin.api.controller.registrar:listItemsAction
+        _format: json
+    methods: [GET]
+
 dothiv_admin_registrar:
     path: /api/registrar/{identifier}
     defaults:

@@ -66,3 +66,30 @@ Feature: Manage Domain Registrations
     And the JSON node "items" should contain 2 elements
     And the JSON node "items[0].domain" should contain "bcme.hiv"
 
+  @Filter
+  Scenario: Filter domains by name
+    Given I send a GET request to "http://tld.hiv.dev/admin/api/domain?q=acme"
+    Then the response status code should be 200
+    And the JSON node "items" should contain 1 elements
+    And the JSON node "items[0].domain" should contain "acme.hiv"
+
+  @Filter
+  Scenario: Filter domains by transfer property
+    Given I send a GET request to "http://tld.hiv.dev/admin/api/domain?q=%40transfer%7B1%7D"
+    Then the response status code should be 200
+    And the JSON node "items" should contain 1 elements
+    And the JSON node "items[0].domain" should contain "acme.hiv"
+
+  @Filter
+  Scenario: Filter domains by nonprofit property
+    Given I send a GET request to "http://tld.hiv.dev/admin/api/domain?q=%40nonprofit%7B1%7D"
+    Then the response status code should be 200
+    And the JSON node "items" should contain 1 elements
+    And the JSON node "items[0].domain" should contain "bcme.hiv"
+
+  @Filter
+  Scenario: Filter domains by registrar
+    Given I send a GET request to "http://tld.hiv.dev/admin/api/domain?q=%40registrar%7Bhttp%3A%2F%2Ftld.hiv.dev%2Fadmin%2Fapi%2Fregistrar%2F1062-EM%7D"
+    Then the response status code should be 200
+    And the JSON node "items" should contain 1 elements
+    And the JSON node "items[0].domain" should contain "acme.hiv"

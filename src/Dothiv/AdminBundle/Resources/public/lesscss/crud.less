@@ -29,6 +29,20 @@ article.crud {
         }
       }
     }
+    thead {
+      form {
+        .pull-right;
+        &:extend(.form-inline all);
+        fieldset {
+          float: left;
+          margin-right: @grid-gutter-width / 2;
+        }
+        input[type=text] {
+          .form-control;
+          .input-sm;
+        }
+      }
+    }
     tfoot {
       nav {
         .pull-right;

@@ -31,6 +31,7 @@ class LoadDomainRegistrationData implements FixtureInterface
         $domainA->setRegistrar($registrar1);
         $domainA->setToken('domaintokenb');
         $domainA->setTokenSent(new \DateTime());
+        $domainA->setNonprofit(true);
         $manager->persist($domainA);
 
         $domainB = new Domain();
@@ -38,6 +39,7 @@ class LoadDomainRegistrationData implements FixtureInterface
         $domainB->setOwnerName("Domain Administrator");
         $domainB->setOwnerEmail("ccops@acme.com");
         $domainB->setRegistrar($registrar2);
+        $domainB->transfer();
         $manager->persist($domainB);
 
         $manager->flush();

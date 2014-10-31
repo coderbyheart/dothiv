@@ -10,8 +10,10 @@ use Dothiv\AdminBundle\Transformer\EntityTransformerInterface;
 use Dothiv\AdminBundle\Transformer\PaginatedListTransformer;
 use Dothiv\APIBundle\Controller\Traits\CreateJsonResponseTrait;
 use Dothiv\BusinessBundle\Entity\EntityInterface;
+use Dothiv\BusinessBundle\Model\FilterQuery;
 use Dothiv\BusinessBundle\Repository\CRUDRepositoryInterface;
 use Dothiv\BusinessBundle\Repository\PaginatedQueryOptions;
+use Dothiv\BusinessBundle\Service\FilterQueryParser;
 use Dothiv\ValueObject\EmailValue;
 use Dothiv\ValueObject\IdentValue;
 use Dothiv\ValueObject\ValueObjectInterface;
@@ -85,20 +87,22 @@ class CRUDController
     public function listItemsAction(Request $request)
     {
         $options = new PaginatedQueryOptions();
-        Option::fromValue($request->query->get('sortField'))->map(function($sortField) use($options) {
+        Option::fromValue($request->query->get('sortField'))->map(function ($sortField) use ($options) {
             $options->setSortField($sortField);
         });
-        Option::fromValue($request->query->get('sortDir'))->map(function($sortDir) use($options) {
+        Option::fromValue($request->query->get('sortDir'))->map(function ($sortDir) use ($options) {
             $options->setSortDir($sortDir);
         });
-        Option::fromValue($request->query->get('offsetKey'))->map(function($offsetKey) use($options) {
+        Option::fromValue($request->query->get('offsetKey'))->map(function ($offsetKey) use ($options) {
             $options->setOffsetKey($offsetKey);
         });
-        $paginatedList = $this->createListing(
+        $filterQueryParser = new FilterQueryParser();
+        $paginatedList     = $this->createListing(
             $this->itemRepo,
             $this->paginatedListTransformer,
             $this->itemTransformer,
             $options,
+            $filterQueryParser->parse($request->query->get('q')),
             $request->attributes->get('_route')
         );
 
@@ -112,6 +116,7 @@ class CRUDController
      * @param PaginatedListTransformer   $listTransformer
      * @param EntityTransformerInterface $itemTransformer
      * @param PaginatedQueryOptions      $options
+     * @param FilterQuery                $filterQuery
      * @param string                     $route
      *
      * @return \Dothiv\AdminBundle\Model\PaginatedList
@@ -121,10 +126,11 @@ class CRUDController
         PaginatedListTransformer $listTransformer,
         EntityTransformerInterface $itemTransformer,
         PaginatedQueryOptions $options,
+        FilterQuery $filterQuery,
         $route
     )
     {
-        $paginatedResult = $repo->getPaginated($options);
+        $paginatedResult = $repo->getPaginated($options, $filterQuery);
         $paginatedList   = $listTransformer->transform($paginatedResult, $route);
         foreach ($paginatedResult->getResult() as $reg) {
             $paginatedList->addItem($itemTransformer->transform($reg, null, true));

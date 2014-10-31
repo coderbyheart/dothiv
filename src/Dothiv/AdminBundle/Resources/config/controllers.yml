@@ -44,6 +44,16 @@ services:
         - @serializer
         - @dothiv.admin.repository.entity_change
         - @security.context
+        
+    dothiv.admin.api.controller.registrar:
+        class: %dothiv.admin.api.controller.crud.class%
+        arguments:
+        - @dothiv.repository.registrar
+        - @dothiv.admin.transformer.registrar
+        - @dothiv.admin.transformer.paginatedlist
+        - @serializer
+        - @dothiv.admin.repository.entity_change
+        - @security.context
 
     dothiv.admin.api.controller.config:
         class: %dothiv.admin.api.controller.crud.class%

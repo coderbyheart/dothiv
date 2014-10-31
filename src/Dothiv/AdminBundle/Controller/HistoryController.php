@@ -7,6 +7,7 @@ use Dothiv\AdminBundle\Transformer\EntityTransformerInterface;
 use Dothiv\AdminBundle\Transformer\PaginatedListTransformer;
 use Dothiv\APIBundle\Controller\Traits\CreateJsonResponseTrait;
 use Dothiv\BusinessBundle\Repository\PaginatedQueryOptions;
+use Dothiv\BusinessBundle\Service\FilterQueryParser;
 use Dothiv\ValueObject\IdentValue;
 use JMS\Serializer\SerializerInterface;
 use PhpOption\Option;
@@ -69,12 +70,14 @@ class HistoryController
         Option::fromValue($request->query->get('offsetKey'))->map(function ($offsetKey) use ($options) {
             $options->setOffsetKey($offsetKey);
         });
-        $paginatedResult = $this->entityChangeRepo->getPaginated(
+        $filterQueryParser = new FilterQueryParser();
+        $paginatedResult   = $this->entityChangeRepo->getPaginated(
             'Dothiv\BusinessBundle\Entity\\' . ucfirst($entity),
             new IdentValue($identifier),
-            $options
+            $options,
+            $filterQueryParser->parse($request->get('q'))
         );
-        $paginatedList   = $this->paginatedListTransformer->transform($paginatedResult, $request->attributes->get('_route'));
+        $paginatedList     = $this->paginatedListTransformer->transform($paginatedResult, $request->attributes->get('_route'));
         foreach ($paginatedResult->getResult() as $reg) {
             $paginatedList->addItem($this->itemTransformer->transform($reg, null, true));
         }
