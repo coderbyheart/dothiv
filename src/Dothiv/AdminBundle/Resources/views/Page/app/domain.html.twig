@@ -7,6 +7,7 @@
             <th>Domain</th>
             <th><!-- flags --></th>
             <th>Registrar</th>
+            <th class="right">Clicks</th>
             <th class="center"><abbr title="Click-Counter configured">Counter</abbr></th>
             <th class="center"><abbr title="Token sent">Token</abbr></th>
             <th class="right">Action</th>
@@ -19,6 +20,7 @@
                 <abbr title="Domain transfer active"><i class="transfer" data-ng-show="domain.transfer"></i></abbr>
             </td>
             <td data-ng-bind="domain.registrar.name"></td>
+            <td class="right" data-ng-bind="domain.clickCount"></td>
             <td class="center">
                 <i class="yes" data-ng-show="domain.clickCounterConfigured"></i>
                 <i class="no" data-ng-show="!domain.clickCounterConfigured"></i>
@@ -40,7 +42,7 @@
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="6">
+            <td colspan="7">
                 <nav>
                     <button data-ng-disabled="!nextUrl" data-ng-click="next()" id="loadMoreButton">Load more</button>
                 </nav>
