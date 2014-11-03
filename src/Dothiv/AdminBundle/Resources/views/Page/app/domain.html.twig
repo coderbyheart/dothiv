@@ -1,4 +1,5 @@
 {% import "DothivAdminBundle:Page:app/list.html.twig" as list %}
+{% import "DothivAdminBundle:Page:app/form.html.twig" as form %}
 <article class="crud" data-ng-init="listUrl = '/admin/api/domain'; fetchFilterPropertyValues('/admin/api/registrar', 'registrars');">
     <h1>
         Domain registrations
@@ -10,20 +11,10 @@
         <tr>
             <td colspan="7">
                 <form>
-                    <fieldset>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" data-ng-true-value="1" data-ng-false-value="" data-ng-model="filterProperties.nonprofit" data-ng-change="loadAfter();">
-                                Non-Profit <i class="nonprofit"></i> </label>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" data-ng-true-value="1" data-ng-false-value="" data-ng-model="filterProperties.transfer" data-ng-change="loadAfter();">
-                                Transfer <i class="transfer"></i> </label>
-                        </div>
-                    </fieldset>
+                    {{ form.propertyFilter("clickcount", "has clicks", "has no clicks", "clicks") }}
+                    {{ form.propertyFilter("clickcounterconfig", "Click-counter configured", "Click-counter not configured", "configured") }}
+                    {{ form.propertyFilter("nonprofit", "Non-Profit domain", "For-profit domain", "nonprofit") }}
+                    {{ form.propertyFilter("transfer", "Domain transfer active", "Domain transfer not active", "transfer") }}
                     <fieldset>
                         <div class="form-group">
                             <input type="text"
@@ -51,10 +42,9 @@
                 {{ list.sort("name") }}
             </th>
             <th><!-- flags --></th>
-            <th>Registrar</th>
             <th class="right">Clicks</th>
-            <th class="center"><abbr title="Click-Counter configured">Counter</abbr></th>
             <th class="center"><abbr title="Token sent">Token</abbr></th>
+            <th>Registrar</th>
             <th class="right">Action</th>
         </tr>
         </thead>
@@ -64,15 +54,12 @@
                 <a href="http://www.%%domain.domain%%/" data-ng-bind="domain.domainUTF8"></a>
             </td>
             <td class="right">
-                <abbr title="Domain transfer active"><i class="transfer" data-ng-show="domain.transfer"></i></abbr>
-                <abbr title="Non-profit domain"><i class="nonprofit" data-ng-show="domain.nonprofit"></i></abbr>
+                <abbr title="Domain transfer active"><i class="status transfer" data-ng-show="domain.transfer"></i></abbr>
+                <abbr title="Non-profit domain"><i class="status nonprofit" data-ng-show="domain.nonprofit"></i></abbr>
+                <abbr title="Click-Counter configured" data-ng-show="domain.clickCounterConfigured"><i class="status configured"></i></abbr>
+                <abbr title="has clicks" data-ng-show="domain.clickCount > 0"><i class="status clicks"></i></abbr>
             </td>
-            <td data-ng-bind="domain.registrar.name"></td>
             <td class="right" data-ng-bind="domain.clickCount"></td>
-            <td class="center">
-                <i class="yes" data-ng-show="domain.clickCounterConfigured"></i>
-                <i class="no" data-ng-show="!domain.clickCounterConfigured"></i>
-            </td>
             <td class="center">
                 <span data-ng-show="domain.registrar.notification">
                     <i class="yes" data-ng-show="domain.tokenSent"></i>
@@ -82,6 +69,7 @@
                     &mdash;
                 </span>
             </td>
+            <td data-ng-bind="domain.registrar.name"></td>
             <td class="right">
                 <button type="submit" data-ng-click="edit('=.domain.edit', domain.domain)"><i></i></button>
             </td>

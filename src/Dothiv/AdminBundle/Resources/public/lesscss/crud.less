@@ -25,7 +25,7 @@ article.crud {
       button[type=submit] {
         .btn-primary;
         i {
-          .icon-edit;
+          .icon-view;
         }
       }
     }
@@ -41,6 +41,17 @@ article.crud {
           .form-control;
           .input-sm;
         }
+        i {
+          color: @brand-success;
+          &.not {
+            color: @brand-danger;
+          }
+        }
+      }
+    }
+    tbody {
+      i.status {
+        color: rgba(0,0,0,0.5);
       }
     }
     tfoot {
