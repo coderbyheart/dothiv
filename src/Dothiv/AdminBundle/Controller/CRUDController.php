@@ -188,7 +188,7 @@ class CRUDController
      *
      * @return EntityChange
      */
-    protected function updateItem(EntityInterface $item, $newPropertyValues)
+    protected function updateItem(EntityInterface $item, array $newPropertyValues)
     {
         $change = new EntityChange();
         $change->setAuthor(new EmailValue($this->securityContext->getToken()->getUser()->getEmail()));
