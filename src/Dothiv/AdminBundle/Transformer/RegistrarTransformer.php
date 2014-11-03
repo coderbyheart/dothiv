@@ -3,7 +3,7 @@
 namespace Dothiv\AdminBundle\Transformer;
 
 use Dothiv\AdminBundle\Model\RegistrarModel;
-use Dothiv\BusinessBundle\Entity\Entity;
+use Dothiv\BusinessBundle\Entity\EntityInterface;
 use Dothiv\BusinessBundle\Entity\Registrar;
 use Dothiv\ValueObject\URLValue;
 use Dothiv\ValueObject\W3CDateTimeValue;
@@ -16,13 +16,9 @@ class RegistrarTransformer extends AbstractTransformer implements EntityTransfor
     use Traits\UserTransformerTrait;
 
     /**
-     * @param Entity  $entity
-     * @param string  $route
-     * @param boolean $listing
-     *
-     * @return RegistrarModel
+     * {@inheritdoc}
      */
-    public function transform(Entity $entity, $route = null, $listing = false)
+    public function transform(EntityInterface $entity, $route = null, $listing = false)
     {
         /** @var Registrar $entity */
         $model = new RegistrarModel();

@@ -1,6 +1,9 @@
+{% import "DothivAdminBundle:Page:app/form.html.twig" as form %}
 <article class="crud" data-ng-init="itemUrl = '/admin/api/domain/' + stateParams.identifier;">
     <header>
-        <h1><a data-ng-href="http://%%stateParams.identifier%%" target="_blank">%%stateParams.identifier%%</a></h1>
+        <h1>
+            <a data-ng-href="http://www.%%stateParams.identifier%%/">%%stateParams.identifier%%</a>
+        </h1>
     </header>
     <div id="alert-msg" role="alert" data-ng-show="errorMessage">
         <button type="button" class="close" data-ng-click="errorMessage=''">
@@ -45,6 +48,10 @@
             </dd>
             <dt data-ng-show="item.token">Token</dt>
             <dd data-ng-show="item.token"><code data-ng-bind="item.token"></code></dd>
+            <dt data-ng-show="item.transfer"><i class="transfer"></i> Transfer</dt>
+            <dd data-ng-show="item.transfer">active</dd>
+            <dt data-ng-show="item.nonprofit"><i class="nonprofit"></i> Non-Profit domain</dt>
+            <dd data-ng-show="item.nonprofit">yes</dd>
         </dl>
     </section>
     <section class="item">
@@ -58,4 +65,13 @@
             <dd data-ng-bind="item.registrar.notificationType"></dd>
         </dl>
     </section>
+</article>
+<article data-ng-show="loaded">
+    <form class="crud" role="form" name="domainForm" novalidate>
+        <fieldset>
+            <legend>Action</legend>
+            {{ form.toggle("item", "transfer", "Toggle transfer") }}
+            {{ form.toggle("item", "nonprofit", "Toggle non-profit") }}
+        </fieldset>
+    </form>
 </article>

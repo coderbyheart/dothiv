@@ -20,7 +20,7 @@ Feature: Manage Non-profit Registrations
     And I add Bearer token equal to "3e11fe85b5c5522aedc52015c21b6c1fda3cc4b4"
 
   Scenario: List registrations
-    Given I send a GET request to "http://tld.hiv.dev/admin/api/nonprofitregistration?offsetKey=40&offsetDir=back"
+    Given I send a GET request to "http://tld.hiv.dev/admin/api/nonprofitregistration?offsetKey=40&sortDir=desc"
     Then the response status code should be 200
     And the header "content-type" should contain "application/json"
     And the JSON node "items" should contain 10 elements

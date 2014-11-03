@@ -1,0 +1,5 @@
+{% macro sort(field) %}
+    <i class="sort" data-ng-show="sortField != '{{ field }}'" data-ng-click="sortField='{{ field }}'; sortDir='asc'; load();"></i>
+    <i class="sort-asc" data-ng-show="sortField == '{{ field }}' && sortDir != 'desc'" data-ng-click="sortDir='desc'; load();"></i>
+    <i class="sort-desc" data-ng-show="sortField == '{{ field }}' && sortDir == 'desc'" data-ng-click="sortDir='asc'; load();"></i>
+{% endmacro %}

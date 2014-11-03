@@ -14,6 +14,12 @@ form[role=form] {
         border-color: @input-border;
       }
     }
+    &.ng-invalid-required {
+      border-color: @brand-warning;
+      &.ng-pristine {
+        border-color: @brand-warning;
+      }
+    }
     &.ng-pristine {
     }
     &.ng-dirty {
@@ -39,10 +45,5 @@ form[role=form] {
 
   div.fields-legend {
     margin-top: 2em;
-  }
-  fieldset {
-    legend {
-      padding: 0;
-    }
   }
 }

@@ -7,6 +7,8 @@ parameters:
     dothiv.admin.transformer.attachment.class: Dothiv\AdminBundle\Transformer\AttachmentTransformer
     dothiv.admin.transformer.user.class: Dothiv\AdminBundle\Transformer\UserTransformer
     dothiv.admin.transformer.registrar.class: Dothiv\AdminBundle\Transformer\RegistrarTransformer
+    dothiv.admin.transformer.config.class: Dothiv\AdminBundle\Transformer\ConfigTransformer
+    dothiv.admin.transformer.entity_change.class: Dothiv\AdminBundle\Transformer\EntityChangeTransformer
 
 services:
     dothiv.admin.service.mailer.login:
@@ -76,3 +78,15 @@ services:
         arguments:
         - @router
         - "dothiv_admin_registrar"
+
+    dothiv.admin.transformer.config:
+        class: %dothiv.admin.transformer.config.class%
+        arguments:
+        - @router
+        - "dothiv_admin_config"
+
+    dothiv.admin.transformer.entity_change:
+        class: %dothiv.admin.transformer.entity_change.class%
+        arguments:
+        - @router
+        - "dothiv_admin_history"

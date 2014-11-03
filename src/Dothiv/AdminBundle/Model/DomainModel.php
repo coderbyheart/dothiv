@@ -12,7 +12,7 @@ use JMS\Serializer\Annotation as Serializer;
 class DomainModel implements JsonLdEntityInterface
 {
     use JsonLdEntityTrait;
-    use W3CCreatedTrait;
+    use Traits\W3CCreatedTrait;
 
     /**
      * @var HivDomainValue
@@ -58,6 +58,18 @@ class DomainModel implements JsonLdEntityInterface
      * @var RegistrarModel
      */
     protected $registrar;
+
+    /**
+     * @var boolean
+     * @Serializer\Type("integer")
+     */
+    protected $transfer;
+
+    /**
+     * @var boolean
+     * @Serializer\Type("integer")
+     */
+    protected $nonprofit;
 
     public function __construct()
     {
@@ -215,5 +227,43 @@ class DomainModel implements JsonLdEntityInterface
     public function getRegistrar()
     {
         return $this->registrar;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getTransfer()
+    {
+        return $this->transfer;
+    }
+
+    /**
+     * @param boolean $transfer
+     *
+     * @return self
+     */
+    public function setTransfer($transfer)
+    {
+        $this->transfer = (boolean)$transfer;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getNonprofit()
+    {
+        return $this->nonprofit;
+    }
+
+    /**
+     * @param boolean $nonprofit
+     *
+     * @return self
+     */
+    public function setNonprofit($nonprofit)
+    {
+        $this->nonprofit = (boolean)$nonprofit;
+        return $this;
     }
 }

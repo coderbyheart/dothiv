@@ -15,19 +15,24 @@ form[role=form] {
     div.fields-legend {
       .make-xs-column(4);
     }
-  }
-}
-article {
-  .make-row();
-  section, header {
-    .make-xs-column(12);
-    &.reporter {
-      .make-xs-column(4);
+    div.done {
+      .make-xs-column(12);
     }
   }
-  &.crud {
-    section, form {
-      .make-xs-column(6);
+}
+main {
+  article {
+    .make-row();
+    section, header {
+      .make-xs-column(12);
+      &.reporter {
+        .make-xs-column(4);
+      }
+    }
+    &.crud {
+      section {
+        .make-xs-column(6);
+      }
     }
   }
 }

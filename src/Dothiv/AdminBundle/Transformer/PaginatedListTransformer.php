@@ -36,7 +36,7 @@ class PaginatedListTransformer extends AbstractTransformer
                 new URLValue(
                     $this->router->generate(
                         $route,
-                        array('offsetKey' => $result->getPrevPageKey()->get(), 'offsetDir' => 'back'),
+                        array('offsetKey' => $result->getPrevPageKey()->get(), 'sortDir' => 'desc'),
                         RouterInterface::ABSOLUTE_URL
                     )
                 )

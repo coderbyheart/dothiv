@@ -1,0 +1,64 @@
+{% macro validatedInput(form, model, field, type, label, info, required) %}
+    <div class="validated-form-group">
+        <div class="input">
+            <label for="{{ field }}">{{ label }}</label>
+            <input 
+                    type="{{ type }}" 
+                    {{ required ? "required" : "" }} 
+                    id="{{ field }}" 
+                    name="{{ field }}" 
+                    data-ng-model="{{ model ~ "." ~ field }}">
+        </div>
+        <div class="status">
+            <abbr class="valid" data-ng-show="{{ form ~ "." ~ field }}.$valid" title="This input is valid."></abbr>
+            <abbr class="required" data-ng-show="{{ form ~ "." ~ field }}.$invalid && {{ form ~ "." ~ field }}.$error.required" title="This input is required."></abbr>
+            <abbr class="invalid" data-ng-show="{{ form ~ "." ~ field }}.$invalid && !{{ form ~ "." ~ field }}.$error.required" title="This input is invalid."></abbr>
+        </div>
+        <div class="info"><p>{{ info }}</p></div>
+    </div>
+{% endmacro %}
+
+{% macro toggle(model, field, label) %}
+    <div class="validated-form-group">
+        <div class="input">
+            <label>{{ label }}</label><br>
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary" data-ng-class="{active: {{ model }}.{{ field }} == 0}">
+                    <input type="radio"
+                            name="{{ field }}-toggle"
+                            value="0"
+                            autocomplete="off"
+                            id="{{ field }}-toggle-off"
+                            data-ng-model="{{ model }}.{{ field }}"
+                            data-ng-click="{{ model }}.{{ field }} = 0; patch('{{ field }}');"
+                            > disabled
+                </label>
+                <label class="btn btn-primary" data-ng-class="{active: {{ model }}.{{ field }} == 1}">
+                    <input type="radio"
+                            name="{{ field }}-toggle"
+                            value="1"
+                            autocomplete="off"
+                            id="{{ field }}-toggle-on"
+                            data-ng-model="{{ model }}.{{ field }}"
+                            data-ng-click="{{ model }}.{{ field }} = 1; patch('{{ field }}');"
+                            > enabled
+                </label>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro propertyFilter(name, label, label_not, icon_class) %}
+    <fieldset>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" data-ng-true-value="1" data-ng-false-value="" data-ng-model="filterProperties.{{ name }}" data-ng-change="loadAfter();">
+                <abbr title="{{ label }}"><i class="{{ icon_class }}"></i></abbr></label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" data-ng-true-value="0" data-ng-false-value="" data-ng-model="filterProperties.{{ name }}" data-ng-change="loadAfter();">
+                <abbr title="{{ label_not }}"><i class="{{ icon_class }} not"></i></abbr></label>
+        </div>
+    </fieldset>
+{% endmacro %}

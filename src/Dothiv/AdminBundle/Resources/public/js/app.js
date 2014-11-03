@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.controllers', 'ngRoute', 'ui.router'])
+angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.directives', 'dotHIVApp.controllers', 'ngRoute', 'ui.router'])
     .config(['$locationProvider', function ($locationProvider) {
         $locationProvider.hashPrefix('!');
     }])
@@ -34,7 +34,7 @@ angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.controllers', 'ngR
                 controller: 'AdminDashboardController'
             })
         ;
-        var sections = ['domain', 'nonprofit'];
+        var sections = ['domain', 'nonprofit', 'config'];
         for (var k in sections) {
             $stateProvider
                 .state('=.' + sections[k], {
@@ -53,7 +53,7 @@ angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.controllers', 'ngR
                 });
         }
     }])
-    .run(['$rootScope', 'security', '$state', function ($rootScope, security, $state) {
+    .run(['$rootScope', 'security', '$state', '$window', 'ContentBehaviour', function ($rootScope, security, $state, $window, ContentBehaviour) {
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             if (toState.name.match('^=\.')) {
                 // Get the current user when the application starts (in case they are still logged in from a previous session)
@@ -66,8 +66,14 @@ angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.controllers', 'ngR
                 });
             }
         });
+        $rootScope.$on('$viewContentLoaded', function (event, current, previous, rejection) {
+            $window.setTimeout(function() {
+                ContentBehaviour.run();
+            }, 0);
+        });
     }])
 ;
 angular.module('dotHIVApp.services', ['dotHIVApp.controllers', 'ui.router', 'ngResource', 'ngCookies']);
+angular.module('dotHIVApp.directives', []);
 angular.module('dotHIVApp.controllers', ['ui.bootstrap']);
 

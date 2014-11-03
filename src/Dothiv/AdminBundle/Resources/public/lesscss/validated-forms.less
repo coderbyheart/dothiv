@@ -1,0 +1,37 @@
+form[role=form] {
+  // Validated form groups
+  .validated-form-group {
+    .form-group;
+
+    .input {
+      .make-sm-column(6);
+    }
+    .status {
+      .make-sm-column(1);
+      
+      abbr {
+        padding: 0.5em;
+        border-radius: 100%;
+        margin-top: 1.75em;
+        .glyphicon;
+        &.required {
+          background-color: @brand-warning;
+          .glyphicon-pencil;
+        }
+        &.invalid {
+          background-color: @brand-danger;
+          .glyphicon-remove;
+        }
+        &.valid {
+          background-color: @brand-success;
+          .glyphicon-ok;
+        }
+      }
+      
+    }
+    .info {
+      .make-sm-column(5);
+      padding-top: 1.5em;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+parameters:
+    dothiv.admin.repository.entity_change.entity: 'DothivAdminBundle:EntityChange'
+    dothiv.admin.repository.entity_change.repository.class: Dothiv\AdminBundle\Repository\EntityChangeRepository
+
+services:
+    dothiv.admin.repository.entity_change:
+        class: %dothiv.admin.repository.entity_change.repository.class%
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments: [ %dothiv.admin.repository.entity_change.entity% ]
+        calls:
+        - [setValidator, ["@validator"]]
+        - [setEventDispatcher, ["@dothiv.business.event_dispatcher"]]

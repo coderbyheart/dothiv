@@ -1,0 +1,36 @@
+<article class="crud" data-ng-init="listUrl = '/admin/api/config';">
+    <h1>
+        Configuration settings
+        <small>(<span data-ng-bind="total"></span>)</small>
+    </h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th class="right">Value</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="config in items">
+            <td><code data-ng-bind="config.name"></code></td>
+            <td><code data-ng-bind="config.value"></code></td>
+            <td class="right">
+                <button type="submit" data-ng-click="edit('=.config.edit', config.name)"><i></i></button>
+            </td>
+        </tr>
+
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5">
+                <nav>
+                    <button data-ng-disabled="!nextUrl" data-ng-click="next()" id="loadMoreButton">Load more</button>
+                </nav>
+                <span class="loading" data-ng-show="!loaded"><i class="loading"></i> loading …</span>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</article>

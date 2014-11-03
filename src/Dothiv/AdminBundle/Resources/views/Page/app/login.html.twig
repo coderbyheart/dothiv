@@ -1,29 +1,18 @@
+{% import "DothivAdminBundle:Page:app/form.html.twig" as form %}
 <article>
-    <div id="alert-msg" role="alert" data-ng-show="errorMessage">
-        <button type="button" class="close" data-ng-click="errorMessage=''">
-            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <p data-ng-bind="errorMessage"></p>
-    </div>
     <form role="form" name="loginForm" novalidate>
         <fieldset>
             <legend>Login</legend>
             <div data-ng-hide="done">
-                <div class="fields">
-                    <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" required id="email" data-ng-model="loginForm.email">
-                    </div>
-                    <nav>
-                        <button type="submit" data-ng-click="submit()" data-ng-disabled="loading || loginForm.$invalid" data-ng-class="{loading: loading}">
-                            <span data-ng-show="!loading">login</span> <span data-ng-show="loading"><i></i> logging in…</span>
-                        </button>
-                    </nav>
-                </div>
-                <div class="fields-legend">
-                    <p>Please enter your email address to login.</p>
-                </div>
+                {{ form.validatedInput("loginForm", "login", "email", "email", "Email address", "Please enter your email address to login.", true) }}
+                <nav>
+                    <button type="submit" data-ng-click="submit()" data-ng-disabled="loading || loginForm.$invalid" data-ng-class="{loading: loading}">
+                        <span data-ng-show="!loading">login</span>
+                        <span data-ng-show="loading"><i></i> logging in…</span>
+                    </button>
+                </nav>
             </div>
-            <div data-ng-show="done">
+            <div data-ng-show="done" class="done">
                 <p>Great. Now check your inbox for the login link.</p>
             </div>
         </fieldset>

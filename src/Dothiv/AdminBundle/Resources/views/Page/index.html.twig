@@ -33,7 +33,7 @@
     <link rel="shortcut icon" href="{{ asset(asset_url) }}">
     {% endimage %}
     {% javascripts
-    '@DothivAngularJsBundle/Resources/public/angular/angular.js'
+    '@angular_js'
     filter='?ngmin,?closureecma5'
     output='js/*.min.js' %}
     <script type="text/javascript" src="{{ asset(asset_url) }}"></script>
@@ -57,6 +57,9 @@
                 <li data-ng-class="{active: state.includes('=.nonprofit') }">
                     <a href="{{ path('dothiv_admin_app') }}#!/nonprofit"><abbr title="Non-profit registrations">Non-profits</abbr></a>
                 </li>
+                <li data-ng-class="{active: state.includes('=.config') }">
+                    <a href="{{ path('dothiv_admin_app') }}#!/config"><abbr title="Global configuration settings">Config</abbr></a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -71,15 +74,17 @@
 {% block angular_app %}
     {% javascripts
     '@DothivPremiumConfiguratorBundle/Resources/public/js/vendor/jquery.js'
-    '@DothivTwitterBootstrapBundle/Resources/public/bootstrap/js/collapse.js'
-    '@DothivAngularJsBundle/Resources/public/angular/angular-resource.js'
-    '@DothivAngularJsBundle/Resources/public/angular/angular-route.js'
-    '@DothivAngularJsBundle/Resources/public/angular/angular-cookies.js'
-    '@DothivAngularJsBundle/Resources/public/extra/angular-ui.github.io/ui-bootstrap/3/angular-ui-bootstrap-tpls.js'
-    '@DothivAngularJsBundle/Resources/public/extra/angular-ui.github.io/ui-router/angular-ui-router.js'
+    '@bootstrap_js_collapse'
+    '@angular_js_resource'
+    '@angular_js_route'
+    '@angular_js_cookies'
+    '@jquery'
+    '@angular_ui_bootstrap_tpls'
+    '@angular_ui_router'
     '@DothivAdminBundle/Resources/public/js/app.js'
     '@DothivBaseWebsiteBundle/Resources/public/js/services/*.js'
     '@DothivBaseWebsiteBundle/Resources/public/js/services/models/*.js'
+    '@DothivAdminBundle/Resources/public/js/services/*.js'
     '@DothivAdminBundle/Resources/public/js/services/models/*.js'
     '@DothivAdminBundle/Resources/public/js/controllers/*.js'
     filter='?ngmin,?closureecma5'
@@ -87,5 +92,18 @@
     <script type="text/javascript" src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
 {% endblock angular_app %}
+<script type="text/ng-template" id="error-modal.html">
+    <header>
+        <h2>%%title%%</h2>
+    </header>
+    <article>
+        <div>
+            <p>%%message%%</p>
+        </div>
+    </article>
+    <footer>
+        <button data-ng-click="$dismiss()">Close</button>
+    </footer>
+</script>
 </body>
 </html>

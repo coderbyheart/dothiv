@@ -25,8 +25,33 @@ article.crud {
       button[type=submit] {
         .btn-primary;
         i {
-          .icon-edit;
+          .icon-view;
         }
+      }
+    }
+    thead {
+      form {
+        .pull-right;
+        &:extend(.form-inline all);
+        fieldset {
+          float: left;
+          margin-right: @grid-gutter-width / 2;
+        }
+        input[type=text] {
+          .form-control;
+          .input-sm;
+        }
+        i {
+          color: @brand-success;
+          &.not {
+            color: @brand-danger;
+          }
+        }
+      }
+    }
+    tbody {
+      i.status {
+        color: rgba(0,0,0,0.5);
       }
     }
     tfoot {
@@ -41,7 +66,7 @@ article.crud {
   }
   section.item {
     h2 {
-      padding: 0;
+      padding: 0 @grid-gutter-width / 2;
       margin-bottom: @line-height-computed;
       font-size: (@font-size-base * 1.5);
       line-height: inherit;
@@ -53,11 +78,13 @@ article.crud {
       &:extend(.dl-horizontal all);
     }
   }
-  form {
-    legend {
-      small.saving {
-        .pull-right;
-      }
+}
+form.crud {
+  legend {
+    margin-bottom: @line-height-computed;
+    margin-top: @line-height-computed;
+    small.saving {
+      .pull-right;
     }
   }
 }
