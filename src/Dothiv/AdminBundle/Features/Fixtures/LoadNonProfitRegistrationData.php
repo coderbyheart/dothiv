@@ -8,6 +8,7 @@ use Dothiv\BusinessBundle\Entity\Attachment;
 use Dothiv\BusinessBundle\Entity\NonProfitRegistration;
 use Dothiv\BusinessBundle\Entity\Registrar;
 use Dothiv\BusinessBundle\Entity\User;
+use Dothiv\ValueObject\W3CDateTimeValue;
 
 class LoadNonProfitRegistrationData implements FixtureInterface
 {
@@ -33,7 +34,7 @@ class LoadNonProfitRegistrationData implements FixtureInterface
         for ($i = 1; $i <= 50; $i++) {
             $npr = new NonProfitRegistration();
             $npr->setUser($user);
-            $npr->setDomain(sprintf('example-%d.hiv', $i));
+            $npr->setDomain(sprintf('example-%02d.hiv', $i));
             $npr->setPersonFirstname('Jill');
             $npr->setPersonSurname('Jones');
             $npr->setPersonEmail('jill@example.com');
@@ -50,6 +51,14 @@ class LoadNonProfitRegistrationData implements FixtureInterface
             $npr->setPersonFax('+49178452');
             $npr->setOrgPhone('+49178453');
             $npr->setOrgFax('+49178454');
+
+            if ($i == 49) {
+                $npr->setApproved(new W3CDateTimeValue('now'));
+            }
+            if ($i == 50) {
+                $npr->setApproved(new W3CDateTimeValue('now'));
+                $npr->setRegistered(new W3CDateTimeValue('now'));
+            }
             $manager->persist($npr);
         }
         $manager->flush();

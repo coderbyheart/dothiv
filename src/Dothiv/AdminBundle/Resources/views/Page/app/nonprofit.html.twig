@@ -1,28 +1,62 @@
 {% import "DothivAdminBundle:Page:app/list.html.twig" as list %}
+{% import "DothivAdminBundle:Page:app/form.html.twig" as form %}
 <article class="crud" data-ng-init="listUrl = '/admin/api/nonprofitregistration';">
     <h1>Non-profit registrations <small>(<span data-ng-bind="total"></span>)</small></h1>
 
     <table>
         <thead>
         <tr>
-            <th>Domain</th>
-            <th class="right">Created</th>
+            <td colspan="6">
+                <form>
+                    {{ form.propertyFilter("approved", "has been approved", "has not approved", "yes") }}
+                    {{ form.propertyFilter("registered", "Domain has been registered", "Domain has not been registered", "cart") }}
+                    <fieldset>
+                        <input type="text" placeholder="Search …" data-ng-model="filterTerm" data-ng-change="loadAfter();">
+                    </fieldset>
+                    <fieldset>
+                        <button type="reset" data-ng-click="clearFilters()">
+                            <i class="trash"></i>
+                        </button>
+                    </fieldset>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Domain
+                {{ list.sort("domain") }}
+            </th>
+            <th><!-- flags --></th>
+            <th>Applied</th>
+            <th>Approved</th>
+            <th>Registered</th>
             <th class="right">Action</th>
         </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="registration in items">
             <td>%%registration.domainUTF8%%</td>
-            <td class="right">%%registration.created%%</td>
+            <td>
+                <abbr title="Approved"><i class="status yes" data-ng-show="registration.approved"></i></abbr>
+                <abbr title="Registered"><i class="status cart" data-ng-show="registration.registered"></i></abbr>
+            </td>
+            <td>
+                <abbr class="time" title="%%registration.created%%" am-time-ago="registration.created"></abbr>
+            </td>
+            <td>
+                <abbr class="time" title="%%registration.approved%%" am-time-ago="registration.approved" data-ng-show="registration.approved"></abbr>
+            </td>
+            <td>
+                <abbr class="time" title="%%registration.registered%%" am-time-ago="registration.registered" data-ng-show="registration.registered"></abbr>
+            </td>
             <td class="right">
                 <button type="submit" data-ng-click="edit('=.nonprofit.edit', registration.domain)"><i></i></button>
             </td>
         </tr>
-
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="3">
+            <td colspan="6">
                 <nav>
                     <button data-ng-disabled="!nextUrl" data-ng-click="next()" id="loadMoreButton">Load more</button>
                 </nav>

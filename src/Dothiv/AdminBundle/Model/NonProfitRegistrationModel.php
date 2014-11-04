@@ -114,11 +114,13 @@ class NonProfitRegistrationModel implements JsonLdEntityInterface
 
     /**
      * @var W3CDateTimeValue
+     * @Serializer\AccessType("public_method")
      */
     protected $approved = null;
 
     /**
      * @var W3CDateTimeValue
+     * @Serializer\AccessType("public_method")
      */
     protected $registered = null;
 
@@ -471,11 +473,11 @@ class NonProfitRegistrationModel implements JsonLdEntityInterface
     }
 
     /**
-     * @return W3CDateTimeValue|null
+     * @return W3CDateTimeValue|0
      */
     public function getApproved()
     {
-        return $this->approved;
+        return !$this->approved ? 0 : $this->approved;
     }
 
     /**
@@ -490,11 +492,11 @@ class NonProfitRegistrationModel implements JsonLdEntityInterface
     }
 
     /**
-     * @return W3CDateTimeValue|null
+     * @return W3CDateTimeValue|0
      */
     public function getRegistered()
     {
-        return $this->registered;
+        return !$this->registered ? 0 : $this->registered;
     }
 
     /**

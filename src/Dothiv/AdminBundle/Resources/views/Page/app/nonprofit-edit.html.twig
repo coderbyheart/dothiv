@@ -1,3 +1,4 @@
+{% import "DothivAdminBundle:Page:app/form.html.twig" as form %}
 <article class="crud" data-ng-init="itemUrl = '/admin/api/nonprofitregistration/' + stateParams.identifier;">
     <header>
         <h1>Non-profit registration for %%stateParams.identifier%%</h1>
@@ -69,26 +70,30 @@
             <dd data-ng-show="item.concept" data-ng-bind="item.concept"></dd>
         </dl>
     </section>
+    <section class="item">
+        <h2>Info</h2>
+        <dl>
+            <dt data-ng-show="item.created">Applied</dt>
+            <dd data-ng-show="item.created">
+                <abbr class="time" title="%%item.created%%" am-time-ago="item.created"></abbr>
+            </dd>
+            <dt data-ng-show="item.approved"><i class="yes"></i> Approved</dt>
+            <dd data-ng-show="item.approved">
+                <abbr class="time" title="%%item.approved%%" am-time-ago="item.approved"></abbr>
+            </dd>
+            <dt data-ng-show="item.registered"><i class="cart"></i> Registered</dt>
+            <dd data-ng-show="item.registered">
+                <abbr class="time" title="%%item.registered%%" am-time-ago="item.registered"></abbr>
+            </dd>
+        </dl>
+    </section>
 </article>
-{#
-<article class="crud" data-ng-show="loaded">
-    <form role="form" name="nonprofitEditForm" novalidate>
+<article data-ng-show="loaded">
+    <form class="crud" role="form" name="domainForm" novalidate>
         <fieldset>
-            <legend>Settings
-                <small class="saving" data-ng-show="saving"><i class="loading"></i> saving …</small>
-            </legend>
-            <div class="form-group">
-                <label for="registrationStatus">Status</label>
-                <select id="registrationStatus" data-ng-model="item.status" data-ng-change="patch('status')">
-                    <option value="new">new</option>
-                    <option value="verified">verified</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="registrationCode">Code</label>
-                <input type="text" id="registrationCode" data-ng-model="item.code" data-ng-blur="patch('code')">
-            </div>
+            <legend>Action</legend>
+            {{ form.toggle("item", "approved", "Toggle approved") }}
+            {{ form.toggle("item", "registered", "Toggle registered") }}
         </fieldset>
     </form>
 </article>
-#}
