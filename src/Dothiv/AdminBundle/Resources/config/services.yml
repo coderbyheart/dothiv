@@ -9,6 +9,7 @@ parameters:
     dothiv.admin.transformer.registrar.class: Dothiv\AdminBundle\Transformer\RegistrarTransformer
     dothiv.admin.transformer.config.class: Dothiv\AdminBundle\Transformer\ConfigTransformer
     dothiv.admin.transformer.entity_change.class: Dothiv\AdminBundle\Transformer\EntityChangeTransformer
+    dothiv.admin.manipulator.generic.class: Dothiv\AdminBundle\Service\Manipulator\GenericEntityManipulator
 
 services:
     dothiv.admin.service.mailer.login:
@@ -90,3 +91,7 @@ services:
         arguments:
         - @router
         - "dothiv_admin_history"
+
+    dothiv.admin.manipulator.generic:
+        class: %dothiv.admin.manipulator.generic.class%
+

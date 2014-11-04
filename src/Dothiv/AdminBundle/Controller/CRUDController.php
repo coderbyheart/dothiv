@@ -6,6 +6,7 @@ use Dothiv\AdminBundle\Entity\EntityChange;
 use Dothiv\AdminBundle\Exception\BadRequestHttpException;
 use Dothiv\AdminBundle\Exception\NotFoundHttpException;
 use Dothiv\AdminBundle\Repository\EntityChangeRepositoryInterface;
+use Dothiv\AdminBundle\Service\Manipulator\EntityManipulatorInterface;
 use Dothiv\AdminBundle\Transformer\EntityTransformerInterface;
 use Dothiv\AdminBundle\Transformer\PaginatedListTransformer;
 use Dothiv\APIBundle\Controller\Traits\CreateJsonResponseTrait;
@@ -53,6 +54,11 @@ class CRUDController
     protected $securityContext;
 
     /**
+     * @var EntityManipulatorInterface
+     */
+    protected $entityManipulator;
+
+    /**
      * @param CRUDRepositoryInterface         $itemRepo
      * @param EntityTransformerInterface      $itemTransformer
      * @param PaginatedListTransformer        $paginatedListTransformer
@@ -66,7 +72,8 @@ class CRUDController
         PaginatedListTransformer $paginatedListTransformer,
         SerializerInterface $serializer,
         EntityChangeRepositoryInterface $entityChangeRepo,
-        SecurityContextInterface $securityContext
+        SecurityContextInterface $securityContext,
+        EntityManipulatorInterface $entityManipulator
     )
     {
         $this->itemRepo                 = $itemRepo;
@@ -75,6 +82,7 @@ class CRUDController
         $this->serializer               = $serializer;
         $this->entityChangeRepo         = $entityChangeRepo;
         $this->securityContext          = $securityContext;
+        $this->entityManipulator        = $entityManipulator;
     }
 
     /**
@@ -195,30 +203,8 @@ class CRUDController
         $change->setEntity($this->itemRepo->getItemEntityName($item));
         $change->setIdentifier(new IdentValue($item->getPublicId()));
 
-        foreach ($newPropertyValues as $property => $content) {
-            $setter = 'set' . ucfirst($property);
-            if (!method_exists($item, $setter)) {
-                throw new BadRequestHttpException(sprintf('Unknown property "%s"!', $property));
-            }
-
-            $getter           = 'get' . ucfirst($property);
-            $getPropertyValue = function () use ($item, $property, $getter) {
-                $value = null;
-                if (method_exists($item, $getter)) {
-                    $value = $item->$getter();
-                    if ($value instanceof ValueObjectInterface) {
-                        $value = $value->toScalar();
-                    }
-                }
-                return $value;
-            };
-
-            $oldValue = $getPropertyValue();
-            $item->$setter($content);
-            $this->itemRepo->persistItem($item)->flush();
-            $newValue = $getPropertyValue();
-            $change->addChange(new IdentValue($property), $oldValue, $newValue);
-        }
+        $changes = $this->entityManipulator->manipulate($item, $newPropertyValues);
+        $change->setChanges($changes);
         return $change;
     }
 }
