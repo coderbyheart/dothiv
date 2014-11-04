@@ -117,6 +117,11 @@ class NonProfitRegistrationModel implements JsonLdEntityInterface
      */
     protected $approved = null;
 
+    /**
+     * @var W3CDateTimeValue
+     */
+    protected $registered = null;
+
     public function __construct()
     {
         $this->setJsonLdContext(new URLValue('http://jsonld.click4life.hiv/NonProfitRegistration'));
@@ -481,6 +486,25 @@ class NonProfitRegistrationModel implements JsonLdEntityInterface
     public function setApproved(W3CDateTimeValue $approved = null)
     {
         $this->approved = $approved;
+        return $this;
+    }
+
+    /**
+     * @return W3CDateTimeValue|null
+     */
+    public function getRegistered()
+    {
+        return $this->registered;
+    }
+
+    /**
+     * @param W3CDateTimeValue|null $registered
+     *
+     * @return self
+     */
+    public function setRegistered(W3CDateTimeValue $registered = null)
+    {
+        $this->registered = $registered;
         return $this;
     }
 }

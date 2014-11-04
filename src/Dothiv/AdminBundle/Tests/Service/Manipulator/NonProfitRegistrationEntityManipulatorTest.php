@@ -8,6 +8,7 @@ use Dothiv\BusinessBundle\Entity\NonProfitRegistration;
 use Dothiv\BusinessBundle\Entity\User;
 use Dothiv\ValueObject\ClockValue;
 use Dothiv\ValueObject\IdentValue;
+use Dothiv\ValueObject\W3CDateTimeValue;
 
 class NonProfitRegistrationEntityManipulatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,27 +24,51 @@ class NonProfitRegistrationEntityManipulatorTest extends \PHPUnit_Framework_Test
     }
 
     /**
-     * @test
-     * @group   Entity
-     * @group   AdminBundle
-     * @group   Manipulator
-     * @depends itShouldBeInstantiable
+     * @return array
      */
-    public function itShouldManipulateAnEntity()
+    public function propertyData()
     {
-        $domain     = new NonProfitRegistration();
-        $properties = array(
-            'approved' => '1'
+        $w3cNow = new W3CDateTimeValue($this->getClock()->getNow());
+        return array(
+            array('approved', null, '1', $w3cNow),
+            array('approved', $w3cNow, '0', null),
+            array('registered', null, '1', $w3cNow),
+            array('registered', $w3cNow, '0', null),
         );
-        $changes    = $this->createTestObject()->manipulate($domain, $properties);
-        $this->assertEquals($this->getClock()->getNow(), $domain->getApproved());
+    }
+
+    /**
+     * @test
+     * @group        Entity
+     * @group        AdminBundle
+     * @group        Manipulator
+     * @depends      itShouldBeInstantiable
+     * @dataProvider propertyData
+     *
+     * @param string $property
+     * @param mixed  $oldValue
+     * @param string $propertyValue
+     * @param mixed  $newValue
+     */
+    public function itShouldManipulateAnEntity($property, $oldValue, $propertyValue, $newValue)
+    {
+        $registration = new NonProfitRegistration();
+        $getter       = 'get' . ucfirst($property);
+        $setter       = 'set' . ucfirst($property);
+        $registration->$setter($oldValue);
+        $properties = array(
+            $property => $propertyValue
+        );
+        $changes    = $this->createTestObject()->manipulate($registration, $properties);
+
+        $this->assertEquals($newValue, $registration->$getter());
         $this->assertEquals(1, count($changes));
         $this->assertInstanceOf('Dothiv\AdminBundle\Model\EntityPropertyChange', $changes[0]);
         /** @var EntityPropertyChange $change */
         $change = $changes[0];
-        $this->assertEquals(null, $change->getOldValue());
-        $this->assertEquals($this->getClock()->getNow(), $change->getNewValue());
-        $this->assertEquals(new IdentValue('approved'), $change->getProperty());
+        $this->assertEquals($oldValue, $change->getOldValue());
+        $this->assertEquals($newValue, $change->getNewValue());
+        $this->assertEquals(new IdentValue($property), $change->getProperty());
     }
 
     /**

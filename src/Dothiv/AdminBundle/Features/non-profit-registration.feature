@@ -70,3 +70,28 @@ Feature: Manage Non-profit Registrations
     # The registration be updated
     When I send a GET request to "http://tld.hiv.dev/admin/api/nonprofitregistration/example-1.hiv"
     And the JSON node "approved" should not exist
+
+  Scenario: Mark registration to be registered
+    Given I send a PATCH request to "http://tld.hiv.dev/admin/api/nonprofitregistration/example-1.hiv" with JSON values:
+      | registered | 1 |
+    Then the response status code should be 204
+  # The registration be updated
+    When I send a GET request to "http://tld.hiv.dev/admin/api/nonprofitregistration/example-1.hiv"
+    And the JSON node "registered" should contain "2014-01-02T13:14:15+01:00"
+  # A history entry should exist
+    When I send a GET request to "http://tld.hiv.dev/admin/api/history/nonprofitregistration/example-1.hiv"
+    Then the response status code should be 200
+    And the header "content-type" should contain "application/json"
+    And the JSON node "items" should contain 1 elements
+    And the JSON node "items[0].entity" should be equal to "nonprofitregistration"
+    And the JSON node "items[0].identifier" should be equal to "example-1.hiv"
+    And the JSON node "items[0].author" should be equal to "admin@click4life.hiv.dev"
+    And the JSON node "items[0].changes.registered.old" should not exist
+    And the JSON node "items[0].changes.registered.new" should be equal to "2014-01-02T13:14:15+01:00"
+  # Unmark
+    Given I send a PATCH request to "http://tld.hiv.dev/admin/api/nonprofitregistration/example-1.hiv" with JSON values:
+      | registered | 0 |
+    Then the response status code should be 204
+  # The registration be updated
+    When I send a GET request to "http://tld.hiv.dev/admin/api/nonprofitregistration/example-1.hiv"
+    And the JSON node "registered" should not exist
