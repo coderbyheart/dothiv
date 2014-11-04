@@ -33,6 +33,7 @@ class NonProfitRegistrationTransformer extends AbstractTransformer implements En
                 RouterInterface::ABSOLUTE_URL
             )
         ));
+        $model->setApproved(!$entity->getApproved() ? null : new W3CDateTimeValue($entity->getApproved()));
         if (!$listing) {
             $model->setUser($this->getUserTransformer()->transform($entity->getUser(), null, $listing));
             $model->setPersonFirstname($entity->getPersonFirstname());

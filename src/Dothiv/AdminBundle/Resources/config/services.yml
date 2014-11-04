@@ -10,6 +10,7 @@ parameters:
     dothiv.admin.transformer.config.class: Dothiv\AdminBundle\Transformer\ConfigTransformer
     dothiv.admin.transformer.entity_change.class: Dothiv\AdminBundle\Transformer\EntityChangeTransformer
     dothiv.admin.manipulator.generic.class: Dothiv\AdminBundle\Service\Manipulator\GenericEntityManipulator
+    dothiv.admin.manipulator.nonprofitregistration.class: Dothiv\AdminBundle\Service\Manipulator\NonProfitRegistrationEntityManipulator
 
 services:
     dothiv.admin.service.mailer.login:
@@ -95,3 +96,7 @@ services:
     dothiv.admin.manipulator.generic:
         class: %dothiv.admin.manipulator.generic.class%
 
+    dothiv.admin.manipulator.nonprofitregistration:
+        class: %dothiv.admin.manipulator.nonprofitregistration.class%
+        arguments:
+        - @clock

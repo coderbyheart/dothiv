@@ -34,6 +34,7 @@ services:
         - @serializer
         - @dothiv.admin.repository.entity_change
         - @security.context
+        - @dothiv.admin.manipulator.nonprofitregistration
 
     dothiv.admin.api.controller.domain:
         class: %dothiv.admin.api.controller.crud.class%
