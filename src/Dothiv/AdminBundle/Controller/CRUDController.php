@@ -176,7 +176,7 @@ class CRUDController
         });
 
         $newPropertyValues = json_decode($request->getContent());
-        $change            = $this->updateItem($item, $newPropertyValues);
+        $change            = $this->updateItem($item, (array)$newPropertyValues);
         $this->entityChangeRepo->persist($change)->flush();
 
         return $this->createNoContentResponse();
