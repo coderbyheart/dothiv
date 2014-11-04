@@ -53,7 +53,7 @@ class EntityChangeTransformerTest extends \PHPUnit_Framework_TestCase
         $model = $this->createTestObject()->transform($entityChange);
         $this->assertInstanceOf('\Dothiv\AdminBundle\Model\EntityChangeModel', $model);
 
-        $this->assertEquals(new IdentValue("someEntity"), $model->getEntity());
+        $this->assertEquals(new IdentValue("someentity"), $model->getEntity());
         $this->assertEquals(new IdentValue("someIdent"), $model->getIdentifier());
         $this->assertEquals(new EmailValue('john.doe@exmample.com'), $model->getAuthor());
         $this->assertEquals(0, $model->getChanges()->get('someProperty')->getOldValue());
