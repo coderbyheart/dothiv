@@ -4,6 +4,7 @@ namespace Dothiv\AdminBundle\Controller;
 
 use Dothiv\AdminBundle\Entity\EntityChange;
 use Dothiv\AdminBundle\Exception\BadRequestHttpException;
+use Dothiv\AdminBundle\Exception\InvalidArgumentException;
 use Dothiv\AdminBundle\Exception\NotFoundHttpException;
 use Dothiv\AdminBundle\Repository\EntityChangeRepositoryInterface;
 use Dothiv\AdminBundle\Service\Manipulator\EntityManipulatorInterface;
@@ -183,11 +184,14 @@ class CRUDController
             );
         });
 
-        $newPropertyValues = json_decode($request->getContent());
-        $change            = $this->updateItem($item, (array)$newPropertyValues);
-        $this->entityChangeRepo->persist($change)->flush();
-
-        return $this->createNoContentResponse();
+        try {
+            $newPropertyValues = json_decode($request->getContent());
+            $change            = $this->updateItem($item, (array)$newPropertyValues);
+            $this->entityChangeRepo->persist($change)->flush();
+            return $this->createNoContentResponse();
+        } catch (InvalidArgumentException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
     }
 
     /**

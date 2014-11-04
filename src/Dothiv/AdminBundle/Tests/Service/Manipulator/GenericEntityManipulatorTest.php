@@ -5,7 +5,6 @@ namespace Dothiv\AdminBundle\Service\Manipulator\Tests;
 use Dothiv\AdminBundle\Model\EntityPropertyChange;
 use Dothiv\AdminBundle\Service\Manipulator\GenericEntityManipulator;
 use Dothiv\BusinessBundle\Entity\Domain;
-use Dothiv\BusinessBundle\Entity\User;
 use Dothiv\ValueObject\IdentValue;
 
 class GenericEntityManipulatorTest extends \PHPUnit_Framework_TestCase
@@ -44,6 +43,24 @@ class GenericEntityManipulatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('other.hiv', $change->getOldValue());
         $this->assertEquals('example.hiv', $change->getNewValue());
         $this->assertEquals(new IdentValue('name'), $change->getProperty());
+    }
+
+    /**
+     * @test
+     * @group                    Entity
+     * @group                    AdminBundle
+     * @group                    Manipulator
+     * @depends                  itShouldManipulateAnEntity
+     * @expectedException \Dothiv\AdminBundle\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Unknown property "invalid"!
+     */
+    public function itShouldThrowAnExceptionOnInvalidProperty()
+    {
+        $domain     = new Domain();
+        $properties = array(
+            'invalid' => 'value'
+        );
+        $this->createTestObject()->manipulate($domain, $properties);
     }
 
     /**
