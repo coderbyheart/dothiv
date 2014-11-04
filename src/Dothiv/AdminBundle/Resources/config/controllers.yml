@@ -75,6 +75,8 @@ services:
         - @dothiv.admin.transformer.entity_change
         - @dothiv.admin.transformer.paginatedlist
         - @serializer
+        calls:
+        - [addEntityClass, ["nonprofitregistration", "Dothiv\\BusinessBundle\\Entity\\NonProfitRegistration"]]
 
     dothiv.admin.api.controller.attachment:
         class: %dothiv.admin.api.controller.attachment.class%

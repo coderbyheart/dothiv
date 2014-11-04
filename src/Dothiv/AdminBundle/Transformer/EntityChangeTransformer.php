@@ -21,7 +21,7 @@ class EntityChangeTransformer extends AbstractTransformer implements EntityTrans
     {
         /** @var EntityChange $entity */
         $entityClass = explode('\\', $entity->getEntity());
-        $entityAlias = lcfirst(array_pop($entityClass));
+        $entityAlias = strtolower(array_pop($entityClass));
         $model       = new EntityChangeModel();
         $model->setJsonLdId(new URLValue(
             $this->router->generate(
