@@ -62,5 +62,4 @@ class ConfigModel implements JsonLdEntityInterface
         $this->value = $value;
         return $this;
     }
-
 }

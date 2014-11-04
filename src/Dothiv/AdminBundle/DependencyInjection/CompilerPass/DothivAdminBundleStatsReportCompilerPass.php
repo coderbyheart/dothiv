@@ -31,4 +31,4 @@ class DothivAdminBundleStatsReportCompilerPass implements CompilerPassInterface
             );
         }
     }
-} 
+}

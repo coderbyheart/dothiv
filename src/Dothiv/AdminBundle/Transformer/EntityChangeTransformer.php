@@ -44,5 +44,4 @@ class EntityChangeTransformer extends AbstractTransformer implements EntityTrans
         $model->setChanges($changes);
         return $model;
     }
-
-} 
+}

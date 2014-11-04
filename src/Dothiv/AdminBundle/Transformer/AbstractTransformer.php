@@ -6,6 +6,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 abstract class AbstractTransformer
 {
+
     /**
      * @var RouterInterface
      */
@@ -28,4 +29,4 @@ abstract class AbstractTransformer
         $this->router = $router;
         $this->route  = $route;
     }
-} 
+}

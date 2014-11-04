@@ -4,6 +4,7 @@ namespace Dothiv\AdminBundle\Model;
 
 class ReportEvent
 {
+
     /**
      * @var \DateTime
      */
@@ -61,5 +62,4 @@ class ReportEvent
     {
         return $this->date;
     }
-
-} 
+}

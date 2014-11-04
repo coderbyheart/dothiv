@@ -37,24 +37,16 @@ class AttachmentController
     {
         $optionalAttachment = $this->attachmentService->getAttachment($handle);
         if ($optionalAttachment->isEmpty()) {
-            throw new NotFoundHttpException(
-                sprintf(
-                    'Attachment "%s" not found.', $handle
-                )
-            );
+            throw new NotFoundHttpException(sprintf('Attachment "%s" not found.', $handle));
         }
 
         $optionalFile = $this->attachmentService->getFile($optionalAttachment->get());
         if ($optionalFile->isEmpty()) {
-            throw new NotFoundHttpException(
-                sprintf(
-                    'Attachment file "%s" not found.', $handle
-                )
-            );
+            throw new NotFoundHttpException(sprintf('Attachment file "%s" not found.', $handle));
         }
 
         BinaryFileResponse::trustXSendfileTypeHeader();
         $response = new BinaryFileResponse($optionalFile->get()->getPathname());
         return $response;
     }
-} 
+}

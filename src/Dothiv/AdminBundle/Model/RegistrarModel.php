@@ -114,5 +114,4 @@ class RegistrarModel implements JsonLdEntityInterface
     {
         return $this->notificationType;
     }
-
 }

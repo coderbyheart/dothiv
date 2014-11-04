@@ -114,5 +114,4 @@ class EntityChangeModel implements JsonLdEntityInterface
         $this->identifier = $identifier;
         return $this;
     }
-
 }
