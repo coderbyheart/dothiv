@@ -6,6 +6,7 @@ use Dothiv\AdminBundle\Transformer\AttachmentTransformer;
 
 trait AttachmentTransformerTrait
 {
+
     /**
      * @var AttachmentTransformer
      */
@@ -29,4 +30,4 @@ trait AttachmentTransformerTrait
     {
         return $this->attachmentTransformer;
     }
-} 
+}

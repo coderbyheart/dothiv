@@ -39,5 +39,4 @@ class EntityChangeEvent extends Event
         $this->change = $change;
         return $this;
     }
-
-} 
+}

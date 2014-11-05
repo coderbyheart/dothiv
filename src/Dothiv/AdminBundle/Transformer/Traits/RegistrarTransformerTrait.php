@@ -6,6 +6,7 @@ use Dothiv\AdminBundle\Transformer\RegistrarTransformer;
 
 trait RegistrarTransformerTrait
 {
+
     /**
      * @var RegistrarTransformer
      */
@@ -29,4 +30,4 @@ trait RegistrarTransformerTrait
     {
         return $this->registrarTransformer;
     }
-} 
+}
