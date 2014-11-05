@@ -6,6 +6,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 
 trait SecurityContextTrait
 {
+
     /**
      * @var SecurityContext
      */
@@ -29,4 +30,4 @@ trait SecurityContextTrait
     {
         return $this->securityContext;
     }
-} 
+}

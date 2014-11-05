@@ -6,6 +6,7 @@ use Dothiv\AdminBundle\Transformer\UserTransformer;
 
 trait UserTransformerTrait
 {
+
     /**
      * @var UserTransformer
      */
@@ -29,4 +30,4 @@ trait UserTransformerTrait
     {
         return $this->userTransformer;
     }
-} 
+}

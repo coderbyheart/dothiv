@@ -6,6 +6,7 @@ use Dothiv\ValueObject\W3CDateTimeValue;
 
 trait W3CCreatedTrait
 {
+
     /**
      * @var W3CDateTimeValue
      */
@@ -29,4 +30,4 @@ trait W3CCreatedTrait
     {
         return $this->created;
     }
-} 
+}

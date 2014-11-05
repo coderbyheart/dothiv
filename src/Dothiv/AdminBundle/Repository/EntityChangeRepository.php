@@ -57,5 +57,4 @@ class EntityChangeRepository extends EntityRepository implements EntityChangeRep
         $qb->andWhere('i.identifier = :identifier')->setParameter('identifier', $identifier->toScalar());
         return $this->buildPaginatedResult($qb, $options);
     }
-
-} 
+}

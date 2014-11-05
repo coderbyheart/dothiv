@@ -45,7 +45,7 @@ class EntityChangeTransformerTest extends \PHPUnit_Framework_TestCase
         $this->mockRouter->expects($this->once())->method('generate')
             ->with(
                 'some_route',
-                array('id' => 17, 'entity' => 'someEntity', 'identifier' => 'someIdent'),
+                array('id' => 17, 'entity' => 'someentity', 'identifier' => 'someIdent'),
                 RouterInterface::ABSOLUTE_URL
             )
             ->willReturn('http://example.com/');
@@ -53,7 +53,7 @@ class EntityChangeTransformerTest extends \PHPUnit_Framework_TestCase
         $model = $this->createTestObject()->transform($entityChange);
         $this->assertInstanceOf('\Dothiv\AdminBundle\Model\EntityChangeModel', $model);
 
-        $this->assertEquals(new IdentValue("someEntity"), $model->getEntity());
+        $this->assertEquals(new IdentValue("someentity"), $model->getEntity());
         $this->assertEquals(new IdentValue("someIdent"), $model->getIdentifier());
         $this->assertEquals(new EmailValue('john.doe@exmample.com'), $model->getAuthor());
         $this->assertEquals(0, $model->getChanges()->get('someProperty')->getOldValue());
@@ -75,4 +75,4 @@ class EntityChangeTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $this->mockRouter = $this->getMock('\Symfony\Component\Routing\RouterInterface');
     }
-} 
+}

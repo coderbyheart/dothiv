@@ -9,7 +9,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class LoginLinkMailer
 {
-
     /**
      * @var \Swift_Mailer
      */
@@ -47,7 +46,8 @@ class LoginLinkMailer
         RouterInterface $router,
         $route,
         $emailFromAddress,
-        $emailFromName)
+        $emailFromName
+    )
     {
         $this->mailer           = $mailer;
         $this->router           = $router;
@@ -78,7 +78,7 @@ class LoginLinkMailer
         $to     = $user->getEmail();
         $toName = $user->getFirstname() . ' ' . $user->getSurname();
 
-        // send email
+        // Send email
         $message = \Swift_Message::newInstance();
         $message
             ->setSubject('dotHIV initiative admin login')
@@ -94,4 +94,4 @@ class LoginLinkMailer
     {
         $this->sendLoginMail($event->getUserToken(), $event->getLocale());
     }
-} 
+}

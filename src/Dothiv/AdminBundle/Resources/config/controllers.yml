@@ -34,6 +34,7 @@ services:
         - @serializer
         - @dothiv.admin.repository.entity_change
         - @security.context
+        - @dothiv.admin.manipulator.nonprofitregistration
 
     dothiv.admin.api.controller.domain:
         class: %dothiv.admin.api.controller.crud.class%
@@ -44,7 +45,8 @@ services:
         - @serializer
         - @dothiv.admin.repository.entity_change
         - @security.context
-        
+        - @dothiv.admin.manipulator.generic
+
     dothiv.admin.api.controller.registrar:
         class: %dothiv.admin.api.controller.crud.class%
         arguments:
@@ -54,6 +56,7 @@ services:
         - @serializer
         - @dothiv.admin.repository.entity_change
         - @security.context
+        - @dothiv.admin.manipulator.generic
 
     dothiv.admin.api.controller.config:
         class: %dothiv.admin.api.controller.crud.class%
@@ -64,6 +67,7 @@ services:
         - @serializer
         - @dothiv.admin.repository.entity_change
         - @security.context
+        - @dothiv.admin.manipulator.generic
 
     dothiv.admin.api.controller.history:
         class: %dothiv.admin.api.controller.history.class%
@@ -72,6 +76,8 @@ services:
         - @dothiv.admin.transformer.entity_change
         - @dothiv.admin.transformer.paginatedlist
         - @serializer
+        calls:
+        - [addEntityClass, ["nonprofitregistration", "Dothiv\\BusinessBundle\\Entity\\NonProfitRegistration"]]
 
     dothiv.admin.api.controller.attachment:
         class: %dothiv.admin.api.controller.attachment.class%

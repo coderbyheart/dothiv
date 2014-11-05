@@ -15,4 +15,4 @@ interface EntityTransformerInterface
      * @return JsonLdEntityInterface
      */
     public function transform(EntityInterface $entity, $route = null, $listing = false);
-} 
+}

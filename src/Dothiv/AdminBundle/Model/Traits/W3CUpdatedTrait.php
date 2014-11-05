@@ -30,4 +30,4 @@ trait W3CUpdatedTrait
     {
         return $this->updated;
     }
-} 
+}

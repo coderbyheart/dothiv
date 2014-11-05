@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dotHIVApp.controllers').controller('AdminEditController', ['$scope', '$http', '$state', '$stateParams', function ($scope, $http, $state, $stateParams) {
+angular.module('dotHIVApp.controllers').controller('AdminEditController', ['$scope', '$http', '$state', '$stateParams', '$window', 'ContentBehaviour', function ($scope, $http, $state, $stateParams, $window, ContentBehaviour) {
 
     $scope.stateParams = $stateParams;
     $scope.itemUrl = null;
@@ -14,6 +14,9 @@ angular.module('dotHIVApp.controllers').controller('AdminEditController', ['$sco
         $http.get(url).success(function (data) {
             $scope.item = data;
             $scope.loaded = true;
+            $window.setTimeout(function () {
+                ContentBehaviour.run();
+            }, 1);
         });
     };
 

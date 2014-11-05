@@ -33,4 +33,4 @@ interface EntityChangeRepositoryInterface
      * @return PaginatedResult
      */
     public function getPaginated($entity, IdentValue $identifier, PaginatedQueryOptions $options, FilterQuery $filterQuery);
-} 
+}

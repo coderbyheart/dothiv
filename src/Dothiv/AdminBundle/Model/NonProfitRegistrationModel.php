@@ -7,6 +7,7 @@ use Dothiv\APIBundle\JsonLd\JsonLdEntityTrait;
 use Dothiv\ValueObject\EmailValue;
 use Dothiv\ValueObject\HivDomainValue;
 use Dothiv\ValueObject\URLValue;
+use Dothiv\ValueObject\W3CDateTimeValue;
 use JMS\Serializer\Annotation as Serializer;
 
 class NonProfitRegistrationModel implements JsonLdEntityInterface
@@ -111,6 +112,18 @@ class NonProfitRegistrationModel implements JsonLdEntityInterface
      */
     protected $forward;
 
+    /**
+     * @var W3CDateTimeValue
+     * @Serializer\AccessType("public_method")
+     */
+    protected $approved = null;
+
+    /**
+     * @var W3CDateTimeValue
+     * @Serializer\AccessType("public_method")
+     */
+    protected $registered = null;
+
     public function __construct()
     {
         $this->setJsonLdContext(new URLValue('http://jsonld.click4life.hiv/NonProfitRegistration'));
@@ -123,7 +136,7 @@ class NonProfitRegistrationModel implements JsonLdEntityInterface
      */
     public function setDomain(HivDomainValue $domain)
     {
-        $this->domain = $domain;
+        $this->domain     = $domain;
         $this->domainUTF8 = $domain->toUTF8();
         return $this;
     }
@@ -457,5 +470,43 @@ class NonProfitRegistrationModel implements JsonLdEntityInterface
     public function getWebsite()
     {
         return $this->website;
+    }
+
+    /**
+     * @return W3CDateTimeValue|0
+     */
+    public function getApproved()
+    {
+        return !$this->approved ? 0 : $this->approved;
+    }
+
+    /**
+     * @param W3CDateTimeValue|null $approved
+     *
+     * @return self
+     */
+    public function setApproved(W3CDateTimeValue $approved = null)
+    {
+        $this->approved = $approved;
+        return $this;
+    }
+
+    /**
+     * @return W3CDateTimeValue|0
+     */
+    public function getRegistered()
+    {
+        return !$this->registered ? 0 : $this->registered;
+    }
+
+    /**
+     * @param W3CDateTimeValue|null $registered
+     *
+     * @return self
+     */
+    public function setRegistered(W3CDateTimeValue $registered = null)
+    {
+        $this->registered = $registered;
+        return $this;
     }
 }

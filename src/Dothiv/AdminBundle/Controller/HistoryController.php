@@ -2,6 +2,7 @@
 
 namespace Dothiv\AdminBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Dothiv\AdminBundle\Repository\EntityChangeRepositoryInterface;
 use Dothiv\AdminBundle\Transformer\EntityTransformerInterface;
 use Dothiv\AdminBundle\Transformer\PaginatedListTransformer;
@@ -34,6 +35,11 @@ class HistoryController
     protected $entityChangeRepo;
 
     /**
+     * @var ArrayCollection
+     */
+    protected $entityMap;
+
+    /**
      * @param EntityChangeRepositoryInterface $entityChangeRepo
      * @param EntityTransformerInterface      $itemTransformer
      * @param PaginatedListTransformer        $paginatedListTransformer
@@ -50,6 +56,7 @@ class HistoryController
         $this->paginatedListTransformer = $paginatedListTransformer;
         $this->serializer               = $serializer;
         $this->entityChangeRepo         = $entityChangeRepo;
+        $this->entityMap                = new ArrayCollection();
     }
 
     /**
@@ -72,7 +79,7 @@ class HistoryController
         });
         $filterQueryParser = new FilterQueryParser();
         $paginatedResult   = $this->entityChangeRepo->getPaginated(
-            'Dothiv\BusinessBundle\Entity\\' . ucfirst($entity),
+            $this->getEntityClass($entity),
             new IdentValue($identifier),
             $options,
             $filterQueryParser->parse($request->get('q'))
@@ -84,5 +91,27 @@ class HistoryController
         $response = $this->createResponse();
         $response->setContent($this->serializer->serialize($paginatedList, 'json'));
         return $response;
+    }
+
+    /**
+     * @param string $entityName
+     *
+     * @return string
+     */
+    protected function getEntityClass($entityName)
+    {
+        if ($this->entityMap->containsKey($entityName)) {
+            return $this->entityMap->get($entityName);
+        }
+        return 'Dothiv\BusinessBundle\Entity\\' . ucfirst($entityName);
+    }
+
+    /**
+     * @param string $entityName
+     * @param string $entityClass
+     */
+    public function addEntityClass($entityName, $entityClass)
+    {
+        $this->entityMap->set($entityName, $entityClass);
     }
 }

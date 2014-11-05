@@ -61,4 +61,4 @@ class EntityPropertyChange
     {
         return $this->property;
     }
-} 
+}

@@ -182,4 +182,18 @@ class EntityChange implements EntityInterface
         }
         return $changes;
     }
+
+    /**
+     * @param EntityPropertyChange[] $changes
+     *
+     * @return self
+     */
+    public function setChanges(array $changes)
+    {
+        $this->changes = array();
+        foreach ($changes as $change) {
+            $this->addChange($change->getProperty(), $change->getOldValue(), $change->getNewValue());
+        }
+        return $this;
+    }
 }

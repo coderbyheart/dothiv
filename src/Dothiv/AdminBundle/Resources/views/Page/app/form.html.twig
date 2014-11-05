@@ -2,11 +2,11 @@
     <div class="validated-form-group">
         <div class="input">
             <label for="{{ field }}">{{ label }}</label>
-            <input 
-                    type="{{ type }}" 
-                    {{ required ? "required" : "" }} 
-                    id="{{ field }}" 
-                    name="{{ field }}" 
+            <input
+                    type="{{ type }}"
+                    {{ required ? "required" : "" }}
+                    id="{{ field }}"
+                    name="{{ field }}"
                     data-ng-model="{{ model ~ "." ~ field }}">
         </div>
         <div class="status">
@@ -33,7 +33,7 @@
                             data-ng-click="{{ model }}.{{ field }} = 0; patch('{{ field }}');"
                             > disabled
                 </label>
-                <label class="btn btn-primary" data-ng-class="{active: {{ model }}.{{ field }} == 1}">
+                <label class="btn btn-primary" data-ng-class="{active: {{ model }}.{{ field }} != 0}">
                     <input type="radio"
                             name="{{ field }}-toggle"
                             value="1"

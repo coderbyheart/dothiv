@@ -21,4 +21,4 @@ interface StatsServiceInterface
      * @return self
      */
     public function addReporter($id, ReporterInterface $report);
-} 
+}
