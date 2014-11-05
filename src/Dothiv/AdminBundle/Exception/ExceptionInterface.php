@@ -2,6 +2,6 @@
 
 namespace Dothiv\AdminBundle\Exception;
 
-interface Exception
+interface ExceptionInterface
 {
 }
