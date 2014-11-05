@@ -3,10 +3,11 @@
 <article class="crud" data-ng-init="listUrl = '/admin/api/nonprofitregistration';">
     <h1>Non-profit registrations <small>(<span data-ng-bind="total"></span>)</small></h1>
 
+    {% set numcols = 6 %}
     <table>
         <thead>
         <tr>
-            <td colspan="6">
+            <td colspan="{{ numcols }}">
                 <form>
                     {{ form.propertyFilter("approved", "has been approved", "has not approved", "yes") }}
                     {{ form.propertyFilter("registered", "Domain has been registered", "Domain has not been registered", "cart") }}
@@ -53,10 +54,13 @@
                 <button type="submit" data-ng-click="edit('=.nonprofit.edit', registration.domain)"><i></i></button>
             </td>
         </tr>
+        <tr data-ng-show="items.length == 0">
+            <td colspan="{{ numcols }}">No registrations found.</td>
+        </tr>
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="6">
+            <td colspan="{{ numcols }}">
                 <nav>
                     <button data-ng-disabled="!nextUrl" data-ng-click="next()" id="loadMoreButton">Load more</button>
                 </nav>
