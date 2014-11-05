@@ -1,8 +1,8 @@
 <?php
 
-namespace Dothiv\AdminBundle\Entity\Tests;
+namespace Dothiv\BusinessBundle\Entity\Tests;
 
-use Dothiv\AdminBundle\Entity\EntityChange;
+use Dothiv\BusinessBundle\Entity\EntityChange;
 use Dothiv\ValueObject\IdentValue;
 
 class EntityChangeTest extends \PHPUnit_Framework_TestCase
@@ -15,7 +15,7 @@ class EntityChangeTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldBeInstantiateable()
     {
-        $this->assertInstanceOf('\Dothiv\AdminBundle\Entity\EntityChange', $this->getTestObject());
+        $this->assertInstanceOf('\Dothiv\BusinessBundle\Entity\EntityChange', $this->getTestObject());
     }
 
     /**
@@ -42,7 +42,7 @@ class EntityChangeTest extends \PHPUnit_Framework_TestCase
      * @group                    AdminBundle
      * @group                    EntityChange
      * @depends                  itShouldBeInstantiateable
-     * @expectedException \Dothiv\AdminBundle\Exception\InvalidArgumentException
+     * @expectedException \Dothiv\BusinessBundle\Exception\InvalidArgumentException
      * @expectedExceptionMessage newValue "0" does not differ from oldValue
      */
     public function ensureThatIMustNotAddUnchangedValues()
@@ -58,4 +58,4 @@ class EntityChangeTest extends \PHPUnit_Framework_TestCase
     {
         return new EntityChange();
     }
-} 
+}

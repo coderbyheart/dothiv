@@ -1,6 +1,6 @@
 <?php
 
-namespace Dothiv\AdminBundle\Transformer;
+namespace Dothiv\APIBundle\Transformer;
 
 use Symfony\Component\Routing\RouterInterface;
 

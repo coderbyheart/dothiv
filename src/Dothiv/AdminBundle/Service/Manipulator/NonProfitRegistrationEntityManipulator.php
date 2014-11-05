@@ -2,6 +2,8 @@
 
 namespace Dothiv\AdminBundle\Service\Manipulator;
 
+use Dothiv\APIBundle\Manipulator\EntityManipulatorInterface;
+use Dothiv\APIBundle\Manipulator\GenericEntityManipulator;
 use Dothiv\BusinessBundle\Entity\EntityInterface;
 use Dothiv\BusinessBundle\Entity\NonProfitRegistration;
 use Dothiv\ValueObject\ClockValue;

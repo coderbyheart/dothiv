@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Dothiv\AdminBundle\Model;
+namespace Dothiv\BusinessBundle\Model;
 
 use Dothiv\ValueObject\IdentValue;
 use JMS\Serializer\Annotation as Serializer;

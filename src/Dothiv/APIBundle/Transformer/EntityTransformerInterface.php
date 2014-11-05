@@ -1,6 +1,6 @@
 <?php
 
-namespace Dothiv\AdminBundle\Transformer;
+namespace Dothiv\APIBundle\Transformer;
 
 use Dothiv\APIBundle\JsonLd\JsonLdEntityInterface;
 use Dothiv\BusinessBundle\Entity\EntityInterface;

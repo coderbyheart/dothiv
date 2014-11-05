@@ -3,9 +3,9 @@
 namespace Dothiv\AdminBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Dothiv\AdminBundle\Repository\EntityChangeRepositoryInterface;
-use Dothiv\AdminBundle\Transformer\EntityTransformerInterface;
-use Dothiv\AdminBundle\Transformer\PaginatedListTransformer;
+use Dothiv\BusinessBundle\Repository\EntityChangeRepositoryInterface;
+use Dothiv\APIBundle\Transformer\EntityTransformerInterface;
+use Dothiv\APIBundle\Transformer\PaginatedListTransformer;
 use Dothiv\APIBundle\Controller\Traits\CreateJsonResponseTrait;
 use Dothiv\BusinessBundle\Repository\PaginatedQueryOptions;
 use Dothiv\BusinessBundle\Service\FilterQueryParser;

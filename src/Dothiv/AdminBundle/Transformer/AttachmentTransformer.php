@@ -5,6 +5,7 @@ namespace Dothiv\AdminBundle\Transformer;
 use Dothiv\AdminBundle\Model\AttachmentModel;
 use Dothiv\AdminBundle\Transformer\Traits\SecurityContextTrait;
 use Dothiv\APIBundle\Security\Authentication\Token\Oauth2BearerToken;
+use Dothiv\APIBundle\Transformer\AbstractTransformer;
 use Dothiv\BusinessBundle\Entity\Attachment;
 use Dothiv\ValueObject\URLValue;
 use Dothiv\ValueObject\W3CDateTimeValue;

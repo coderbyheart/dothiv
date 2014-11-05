@@ -18,6 +18,5 @@ class DothivAdminExtension extends Extension
         $loader->load('controllers.yml');
         $loader->load('validators.yml');
         $loader->load('services.yml');
-        $loader->load('repositories.yml');
     }
 }

@@ -1,7 +1,6 @@
 parameters:
     dothiv.admin.api.controller.stats.class: Dothiv\AdminBundle\Controller\StatsController
     dothiv.admin.api.controller.history.class: Dothiv\AdminBundle\Controller\HistoryController
-    dothiv.admin.api.controller.crud.class: Dothiv\AdminBundle\Controller\CRUDController
     dothiv.admin.api.controller.attachment.class: Dothiv\AdminBundle\Controller\AttachmentController
 
 services:
@@ -26,53 +25,53 @@ services:
         - @router
 
     dothiv.admin.api.controller.nonprofitregistration:
-        class: %dothiv.admin.api.controller.crud.class%
+        class: %dothiv.api.controller.crud.class%
         arguments:
         - @dothiv.repository.nonprofitregistration
         - @dothiv.admin.transformer.nonprofitregistration
         - @dothiv.admin.transformer.paginatedlist
         - @serializer
-        - @dothiv.admin.repository.entity_change
+        - @dothiv.repository.entity_change
         - @security.context
         - @dothiv.admin.manipulator.nonprofitregistration
 
     dothiv.admin.api.controller.domain:
-        class: %dothiv.admin.api.controller.crud.class%
+        class: %dothiv.api.controller.crud.class%
         arguments:
         - @dothiv.repository.domain
         - @dothiv.admin.transformer.domain
         - @dothiv.admin.transformer.paginatedlist
         - @serializer
-        - @dothiv.admin.repository.entity_change
+        - @dothiv.repository.entity_change
         - @security.context
-        - @dothiv.admin.manipulator.generic
+        - @dothiv.api.manipulator.generic
 
     dothiv.admin.api.controller.registrar:
-        class: %dothiv.admin.api.controller.crud.class%
+        class: %dothiv.api.controller.crud.class%
         arguments:
         - @dothiv.repository.registrar
         - @dothiv.admin.transformer.registrar
         - @dothiv.admin.transformer.paginatedlist
         - @serializer
-        - @dothiv.admin.repository.entity_change
+        - @dothiv.repository.entity_change
         - @security.context
-        - @dothiv.admin.manipulator.generic
+        - @dothiv.api.manipulator.generic
 
     dothiv.admin.api.controller.config:
-        class: %dothiv.admin.api.controller.crud.class%
+        class: %dothiv.api.controller.crud.class%
         arguments:
         - @dothiv.repository.config
         - @dothiv.admin.transformer.config
         - @dothiv.admin.transformer.paginatedlist
         - @serializer
-        - @dothiv.admin.repository.entity_change
+        - @dothiv.repository.entity_change
         - @security.context
-        - @dothiv.admin.manipulator.generic
+        - @dothiv.api.manipulator.generic
 
     dothiv.admin.api.controller.history:
         class: %dothiv.admin.api.controller.history.class%
         arguments:
-        - @dothiv.admin.repository.entity_change
+        - @dothiv.repository.entity_change
         - @dothiv.admin.transformer.entity_change
         - @dothiv.admin.transformer.paginatedlist
         - @serializer

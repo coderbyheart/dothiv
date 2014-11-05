@@ -1,9 +1,9 @@
 <?php
 
-namespace Dothiv\AdminBundle\Service\Manipulator\Tests;
+namespace Dothiv\APIBundle\Manipulator\Tests;
 
-use Dothiv\AdminBundle\Model\EntityPropertyChange;
-use Dothiv\AdminBundle\Service\Manipulator\GenericEntityManipulator;
+use Dothiv\BusinessBundle\Model\EntityPropertyChange;
+use Dothiv\APIBundle\Manipulator\GenericEntityManipulator;
 use Dothiv\BusinessBundle\Entity\Domain;
 use Dothiv\ValueObject\IdentValue;
 
@@ -17,7 +17,7 @@ class GenericEntityManipulatorTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldBeInstantiable()
     {
-        $this->assertInstanceOf('\Dothiv\AdminBundle\Service\Manipulator\GenericEntityManipulator', $this->createTestObject());
+        $this->assertInstanceOf('\Dothiv\APIBundle\Manipulator\GenericEntityManipulator', $this->createTestObject());
     }
 
     /**
@@ -37,7 +37,7 @@ class GenericEntityManipulatorTest extends \PHPUnit_Framework_TestCase
         $changes    = $this->createTestObject()->manipulate($domain, $properties);
         $this->assertEquals('example.hiv', $domain->getName());
         $this->assertEquals(1, count($changes));
-        $this->assertInstanceOf('Dothiv\AdminBundle\Model\EntityPropertyChange', $changes[0]);
+        $this->assertInstanceOf('Dothiv\BusinessBundle\Model\EntityPropertyChange', $changes[0]);
         /** @var EntityPropertyChange $change */
         $change = $changes[0];
         $this->assertEquals('other.hiv', $change->getOldValue());
@@ -51,7 +51,7 @@ class GenericEntityManipulatorTest extends \PHPUnit_Framework_TestCase
      * @group                    AdminBundle
      * @group                    Manipulator
      * @depends                  itShouldManipulateAnEntity
-     * @expectedException \Dothiv\AdminBundle\Exception\InvalidArgumentException
+     * @expectedException \Dothiv\APIBundle\Exception\InvalidArgumentException
      * @expectedExceptionMessage Unknown property "invalid"!
      */
     public function itShouldThrowAnExceptionOnInvalidProperty()

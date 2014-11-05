@@ -3,9 +3,9 @@
 namespace Dothiv\AdminBundle\Repository\Tests;
 
 use Dothiv\AdminBundle\AdminEvents;
-use Dothiv\AdminBundle\Entity\EntityChange;
+use Dothiv\BusinessBundle\Entity\EntityChange;
 use Dothiv\AdminBundle\Model\EntityPropertyChange;
-use Dothiv\AdminBundle\Repository\EntityChangeRepository;
+use Dothiv\BusinessBundle\Repository\EntityChangeRepository;
 use Dothiv\BusinessBundle\Model\FilterQuery;
 use Dothiv\BusinessBundle\Repository\PaginatedQueryOptions;
 use Dothiv\BusinessBundle\Tests\Traits;
@@ -30,7 +30,7 @@ class EntityChangeRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldBeInstantiateable()
     {
-        $this->assertInstanceOf('\Dothiv\AdminBundle\Repository\EntityChangeRepository', $this->getTestObject());
+        $this->assertInstanceOf('\Dothiv\BusinessBundle\Repository\EntityChangeRepository', $this->getTestObject());
     }
 
     /**
@@ -124,7 +124,7 @@ class EntityChangeRepositoryTest extends \PHPUnit_Framework_TestCase
     protected function getTestObject()
     {
         /** @var EntityChangeRepository $repo */
-        $repo = $this->getTestEntityManager()->getRepository('DothivAdminBundle:EntityChange');
+        $repo = $this->getTestEntityManager()->getRepository('DothivBusinessBundle:EntityChange');
         $repo->setValidator($this->testValidator);
         $repo->setEventDispatcher($this->mockEventDispatcher);
         return $repo;
@@ -140,4 +140,4 @@ class EntityChangeRepositoryTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
     }
-} 
+}
