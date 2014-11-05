@@ -1,24 +1,25 @@
 <?php
 
-namespace Dothiv\AdminBundle\Controller;
+namespace Dothiv\APIBundle\Controller;
 
-use Dothiv\AdminBundle\Entity\EntityChange;
-use Dothiv\AdminBundle\Exception\BadRequestHttpException;
-use Dothiv\AdminBundle\Exception\InvalidArgumentException;
-use Dothiv\AdminBundle\Exception\NotFoundHttpException;
-use Dothiv\AdminBundle\Repository\EntityChangeRepositoryInterface;
-use Dothiv\AdminBundle\Service\Manipulator\EntityManipulatorInterface;
-use Dothiv\AdminBundle\Transformer\EntityTransformerInterface;
-use Dothiv\AdminBundle\Transformer\PaginatedListTransformer;
+use Dothiv\APIBundle\Exception\AccessDeniedHttpException;
+use Dothiv\APIBundle\Exception\BadRequestHttpException;
+use Dothiv\APIBundle\Exception\InvalidArgumentException;
+use Dothiv\APIBundle\Exception\NotFoundHttpException;
+use Dothiv\APIBundle\Manipulator\EntityManipulatorInterface;
+use Dothiv\APIBundle\Transformer\EntityTransformerInterface;
+use Dothiv\APIBundle\Transformer\PaginatedListTransformer;
 use Dothiv\APIBundle\Controller\Traits\CreateJsonResponseTrait;
+use Dothiv\BusinessBundle\Entity\EntityChange;
 use Dothiv\BusinessBundle\Entity\EntityInterface;
+use Dothiv\BusinessBundle\Entity\User;
 use Dothiv\BusinessBundle\Model\FilterQuery;
 use Dothiv\BusinessBundle\Repository\CRUDRepositoryInterface;
+use Dothiv\BusinessBundle\Repository\EntityChangeRepositoryInterface;
 use Dothiv\BusinessBundle\Repository\PaginatedQueryOptions;
 use Dothiv\BusinessBundle\Service\FilterQueryParser;
 use Dothiv\ValueObject\EmailValue;
 use Dothiv\ValueObject\IdentValue;
-use Dothiv\ValueObject\ValueObjectInterface;
 use JMS\Serializer\SerializerInterface;
 use PhpOption\Option;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,6 +67,7 @@ class CRUDController
      * @param SerializerInterface             $serializer
      * @param EntityChangeRepositoryInterface $entityChangeRepo
      * @param SecurityContextInterface        $securityContext
+     * @param EntityManipulatorInterface      $entityManipulator
      */
     public function __construct(
         CRUDRepositoryInterface $itemRepo,
@@ -106,12 +108,16 @@ class CRUDController
             $options->setOffsetKey($offsetKey);
         });
         $filterQueryParser = new FilterQueryParser();
-        $paginatedList     = $this->createListing(
+        $filterQuery       = $filterQueryParser->parse($request->query->get('q'));
+        if (!$this->isAdmin()) {
+            $filterQuery->setUser($this->getUser());
+        }
+        $paginatedList = $this->createListing(
             $this->itemRepo,
             $this->paginatedListTransformer,
             $this->itemTransformer,
             $options,
-            $filterQueryParser->parse($request->query->get('q')),
+            $filterQuery,
             $request->attributes->get('_route')
         );
 
@@ -128,7 +134,7 @@ class CRUDController
      * @param FilterQuery                $filterQuery
      * @param string                     $route
      *
-     * @return \Dothiv\AdminBundle\Model\PaginatedList
+     * @return \Dothiv\APIBundle\Model\PaginatedList
      */
     protected function createListing(
         CRUDRepositoryInterface $repo,
@@ -153,6 +159,8 @@ class CRUDController
      * @param string $identifier
      *
      * @return Response
+     *
+     * @throws AccessDeniedHttpException
      */
     public function getItemAction($identifier)
     {
@@ -162,9 +170,27 @@ class CRUDController
             );
         });
 
+        $this->checkPermission($identifier, $item);
+
         $response = $this->createResponse();
         $response->setContent($this->serializer->serialize($this->itemTransformer->transform($item), 'json'));
         return $response;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isAdmin()
+    {
+        return in_array('ROLE_ADMIN', $this->getUser()->getRoles());
+    }
+
+    /**
+     * @return User
+     */
+    protected function getUser()
+    {
+        return $this->securityContext->getToken()->getUser();
     }
 
     /**
@@ -210,5 +236,25 @@ class CRUDController
         $changes = $this->entityManipulator->manipulate($item, $newPropertyValues);
         $change->setChanges($changes);
         return $change;
+    }
+
+    /**
+     * @param string          $identifier
+     * @param EntityInterface $item
+     *
+     * @throws AccessDeniedHttpException
+     */
+    protected function checkPermission($identifier, EntityInterface $item)
+    {
+        if (!$this->isAdmin()) {
+            if (!method_exists($item, 'getUser')) {
+                throw new AccessDeniedHttpException(sprintf('Item "%s" has no user!', $this->itemRepo->getItemEntityName($item)));
+            }
+            if ($item->getUser() !== $this->getUser()) {
+                throw new AccessDeniedHttpException(
+                    sprintf('Item "%s" with id "%s" does not belong to user!', $this->itemRepo->getItemEntityName($item), $identifier)
+                );
+            }
+        }
     }
 }

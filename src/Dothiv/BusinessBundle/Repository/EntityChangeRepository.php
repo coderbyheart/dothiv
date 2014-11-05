@@ -1,10 +1,10 @@
 <?php
 
-namespace Dothiv\AdminBundle\Repository;
+namespace Dothiv\BusinessBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Dothiv\AdminBundle\AdminEvents;
-use Dothiv\AdminBundle\Entity\EntityChange;
+use Dothiv\BusinessBundle\Entity\EntityChange;
 use Dothiv\AdminBundle\Event\EntityChangeEvent;
 use Dothiv\BusinessBundle\Model\FilterQuery;
 use Dothiv\BusinessBundle\Repository\PaginatedQueryOptions;

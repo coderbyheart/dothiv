@@ -1,10 +1,10 @@
 <?php
 
-namespace Dothiv\AdminBundle\Service\Manipulator;
+namespace Dothiv\APIBundle\Manipulator;
 
-use Dothiv\AdminBundle\Exception\InvalidArgumentException;
-use Dothiv\AdminBundle\Model\EntityPropertyChange;
+use Dothiv\APIBundle\Exception\InvalidArgumentException;
 use Dothiv\BusinessBundle\Entity\EntityInterface;
+use Dothiv\BusinessBundle\Model\EntityPropertyChange;
 use Dothiv\ValueObject\IdentValue;
 use Dothiv\ValueObject\ValueObjectInterface;
 

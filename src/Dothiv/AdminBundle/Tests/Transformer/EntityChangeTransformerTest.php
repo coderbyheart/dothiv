@@ -2,7 +2,7 @@
 
 namespace Dothiv\AdminBundle\Tests\Transformer;
 
-use Dothiv\AdminBundle\Entity\EntityChange;
+use Dothiv\BusinessBundle\Entity\EntityChange;
 use Dothiv\AdminBundle\Transformer\EntityChangeTransformer;
 use Dothiv\BusinessBundle\Tests\ObjectManipulator;
 use Dothiv\ValueObject\EmailValue;

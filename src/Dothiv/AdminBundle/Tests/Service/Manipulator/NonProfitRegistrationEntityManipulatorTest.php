@@ -2,10 +2,9 @@
 
 namespace Dothiv\AdminBundle\Service\Manipulator\Tests;
 
-use Dothiv\AdminBundle\Model\EntityPropertyChange;
 use Dothiv\AdminBundle\Service\Manipulator\NonProfitRegistrationEntityManipulator;
 use Dothiv\BusinessBundle\Entity\NonProfitRegistration;
-use Dothiv\BusinessBundle\Entity\User;
+use Dothiv\BusinessBundle\Model\EntityPropertyChange;
 use Dothiv\ValueObject\ClockValue;
 use Dothiv\ValueObject\IdentValue;
 use Dothiv\ValueObject\W3CDateTimeValue;
@@ -63,7 +62,7 @@ class NonProfitRegistrationEntityManipulatorTest extends \PHPUnit_Framework_Test
 
         $this->assertEquals($newValue, $registration->$getter());
         $this->assertEquals(1, count($changes));
-        $this->assertInstanceOf('Dothiv\AdminBundle\Model\EntityPropertyChange', $changes[0]);
+        $this->assertInstanceOf('Dothiv\BusinessBundle\Model\EntityPropertyChange', $changes[0]);
         /** @var EntityPropertyChange $change */
         $change = $changes[0];
         $this->assertEquals($oldValue, $change->getOldValue());

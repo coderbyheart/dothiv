@@ -4,7 +4,9 @@
 namespace Dothiv\AdminBundle\Transformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Dothiv\AdminBundle\Entity\EntityChange;
+use Dothiv\APIBundle\Transformer\AbstractTransformer;
+use Dothiv\APIBundle\Transformer\EntityTransformerInterface;
+use Dothiv\BusinessBundle\Entity\EntityChange;
 use Dothiv\AdminBundle\Model\EntityChangeModel;
 use Dothiv\BusinessBundle\Entity\EntityInterface;
 use Dothiv\ValueObject\IdentValue;

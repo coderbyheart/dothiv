@@ -3,6 +3,7 @@
 namespace Dothiv\AdminBundle\Transformer;
 
 use Dothiv\AdminBundle\Model\UserModel;
+use Dothiv\APIBundle\Transformer\AbstractTransformer;
 use Dothiv\BusinessBundle\Entity\User;
 use Dothiv\ValueObject\EmailValue;
 use Dothiv\ValueObject\URLValue;

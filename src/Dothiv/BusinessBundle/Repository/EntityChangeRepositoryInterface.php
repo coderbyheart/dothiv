@@ -1,8 +1,8 @@
 <?php
 
-namespace Dothiv\AdminBundle\Repository;
+namespace Dothiv\BusinessBundle\Repository;
 
-use Dothiv\AdminBundle\Entity\EntityChange;
+use Dothiv\BusinessBundle\Entity\EntityChange;
 use Dothiv\BusinessBundle\Model\FilterQuery;
 use Dothiv\BusinessBundle\Repository\PaginatedQueryOptions;
 use Dothiv\BusinessBundle\Repository\PaginatedResult;

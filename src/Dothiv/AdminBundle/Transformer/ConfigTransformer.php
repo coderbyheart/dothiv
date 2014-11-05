@@ -3,6 +3,8 @@
 namespace Dothiv\AdminBundle\Transformer;
 
 use Dothiv\AdminBundle\Model\ConfigModel;
+use Dothiv\APIBundle\Transformer\AbstractTransformer;
+use Dothiv\APIBundle\Transformer\EntityTransformerInterface;
 use Dothiv\BusinessBundle\Entity\Config;
 use Dothiv\BusinessBundle\Entity\EntityInterface;
 use Dothiv\ValueObject\URLValue;

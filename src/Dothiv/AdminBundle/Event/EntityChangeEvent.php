@@ -2,7 +2,7 @@
 
 namespace Dothiv\AdminBundle\Event;
 
-use Dothiv\AdminBundle\Entity\EntityChange;
+use Dothiv\BusinessBundle\Entity\EntityChange;
 use Symfony\Component\EventDispatcher\Event;
 
 class EntityChangeEvent extends Event

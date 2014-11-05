@@ -1,12 +1,11 @@
 <?php
 
-namespace Dothiv\AdminBundle\Entity;
+namespace Dothiv\BusinessBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Dothiv\AdminBundle\Exception\InvalidArgumentException;
-use Dothiv\AdminBundle\Model\EntityPropertyChange;
-use Dothiv\BusinessBundle\Entity\EntityInterface;
+use Dothiv\BusinessBundle\Exception\InvalidArgumentException;
+use Dothiv\BusinessBundle\Model\EntityPropertyChange;
 use Dothiv\ValueObject\EmailValue;
 use Dothiv\ValueObject\IdentValue;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,7 +15,7 @@ use Dothiv\BusinessBundle\Entity\Traits;
 /**
  * Represents a change on an entity by an admin
  *
- * @ORM\Entity(repositoryClass="Dothiv\AdminBundle\Repository\EntityChangeRepository")
+ * @ORM\Entity(repositoryClass="Dothiv\BusinessBundle\Repository\EntityChangeRepository")
  * @ORM\Table(
  *  indexes={
  *      @ORM\Index(name="entity_change__author_idx", columns={"author"}),

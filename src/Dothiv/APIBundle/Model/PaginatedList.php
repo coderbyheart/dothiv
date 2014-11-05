@@ -1,6 +1,6 @@
 <?php
 
-namespace Dothiv\AdminBundle\Model;
+namespace Dothiv\APIBundle\Model;
 
 use Dothiv\APIBundle\JsonLd\JsonLdEntityInterface;
 use Dothiv\APIBundle\JsonLd\JsonLdEntityTrait;

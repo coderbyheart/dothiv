@@ -1,8 +1,8 @@
 <?php
 
-namespace Dothiv\AdminBundle\Transformer;
+namespace Dothiv\APIBundle\Transformer;
 
-use Dothiv\AdminBundle\Model\PaginatedList;
+use Dothiv\APIBundle\Model\PaginatedList;
 use Dothiv\BusinessBundle\Repository\PaginatedResult;
 use Dothiv\ValueObject\URLValue;
 use Symfony\Component\Routing\RouterInterface;
