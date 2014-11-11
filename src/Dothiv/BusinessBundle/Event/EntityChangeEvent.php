@@ -1,8 +1,9 @@
 <?php
 
-namespace Dothiv\AdminBundle\Event;
+namespace Dothiv\BusinessBundle\Event;
 
 use Dothiv\BusinessBundle\Entity\EntityChange;
+use Dothiv\BusinessBundle\Entity\EntityInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 class EntityChangeEvent extends Event
@@ -14,11 +15,17 @@ class EntityChangeEvent extends Event
     private $change;
 
     /**
+     * @var EntityInterface
+     */
+    private $entity;
+
+    /**
      * @param EntityChange $change
      */
-    public function __construct(EntityChange $change)
+    public function __construct(EntityChange $change, EntityInterface $entity)
     {
         $this->change = $change;
+        $this->entity = $entity;
     }
 
     /**
@@ -39,4 +46,24 @@ class EntityChangeEvent extends Event
         $this->change = $change;
         return $this;
     }
+
+    /**
+     * @return EntityInterface
+     */
+    public function getEntity()
+    {
+        return $this->entity;
+    }
+
+    /**
+     * @param EntityInterface $entity
+     *
+     * @return self
+     */
+    public function setEntity(EntityInterface $entity)
+    {
+        $this->entity = $entity;
+        return $this;
+    }
+
 }
