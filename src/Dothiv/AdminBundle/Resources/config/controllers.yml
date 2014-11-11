@@ -34,6 +34,7 @@ services:
         - @dothiv.repository.entity_change
         - @security.context
         - @dothiv.admin.manipulator.nonprofitregistration
+        - @dothiv.business.event_dispatcher
 
     dothiv.admin.api.controller.domain:
         class: %dothiv.api.controller.crud.class%
@@ -45,6 +46,7 @@ services:
         - @dothiv.repository.entity_change
         - @security.context
         - @dothiv.api.manipulator.generic
+        - @dothiv.business.event_dispatcher
 
     dothiv.admin.api.controller.registrar:
         class: %dothiv.api.controller.crud.class%
@@ -56,6 +58,7 @@ services:
         - @dothiv.repository.entity_change
         - @security.context
         - @dothiv.api.manipulator.generic
+        - @dothiv.business.event_dispatcher
 
     dothiv.admin.api.controller.config:
         class: %dothiv.api.controller.crud.class%
@@ -67,6 +70,7 @@ services:
         - @dothiv.repository.entity_change
         - @security.context
         - @dothiv.api.manipulator.generic
+        - @dothiv.business.event_dispatcher
 
     dothiv.admin.api.controller.history:
         class: %dothiv.admin.api.controller.history.class%
