@@ -3,13 +3,12 @@ parameters:
     dothiv.admin.service.mailer.login.class: Dothiv\AdminBundle\Service\Mailer\LoginLinkMailer
     dothiv.admin.transformer.nonprofitregistration.class: Dothiv\AdminBundle\Transformer\NonProfitRegistrationTransformer
     dothiv.admin.transformer.domain.class: Dothiv\AdminBundle\Transformer\DomainTransformer
-    dothiv.admin.transformer.paginatedlist.class: Dothiv\AdminBundle\Transformer\PaginatedListTransformer
+    dothiv.admin.transformer.paginatedlist.class: Dothiv\APIBundle\Transformer\PaginatedListTransformer
     dothiv.admin.transformer.attachment.class: Dothiv\AdminBundle\Transformer\AttachmentTransformer
     dothiv.admin.transformer.user.class: Dothiv\AdminBundle\Transformer\UserTransformer
     dothiv.admin.transformer.registrar.class: Dothiv\AdminBundle\Transformer\RegistrarTransformer
     dothiv.admin.transformer.config.class: Dothiv\AdminBundle\Transformer\ConfigTransformer
     dothiv.admin.transformer.entity_change.class: Dothiv\AdminBundle\Transformer\EntityChangeTransformer
-    dothiv.admin.manipulator.generic.class: Dothiv\AdminBundle\Service\Manipulator\GenericEntityManipulator
     dothiv.admin.manipulator.nonprofitregistration.class: Dothiv\AdminBundle\Service\Manipulator\NonProfitRegistrationEntityManipulator
 
 services:
@@ -22,7 +21,7 @@ services:
         - %email_from_address%
         - %email_from_name%
         tags:
-            - { name: kernel.event_listener, event: dothiv.admin.loginlink.requested, method: onLoginLinkRequested }
+            - { name: dothiv.business.event_listener, event: dothiv.admin.loginlink.requested, method: onLoginLinkRequested }
 
     dothiv.admin.service.user:
         class: %dothiv.businessbundle.service.user.class%
@@ -30,7 +29,8 @@ services:
         - @dothiv.repository.user
         - @dothiv.repository.user_token
         - @clock
-        - @event_dispatcher
+        - @dothiv.business.event_dispatcher
+        - @dothiv.repository.user_profile_change
         - 'dothiv.admin.loginlink.requested'
         - "%charitydomain%"
         - %dothiv_business.link_request_wait%
@@ -92,9 +92,6 @@ services:
         arguments:
         - @router
         - "dothiv_admin_history"
-
-    dothiv.admin.manipulator.generic:
-        class: %dothiv.admin.manipulator.generic.class%
 
     dothiv.admin.manipulator.nonprofitregistration:
         class: %dothiv.admin.manipulator.nonprofitregistration.class%

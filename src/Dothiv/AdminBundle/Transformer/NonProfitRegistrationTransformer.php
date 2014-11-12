@@ -3,6 +3,8 @@
 namespace Dothiv\AdminBundle\Transformer;
 
 use Dothiv\AdminBundle\Model\NonProfitRegistrationModel;
+use Dothiv\APIBundle\Transformer\AbstractTransformer;
+use Dothiv\APIBundle\Transformer\EntityTransformerInterface;
 use Dothiv\BusinessBundle\Entity\EntityInterface;
 use Dothiv\BusinessBundle\Entity\NonProfitRegistration;
 use Dothiv\ValueObject\EmailValue;
