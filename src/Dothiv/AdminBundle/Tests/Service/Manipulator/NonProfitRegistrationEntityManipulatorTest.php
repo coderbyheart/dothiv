@@ -3,6 +3,7 @@
 namespace Dothiv\AdminBundle\Service\Manipulator\Tests;
 
 use Dothiv\AdminBundle\Service\Manipulator\NonProfitRegistrationEntityManipulator;
+use Dothiv\APIBundle\Request\DefaultUpdateRequest;
 use Dothiv\BusinessBundle\Entity\NonProfitRegistration;
 use Dothiv\BusinessBundle\Model\EntityPropertyChange;
 use Dothiv\ValueObject\ClockValue;
@@ -55,10 +56,9 @@ class NonProfitRegistrationEntityManipulatorTest extends \PHPUnit_Framework_Test
         $getter       = 'get' . ucfirst($property);
         $setter       = 'set' . ucfirst($property);
         $registration->$setter($oldValue);
-        $properties = array(
-            $property => $propertyValue
-        );
-        $changes    = $this->createTestObject()->manipulate($registration, $properties);
+        $data            = new DefaultUpdateRequest();
+        $data->$property = $propertyValue;
+        $changes         = $this->createTestObject()->manipulate($registration, $data);
 
         $this->assertEquals($newValue, $registration->$getter());
         $this->assertEquals(1, count($changes));

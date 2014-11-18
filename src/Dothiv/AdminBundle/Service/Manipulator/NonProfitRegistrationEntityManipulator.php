@@ -38,16 +38,16 @@ class NonProfitRegistrationEntityManipulator extends GenericEntityManipulator im
                 } else {
                     $entity->setApproved(null);
                 }
-                break;
+                return true;
             case 'registered':
                 if ($value) {
                     $entity->setRegistered(new W3CDateTimeValue($this->clock->getNow()));
                 } else {
                     $entity->setRegistered(null);
                 }
-                break;
+                return true;
             default:
-                parent::setValue($entity, $property, $value);
+                return parent::setValue($entity, $property, $value);
         }
     }
 }
