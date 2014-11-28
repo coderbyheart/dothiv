@@ -4,9 +4,7 @@ namespace Dothiv\AdminBundle\Model;
 
 use Dothiv\APIBundle\JsonLd\JsonLdEntityInterface;
 use Dothiv\APIBundle\JsonLd\JsonLdEntityTrait;
-use Dothiv\ValueObject\EmailValue;
-use Dothiv\ValueObject\HivDomainValue;
-use Dothiv\ValueObject\URLValue;
+use Dothiv\APIBundle\Model\Traits;
 use JMS\Serializer\Annotation as Serializer;
 
 class ConfigModel implements JsonLdEntityInterface

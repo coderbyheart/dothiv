@@ -7,7 +7,7 @@ use Dothiv\BusinessBundle\Repository\EntityChangeRepositoryInterface;
 use Dothiv\APIBundle\Transformer\EntityTransformerInterface;
 use Dothiv\APIBundle\Transformer\PaginatedListTransformer;
 use Dothiv\APIBundle\Controller\Traits\CreateJsonResponseTrait;
-use Dothiv\BusinessBundle\Repository\PaginatedQueryOptions;
+use Dothiv\BusinessBundle\Repository\CRUD;
 use Dothiv\BusinessBundle\Service\FilterQueryParser;
 use Dothiv\ValueObject\IdentValue;
 use JMS\Serializer\SerializerInterface;
@@ -70,7 +70,7 @@ class HistoryController
      */
     public function listItemsAction(Request $request, $entity, $identifier)
     {
-        $options = new PaginatedQueryOptions();
+        $options = new CRUD\PaginatedQueryOptions();
         Option::fromValue($request->query->get('sortDir'))->map(function ($sortDir) use ($options) {
             $options->setSortDir($sortDir);
         });

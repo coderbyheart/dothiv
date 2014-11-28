@@ -8,6 +8,7 @@ use Dothiv\ValueObject\EmailValue;
 use Dothiv\ValueObject\HivDomainValue;
 use Dothiv\ValueObject\URLValue;
 use Dothiv\ValueObject\W3CDateTimeValue;
+use Dothiv\APIBundle\Model\Traits;
 use JMS\Serializer\Annotation as Serializer;
 
 class NonProfitRegistrationModel implements JsonLdEntityInterface
