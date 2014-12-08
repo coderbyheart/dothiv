@@ -84,7 +84,11 @@ class HistoryController
             $options,
             $filterQueryParser->parse($request->get('q'))
         );
-        $paginatedList     = $this->paginatedListTransformer->transform($paginatedResult, $request->attributes->get('_route'));
+        $paginatedList     = $this->paginatedListTransformer->transform(
+            $paginatedResult,
+            $request->attributes->get('_route'),
+            $request->attributes->get('_route_params')
+        );
         foreach ($paginatedResult->getResult() as $reg) {
             $paginatedList->addItem($this->itemTransformer->transform($reg, null, true));
         }
