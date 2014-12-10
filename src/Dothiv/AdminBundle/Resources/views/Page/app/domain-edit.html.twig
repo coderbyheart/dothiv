@@ -23,7 +23,8 @@
             <dt>Email</dt>
             <dd><a data-ng-href="mailto:%%item.ownerEmail%%" data-ng-bind="item.ownerEmail"></a>
             <dt data-ng-show="item.loginLink">Login-Link</dt>
-            <dd data-ng-show="item.loginLink"><a data-ng-href="%%item.loginLink%%" data-ng-bind="item.loginLink"></a></dd>
+            <dd data-ng-show="item.loginLink"><a data-ng-href="%%item.loginLink%%" data-ng-bind="item.loginLink"></a>
+            </dd>
         </dl>
     </section>
     <section class="item">
@@ -65,6 +66,41 @@
             <dd data-ng-bind="item.registrar.name"></dd>
             <dt>Notification</dt>
             <dd data-ng-bind="item.registrar.notificationType"></dd>
+        </dl>
+    </section>
+    <section class="item" data-ng-controller="AdminEditController" data-ng-init="itemUrl = '/admin/api/hivdomainstatus/' + stateParams.identifier;" data-ng-show="loaded">
+        <h2>
+            .hiv Domain Check
+            <small>
+                <i class="yes" data-ng-show="item.valid"></i>
+                <i class="no" data-ng-show="!item.valid"></i>
+            </small>
+        </h2>
+        <dl>
+            <dt>DNS</dt>
+            <dd>
+                <i class="yes" data-ng-show="item.dnsOk"></i>
+                <i class="no" data-ng-show="!item.dnsOk"></i>
+            </dd>
+            <dt>URL</dt>
+            <dd>
+                <a data-ng-href="%%item.url%%" data-ng-bind="item.url"></a>
+            </dd>
+            <dt>Status</dt>
+            <dd><code data-ng-bind="item.statusCode"></code></dd>
+            <dt>Script</dt>
+            <dd>
+                <i class="yes" data-ng-show="item.scriptPresent"></i>
+                <i class="no" data-ng-show="!item.scriptPresent"></i>
+            </dd>
+            <dt data-ng-show="item.iframePresent">Iframe</dt>
+            <dd data-ng-show="item.iframePresent">
+                <i class="yes" data-ng-show="item.iframeTargetOk"></i>
+                <i class="no" data-ng-show="!item.iframeTargetOk"></i>
+                <br><a data-ng-href="%%item.iframeTarget%%" data-ng-bind="item.iframeTarget"></a>
+            </dd>
+            <dt>Checked</dt>
+            <dd><abbr class="time" title="%%item.created%%" am-time-ago="item.created"></abbr></dd>
         </dl>
     </section>
 </article>

@@ -72,6 +72,12 @@ class DomainModel implements JsonLdEntityInterface
      */
     protected $nonprofit;
 
+    /**
+     * @var boolean
+     * @Serializer\Type("integer")
+     */
+    protected $live;
+
     public function __construct()
     {
         $this->setJsonLdContext(new URLValue('http://jsonld.click4life.hiv/Domain'));
@@ -265,6 +271,25 @@ class DomainModel implements JsonLdEntityInterface
     public function setNonprofit($nonprofit)
     {
         $this->nonprofit = (boolean)$nonprofit;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getLive()
+    {
+        return $this->live;
+    }
+
+    /**
+     * @param boolean $live
+     *
+     * @return self
+     */
+    public function setLive($live)
+    {
+        $this->live = (boolean)$live;
         return $this;
     }
 }
