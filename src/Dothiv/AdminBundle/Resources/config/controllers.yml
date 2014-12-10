@@ -35,6 +35,8 @@ services:
         - @security.context
         - @dothiv.admin.manipulator.nonprofitregistration
         - @dothiv.business.event_dispatcher
+        calls:
+        - [makeAdminController]
 
     dothiv.admin.api.controller.domain:
         class: %dothiv.api.controller.crud.class%
@@ -47,6 +49,8 @@ services:
         - @security.context
         - @dothiv.api.manipulator.generic
         - @dothiv.business.event_dispatcher
+        calls:
+        - [makeAdminController]
 
     dothiv.admin.api.controller.registrar:
         class: %dothiv.api.controller.crud.class%
@@ -59,6 +63,8 @@ services:
         - @security.context
         - @dothiv.api.manipulator.generic
         - @dothiv.business.event_dispatcher
+        calls:
+        - [makeAdminController]
 
     dothiv.admin.api.controller.config:
         class: %dothiv.api.controller.crud.class%
@@ -71,6 +77,8 @@ services:
         - @security.context
         - @dothiv.api.manipulator.generic
         - @dothiv.business.event_dispatcher
+        calls:
+        - [makeAdminController]
 
     dothiv.admin.api.controller.history:
         class: %dothiv.admin.api.controller.history.class%
