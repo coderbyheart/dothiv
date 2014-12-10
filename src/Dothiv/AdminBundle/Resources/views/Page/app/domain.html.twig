@@ -12,6 +12,7 @@
         <tr>
             <td colspan="{{ numcols }}">
                 <form>
+                    {{ form.propertyFilter("live", "is live", "is not live", "live") }}
                     {{ form.propertyFilter("clickcount", "has clicks", "has no clicks", "clicks") }}
                     {{ form.propertyFilter("clickcounterconfig", "Click-counter configured", "Click-counter not configured", "configured") }}
                     {{ form.propertyFilter("nonprofit", "Non-Profit domain", "For-profit domain", "nonprofit") }}
@@ -56,10 +57,11 @@
                 <a href="http://www.%%domain.domain%%/" data-ng-bind="domain.domainUTF8"></a>
             </td>
             <td class="right">
+                <abbr title="is live" data-ng-show="domain.live"><i class="status live"></i></abbr>
+                <abbr title="has clicks" data-ng-show="domain.clickCount > 0"><i class="status clicks"></i></abbr>
+                <abbr title="Click-Counter configured" data-ng-show="domain.clickCounterConfigured"><i class="status configured"></i></abbr>
                 <abbr title="Domain transfer active"><i class="status transfer" data-ng-show="domain.transfer"></i></abbr>
                 <abbr title="Non-profit domain"><i class="status nonprofit" data-ng-show="domain.nonprofit"></i></abbr>
-                <abbr title="Click-Counter configured" data-ng-show="domain.clickCounterConfigured"><i class="status configured"></i></abbr>
-                <abbr title="has clicks" data-ng-show="domain.clickCount > 0"><i class="status clicks"></i></abbr>
             </td>
             <td class="right" data-ng-bind="domain.clickCount"></td>
             <td class="center">
