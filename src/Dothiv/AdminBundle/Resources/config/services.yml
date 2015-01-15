@@ -18,8 +18,8 @@ services:
         - @mailer
         - @router
         - 'dothiv_admin_app'
-        - %email_from_address%
-        - %email_from_name%
+        - %registry_email_from_address%
+        - %registry_email_from_name%
         tags:
             - { name: dothiv.business.event_listener, event: dothiv.admin.loginlink.requested, method: onLoginLinkRequested }
 
