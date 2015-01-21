@@ -12,8 +12,8 @@
         <tr>
             <td colspan="{{ numcols }}">
                 <form>
-                    {{ form.propertyFilter("live", "is live", "is not live", "live") }}
-                    {{ form.propertyFilter("clickcount", "has clicks", "has no clicks", "clicks") }}
+                    {{ form.propertyFilter("live", "is live", "is not live", "live", "!=0") }}
+                    {{ form.propertyFilter("clickcount", "has clicks", "has no clicks", "clicks", ">=1") }}
                     {{ form.propertyFilter("clickcounterconfig", "Click-counter configured", "Click-counter not configured", "configured") }}
                     {{ form.propertyFilter("nonprofit", "Non-Profit domain", "For-profit domain", "nonprofit") }}
                     {{ form.propertyFilter("transfer", "Domain transfer active", "Domain transfer not active", "transfer") }}

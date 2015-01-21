@@ -105,7 +105,7 @@ Feature: Manage Domain Registrations
   @Filter
   Scenario: Filter domains by click-count
     Given I send a GET request to "http://tld.hiv.dev/admin/api/domain" with query:
-      | q | @clickcount{1} |
+      | q | @clickcount{>1} |
     Then the response status code should be 200
     And the JSON node "items" should contain 1 elements
     And the JSON node "items[0].domain" should contain "domain-with-clickcounter.hiv"

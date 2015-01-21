@@ -48,16 +48,16 @@
     </div>
 {% endmacro %}
 
-{% macro propertyFilter(name, label, label_not, icon_class) %}
+{% macro propertyFilter(name, label, label_not, icon_class, true_value, false_value) %}
     <fieldset>
         <div class="checkbox">
             <label>
-                <input type="checkbox" data-ng-true-value="1" data-ng-false-value="" data-ng-model="filterProperties.{{ name }}" data-ng-change="loadAfter();">
+                <input type="checkbox" data-ng-true-value="{{ true_value|default(1) }}" data-ng-false-value="" data-ng-model="filterProperties.{{ name }}" data-ng-change="loadAfter();">
                 <abbr title="{{ label }}"><i class="{{ icon_class }}"></i></abbr></label>
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" data-ng-true-value="0" data-ng-false-value="" data-ng-model="filterProperties.{{ name }}" data-ng-change="loadAfter();">
+                <input type="checkbox" data-ng-true-value="{{ false_value|default(0) }}" data-ng-false-value="" data-ng-model="filterProperties.{{ name }}" data-ng-change="loadAfter();">
                 <abbr title="{{ label_not }}"><i class="{{ icon_class }} not"></i></abbr></label>
         </div>
     </fieldset>

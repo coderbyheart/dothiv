@@ -48,7 +48,7 @@ class DomainTransformer extends AbstractTransformer implements EntityTransformer
         $model->setRegistrar($this->getRegistrarTransformer()->transform($entity->getRegistrar()));
         $model->setTransfer($entity->getTransfer());
         $model->setNonprofit($entity->getNonprofit());
-        $model->setLive($entity->getLive());
+        $model->setLive($entity->isLive());
         return $model;
     }
 }
