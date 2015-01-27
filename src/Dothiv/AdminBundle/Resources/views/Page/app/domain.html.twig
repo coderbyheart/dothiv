@@ -19,12 +19,7 @@
                     {{ form.propertyFilter("transfer", "Domain transfer active", "Domain transfer not active", "transfer") }}
                     <fieldset>
                         <div class="form-group">
-                            <input type="text"
-                                    data-ng-model="registrarLabel"
-                                    data-typeahead="registrar as registrar.name for registrar in filterPropertyValues.registrars | filter:$viewValue | limitTo:3"
-                                    data-typeahead-on-select="filterPropertyTypeahead($item, 'registrar');"
-                                    placeholder="Registrar (%%filterPropertyValues.registrars.length%%)"
-                                    >
+                            <input type="text" data-ng-model="registrarLabel" data-typeahead="registrar as registrar.name for registrar in filterPropertyValues.registrars | filter:$viewValue | limitTo:3" data-typeahead-on-select="filterPropertyTypeahead('registrar', $item);" placeholder="Registrar (%%filterPropertyValues.registrars.length%%)">
                         </div>
                     </fieldset>
                     <fieldset>
@@ -34,6 +29,12 @@
                         <button type="reset" data-ng-click="clearFilters()">
                             <i class="trash"></i>
                         </button>
+                    </fieldset>
+                    <fieldset class="daterange" data-ng-init="opened = false">
+                        <label for="domainCreatedBefore">created after:</label>
+                        <input id=domainCreatedBefore" type="text" data-ng-pattern="/^2[0-9]{3}-[0-1][0-9]-[0-3][0-9]$/" placeholder="{{ '-1 month'|date('Y-m-d') }}" data-ng-model="createdAfter" id="domainCreatedAfter" data-ng-change="setFilterProperty('created', '>=' + createdAfter, 'createdAfter');">
+                        <label for="domainCreatedBefore">before</label>
+                        <input type="text" data-ng-pattern="/^2[0-9]{3}-[0-1][0-9]-[0-3][0-9]$/" placeholder="{{ 'now'|date('Y-m-d') }}" data-ng-model="createdBefore" id="domainCreatedBefore" data-ng-change="setFilterProperty('created', '<=' + createdBefore, 'createdBefore');">
                     </fieldset>
                 </form>
             </td>
