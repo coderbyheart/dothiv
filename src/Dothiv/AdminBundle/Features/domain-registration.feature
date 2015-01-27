@@ -128,3 +128,21 @@ Feature: Manage Domain Registrations
       | q | @clickcounterconfig{0} |
     Then the response status code should be 200
     And the JSON node "items" should contain 3 elements
+
+  @Filter
+  Scenario: Filter domains by creation date
+    Given I send a GET request to "http://tld.hiv.dev/admin/api/domain" with query:
+      | q         | @created{>=2013-12-01T00:00:00} @created{<2014-01-01T00:00:00} |
+      | sortField | name                                                           |
+      | sortDir   | asc                                                            |
+    Then the response status code should be 200
+    And the JSON node "items" should contain 1 elements
+    And the JSON node "items[0].domain" should contain "acme.hiv"
+    Given I send a GET request to "http://tld.hiv.dev/admin/api/domain" with query:
+      | q         | @created{>=2013-11-01T00:00:00} @created{<2014-01-01T00:00:00} |
+      | sortField | name                                                           |
+      | sortDir   | asc                                                            |
+    Then the response status code should be 200
+    And the JSON node "items" should contain 2 elements
+    And the JSON node "items[0].domain" should contain "acme.hiv"
+    And the JSON node "items[1].domain" should contain "bcme.hiv"

@@ -34,7 +34,7 @@ angular.module('dotHIVApp', ['dotHIVApp.services', 'dotHIVApp.directives', 'dotH
                 controller: 'AdminDashboardController'
             })
         ;
-        var sections = ['domain', 'nonprofit', 'config'];
+        var sections = ['domain', 'nonprofit', 'config', 'deleted-domain'];
         for (var k in sections) {
             $stateProvider
                 .state('=.' + sections[k], {

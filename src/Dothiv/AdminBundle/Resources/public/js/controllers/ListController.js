@@ -11,8 +11,8 @@ angular.module('dotHIVApp.controllers').controller('AdminListController', ['$sco
     $scope.sortDir = null;
     $scope.total = 0;
     $scope.filterTerm = null;
-    $scope.filterProperties = {};
     $scope.filterPropertyValues = {};
+    var filterProperties = {};
 
     var loading = false;
 
@@ -35,10 +35,11 @@ angular.module('dotHIVApp.controllers').controller('AdminListController', ['$sco
             q += $scope.filterTerm;
         }
         var props = [];
-        for (var prop in $scope.filterProperties) {
-            if ($scope.filterProperties.hasOwnProperty(prop)) {
-                if ($scope.filterProperties[prop]) {
-                    props.push('@' + prop + '{' + $scope.filterProperties[prop] + '}');
+        for (var name in filterProperties) {
+            if (filterProperties.hasOwnProperty(name)) {
+                var prop = filterProperties[name];
+                if (prop.value) {
+                    props.push('@' + prop.property + '{' + prop.value + '}');
                 }
             }
         }
@@ -132,16 +133,30 @@ angular.module('dotHIVApp.controllers').controller('AdminListController', ['$sco
         });
     };
 
-    $scope.filterPropertyTypeahead = function ($item, propertyName) {
-        $scope.filterProperties[propertyName] = $item['@id'];
-        $scope.load();
+    $scope.filterPropertyTypeahead = function (property, item, name) {
+        $scope.setFilterProperty(property, item['@id'], name);
+    };
+
+    // Handle properties
+    $scope.setFilterProperty = function (property, value, name) {
+        if (typeof name === "undefined") {
+            name = property;
+        }
+        if (!value) {
+            delete filterProperties[name];
+        } else {
+            filterProperties[name] = {
+                property: property,
+                value: value
+            };
+        }
+        $scope.loadAfter();
     };
 
     // Clear filters
-    $scope.clearFilters = function()
-    {
+    $scope.clearFilters = function () {
         $scope.filterTerm = null;
-        $scope.filterProperties = {};
+        filterProperties = {};
         $scope.load();
     };
 }]);

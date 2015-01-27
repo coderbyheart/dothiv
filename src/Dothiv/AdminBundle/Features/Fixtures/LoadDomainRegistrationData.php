@@ -34,6 +34,7 @@ class LoadDomainRegistrationData implements FixtureInterface
         $domainA->setToken('domaintokenb');
         $domainA->setTokenSent(new \DateTime());
         $domainA->setNonprofit(true);
+        $domainA->setCreated(new \DateTime('2013-12-01T00:00:00'));
         $manager->persist($domainA);
 
         $domainB = new Domain();
@@ -42,6 +43,7 @@ class LoadDomainRegistrationData implements FixtureInterface
         $domainB->setOwnerEmail("ccops@acme.com");
         $domainB->setRegistrar($registrar2);
         $domainB->transfer();
+        $domainB->setCreated(new \DateTime('2014-01-01T00:00:00'));
         $manager->persist($domainB);
 
         // Add a domain with clicks
@@ -68,12 +70,13 @@ class LoadDomainRegistrationData implements FixtureInterface
         $manager->persist($domainWithClickCounterWithoutClicks);
 
         // Add an IDN domain
-        $idnDOmain = new Domain();
-        $idnDOmain->setName(HivDomainValue::createFromUTF8('zühlke.hiv')->toScalar());
-        $idnDOmain->setOwnerName("Domain Administrator");
-        $idnDOmain->setOwnerEmail("ccops@acme.com");
-        $idnDOmain->setRegistrar($registrar1);
-        $manager->persist($idnDOmain);
+        $idnDomain = new Domain();
+        $idnDomain->setName(HivDomainValue::createFromUTF8('zühlke.hiv')->toScalar());
+        $idnDomain->setOwnerName("Domain Administrator");
+        $idnDomain->setOwnerEmail("ccops@acme.com");
+        $idnDomain->setRegistrar($registrar1);
+        $idnDomain->setCreated(new \DateTime('2014-02-01T00:00:00'));
+        $manager->persist($idnDomain);
 
         $manager->flush();
     }

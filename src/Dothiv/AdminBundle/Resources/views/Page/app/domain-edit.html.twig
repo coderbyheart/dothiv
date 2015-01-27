@@ -72,15 +72,13 @@
         <h2>
             .hiv Domain Check
             <small>
-                <i class="yes" data-ng-show="item.valid"></i>
-                <i class="no" data-ng-show="!item.valid"></i>
+                <i class="yes" data-ng-show="item.valid"></i> <i class="no" data-ng-show="!item.valid"></i>
             </small>
         </h2>
         <dl>
             <dt>DNS</dt>
             <dd>
-                <i class="yes" data-ng-show="item.dnsOk"></i>
-                <i class="no" data-ng-show="!item.dnsOk"></i>
+                <i class="yes" data-ng-show="item.dnsOk"></i> <i class="no" data-ng-show="!item.dnsOk"></i>
             </dd>
             <dt>URL</dt>
             <dd>
@@ -103,6 +101,50 @@
             <dd><abbr class="time" title="%%item.created%%" am-time-ago="item.created"></abbr></dd>
         </dl>
     </section>
+    <div data-ng-controller="AdminEditController" data-ng-init="itemUrl = '/admin/api/whois/' + stateParams.identifier;" data-ng-show="loaded">
+        <section class="item">
+            <h2>
+                WHOIS Registrant
+            </h2>
+            <dl>
+                <dt>Name</dt>
+                <dd data-ng-bind="item.whois.Registrant.Name"></dd>
+                <dt>Email</dt>
+                <dd><a href="mailto:%%item.whois.Registrant.Email" data-ng-bind="item.whois.Registrant.Email"></a></dd>
+                <dt data-ng-show="item.whois.Registrant.Organization">Organization</dt>
+                <dd data-ng-show="item.whois.Registrant.Organization" data-ng-bind="item.whois.Registrant.Organization"></dd>
+                <dt>Street</dt>
+                <dd data-ng-bind="item.whois.Registrant.Street"></dd>
+                <dt>Postal Code</dt>
+                <dd data-ng-bind="item.whois.Registrant.Postal_Code"></dd>
+                <dt>City</dt>
+                <dd data-ng-bind="item.whois.Registrant.City"></dd>
+                <dt>Country</dt>
+                <dd data-ng-bind="item.whois.Registrant.Country"></dd>
+                <dt>Phone</dt>
+                <dd data-ng-bind="item.whois.Registrant.Phone"></dd>
+            </dl>
+        </section>
+        <section class="item">
+            <h2>
+                WHOIS Info
+            </h2>
+            <dl>
+                <dt>Creation Date</dt>
+                <dd><abbr class="time" title="%%item.whois.Creation_Date%%" am-time-ago="item.whois.Creation_Date"></abbr></dd>
+                <dt data-ng-show="item.whois.Updated_Date">Updated Date</dt>
+                <dd data-ng-show="item.whois.Updated_Date"><abbr class="time" title="%%item.whois.Updated_Date%%" am-time-ago="item.whois.Updated_Date"></abbr></dd>
+                <dt>Expiry Date</dt>
+                <dd><abbr class="time" title="%%item.whois.Registry_Expiry_Date%%" am-time-ago="item.whois.Registry_Expiry_Date"></abbr></dd>
+                <dt data-ng-show="item.whois.Name_Server">Name Servers</dt>
+                <dd data-ng-show="item.whois.Name_Server">
+                    <ul>
+                        <li data-ng-repeat="ns in item.whois.Name_Server"><code data-ng-bind="ns"></code></li>
+                    </ul>
+                </dd>
+            </dl>
+        </section>
+    </div>
 </article>
 <article data-ng-show="loaded">
     <form class="crud" role="form" name="domainForm" novalidate>
