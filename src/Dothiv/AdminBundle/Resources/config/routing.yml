@@ -159,4 +159,20 @@ dothiv_admin_whois:
     path: /api/whois/{identifier}
     defaults:
        _controller: dothiv.admin.api.controller.whois:getItemAction
+       _format: json
+    methods: [GET]
+
+# Deleted Domains
+dothiv_admin_deleted_domain_list:
+    path: /api/deleted-domain
+    defaults:
+       _controller: dothiv.admin.api.controller.deleted_domain:listItemsAction
+       _format: json
+    methods: [GET]
+
+dothiv_admin_deleted_domain:
+    path: /api/deleted-domain/{identifier}
+    defaults:
+       _controller: dothiv.admin.api.controller.deleted_domain:getItemAction
+       _format: json
     methods: [GET]

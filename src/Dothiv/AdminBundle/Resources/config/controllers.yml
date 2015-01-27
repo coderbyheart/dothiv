@@ -80,6 +80,20 @@ services:
         calls:
         - [makeAdminController]
 
+    dothiv.admin.api.controller.deleted_domain:
+        class: %dothiv.api.controller.crud.class%
+        arguments:
+        - @dothiv.repository.deleted_domain
+        - @dothiv.admin.transformer.deleted_domain
+        - @dothiv.admin.transformer.paginatedlist
+        - @serializer
+        - @dothiv.repository.entity_change
+        - @security.context
+        - @dothiv.api.manipulator.generic
+        - @dothiv.business.event_dispatcher
+        calls:
+        - [makeAdminController]
+
     dothiv.admin.api.controller.config:
         class: %dothiv.api.controller.crud.class%
         arguments:

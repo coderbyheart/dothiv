@@ -54,6 +54,9 @@
                 <li data-ng-class="{active: state.includes('=.domain') }">
                     <a href="{{ path('dothiv_admin_app') }}#!/domain"><abbr title="Domain registrations">Domains</abbr></a>
                 </li>
+                <li data-ng-class="{active: state.includes('=.deleted-domain') }">
+                    <a href="{{ path('dothiv_admin_app') }}#!/deleted-domain"><abbr title="Deleted domains">Del. Domains</abbr></a>
+                </li>
                 <li data-ng-class="{active: state.includes('=.nonprofit') }">
                     <a href="{{ path('dothiv_admin_app') }}#!/nonprofit"><abbr title="Non-profit applications">Non-profits</abbr></a>
                 </li>

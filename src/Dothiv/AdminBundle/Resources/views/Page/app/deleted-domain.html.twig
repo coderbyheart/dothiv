@@ -1,0 +1,49 @@
+<article class="crud" data-ng-init="listUrl = '/admin/api/deleted-domain';">
+    <h1>
+        Deleted Domains
+        <small>(<span data-ng-bind="total"></span>)</small>
+    </h1>
+
+    {% set numcols = 2 %}
+    <table>
+        <thead>
+        <tr>
+            <td colspan="{{ numcols }}">
+                <form>
+                    <fieldset>
+                        <input type="text" placeholder="Search …" data-ng-model="filterTerm" data-ng-change="loadAfter();">
+                    </fieldset>
+                    <fieldset>
+                        <button type="reset" data-ng-click="clearFilters()">
+                            <i class="trash"></i>
+                        </button>
+                    </fieldset>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <th>Deleted</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="domain in items">
+            <td data-ng-bind="domain.domainUTF8"></td>
+            <td>
+                <abbr class="time" title="%%domain.created%%" am-time-ago="domain.created"></abbr>
+            </td>
+        </tr>
+
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="{{ numcols }}">
+                <nav>
+                    <button data-ng-disabled="!nextUrl" data-ng-click="next()" id="loadMoreButton">Load more</button>
+                </nav>
+                <span class="loading" data-ng-show="!loaded"><i class="loading"></i> loading …</span>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</article>
