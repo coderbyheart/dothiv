@@ -66,6 +66,20 @@ services:
         calls:
         - [makeAdminController]
 
+    dothiv.admin.api.controller.whois:
+        class: %dothiv.api.controller.crud.class%
+        arguments:
+        - @dothiv.repository.domain_whois
+        - @dothiv.admin.transformer.domain_whois
+        - @dothiv.admin.transformer.paginatedlist
+        - @serializer
+        - @dothiv.repository.entity_change
+        - @security.context
+        - @dothiv.api.manipulator.generic
+        - @dothiv.business.event_dispatcher
+        calls:
+        - [makeAdminController]
+
     dothiv.admin.api.controller.config:
         class: %dothiv.api.controller.crud.class%
         arguments:

@@ -153,3 +153,10 @@ dothiv_admin_registrar:
     defaults:
        _controller: dothiv.admin.api.controller.registrar:getItemAction
     methods: [GET]
+
+# WHOIS
+dothiv_admin_whois:
+    path: /api/whois/{identifier}
+    defaults:
+       _controller: dothiv.admin.api.controller.whois:getItemAction
+    methods: [GET]

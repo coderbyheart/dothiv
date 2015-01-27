@@ -129,7 +129,7 @@ Feature: Manage Domain Registrations
     Then the response status code should be 200
     And the JSON node "items" should contain 3 elements
 
-  @Filter @Current
+  @Filter
   Scenario: Filter domains by creation date
     Given I send a GET request to "http://tld.hiv.dev/admin/api/domain" with query:
       | q         | @created{>=2013-12-01T00:00:00} @created{<2014-01-01T00:00:00} |

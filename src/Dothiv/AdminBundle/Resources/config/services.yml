@@ -9,6 +9,7 @@ parameters:
     dothiv.admin.transformer.registrar.class: Dothiv\AdminBundle\Transformer\RegistrarTransformer
     dothiv.admin.transformer.config.class: Dothiv\AdminBundle\Transformer\ConfigTransformer
     dothiv.admin.transformer.entity_change.class: Dothiv\AdminBundle\Transformer\EntityChangeTransformer
+    dothiv.admin.transformer.domain_whois.class: Dothiv\AdminBundle\Transformer\DomainWhoisTransformer
     dothiv.admin.manipulator.nonprofitregistration.class: Dothiv\AdminBundle\Service\Manipulator\NonProfitRegistrationEntityManipulator
 
 services:
@@ -92,6 +93,12 @@ services:
         arguments:
         - @router
         - "dothiv_admin_history"
+
+    dothiv.admin.transformer.domain_whois:
+        class: %dothiv.admin.transformer.domain_whois.class%
+        arguments:
+        - @router
+        - "dothiv_admin_whois"
 
     dothiv.admin.manipulator.nonprofitregistration:
         class: %dothiv.admin.manipulator.nonprofitregistration.class%
