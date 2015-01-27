@@ -23,7 +23,5 @@
     And I send a GET request to "http://tld.hiv.dev/admin/api/whois/example.hiv"
     Then the response status code should be 200
     And the header "content-type" should contain "application/json"
-    And I debug the JSON
     And the JSON node "whois.Domain.Name" should contain "TLD.HIV"
     And the JSON node "whois.Name_Server[0]" should contain "NS-CLOUD-E1.GOOGLEDOMAINS.COM"
-
