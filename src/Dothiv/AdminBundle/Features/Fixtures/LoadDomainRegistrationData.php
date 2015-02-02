@@ -2,10 +2,12 @@
 
 namespace Dothiv\AdminBundle\Features\Fixtures;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Dothiv\BusinessBundle\Entity\Banner;
 use Dothiv\BusinessBundle\Entity\Domain;
+use Dothiv\BusinessBundle\Entity\DomainWhois;
 use Dothiv\BusinessBundle\Entity\Registrar;
 use Dothiv\ValueObject\HivDomainValue;
 
@@ -34,8 +36,13 @@ class LoadDomainRegistrationData implements FixtureInterface
         $domainA->setToken('domaintokenb');
         $domainA->setTokenSent(new \DateTime());
         $domainA->setNonprofit(true);
-        $domainA->setCreated(new \DateTime('2013-12-01T00:00:00'));
         $manager->persist($domainA);
+
+        $domainAWhois = DomainWhois::create(
+            new HivDomainValue('bcme.hiv'),
+            new ArrayCollection(['Creation Date' => '2013-12-01T00:00:00', 'Registry Expiry Date' => '2016-12-01T00:00:0'])
+        );
+        $manager->persist($domainAWhois);
 
         $domainB = new Domain();
         $domainB->setName("acme.hiv");
@@ -43,8 +50,13 @@ class LoadDomainRegistrationData implements FixtureInterface
         $domainB->setOwnerEmail("ccops@acme.com");
         $domainB->setRegistrar($registrar2);
         $domainB->transfer();
-        $domainB->setCreated(new \DateTime('2014-01-01T00:00:00'));
         $manager->persist($domainB);
+
+        $domainBWhois = DomainWhois::create(
+            new HivDomainValue('acme.hiv'),
+            new ArrayCollection(['Creation Date' => '2014-01-01T00:00:00', 'Registry Expiry Date' => '2015-01-01T00:00:00'])
+        );
+        $manager->persist($domainBWhois);
 
         // Add a domain with clicks
         $banner = new Banner();
@@ -75,7 +87,12 @@ class LoadDomainRegistrationData implements FixtureInterface
         $idnDomain->setOwnerName("Domain Administrator");
         $idnDomain->setOwnerEmail("ccops@acme.com");
         $idnDomain->setRegistrar($registrar1);
-        $idnDomain->setCreated(new \DateTime('2014-02-01T00:00:00'));
+        $manager->persist($idnDomain);
+
+        $idnDomain = DomainWhois::create(
+            HivDomainValue::createFromUTF8('zühlke.hiv'),
+            new ArrayCollection(['Creation Date' => '2015-02-01T00:00:00', 'Registry Expiry Date' => '2014-02-01T00:00:00'])
+        );
         $manager->persist($idnDomain);
 
         $manager->flush();

@@ -1,4 +1,4 @@
-@AdminBundle @DomainRegistration @Current
+@AdminBundle @DomainRegistration
 Feature: View deleted domains
   As an admin
   I should be able to fetch the list of deleted domains
