@@ -130,7 +130,7 @@ Feature: Manage Domain Registrations
     And the JSON node "items" should contain 3 elements
 
   @Filter
-  Scenario: Filter domains by creation date
+  Scenario: Filter domains by WHOIS creation date
     Given I send a GET request to "http://tld.hiv.dev/admin/api/domain" with query:
       | q         | @created{>=2013-12-01T00:00:00} @created{<2014-01-01T00:00:00} |
       | sortField | name                                                           |
