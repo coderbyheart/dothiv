@@ -5,7 +5,7 @@ Feature: Lookup domain name
 
   Background:
     Given the "DothivShopBundle:DomainInfo" entity exists in "registeredDomain" with values:
-      | name       | {\Dothiv\ValueObject\HivDomainValue@cto.hiv} |
+      | name       | {\Dothiv\ValueObject\HivDomainValue@coderbyheart.com} |
       | registered | 1                                            |
     Given the "DothivShopBundle:DomainInfo" entity exists in "premiumDomain" with values:
       | name    | {\Dothiv\ValueObject\HivDomainValue@click.hiv} |
@@ -82,7 +82,7 @@ Feature: Lookup domain name
 
   Scenario: Lookup registered domain
     And I send a GET request to "https://tld.hiv.dev/api/shop/lookup" with query:
-      | q | cto.hiv |
+      | q | coderbyheart.com |
     Then the response status code should be 200
     And the header "content-type" should contain "application/json"
     And the JSON node "@context" should contain "http://jsonld.click4life.hiv/DomainInfo"
